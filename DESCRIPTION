@@ -20,3 +20,5 @@ Imports:
     Rglpk,
     rlist,
     RSpectra
+URL: https://github.com/manuelrubio/aramappings
+BugReports: https://github.com/manuelrubio/aramappings/issues
