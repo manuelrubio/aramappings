@@ -2,7 +2,7 @@ Package: aramappings
 Title: Computes Adaptable Radial Axes mappings
 Version: 0.0.0.9000
 Authors@R: 
-    person("Manuel", "Rubio-Sanchez", , "manuel.rubio@urjc.es", role = c("aut", "cre"),
+    person("Manuel", "Rubio-Sánchez", , "manuel.rubio@urjc.es", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-8692-2553"))
 Description: Computes low-dimensional point representations of high-dimensional numerical data according to the data visualization method "Adaptable Radial Axes": RUBIO-SÁNCHEZ M., SANCHEZ A., LEHMANN D. J.: Adaptable radial axes plots for improved multivariate data visualization. Computer Graphics Forum 36, 3 (2017), 389–399. doi:10.1111/cgf.13196. 
 License: MIT + file LICENSE
@@ -12,13 +12,23 @@ RoxygenNote: 7.3.2
 Imports: 
     clarabel,
     CVXR,
-    expm,
     glpkAPI,
+    Matrix,
     parallel,
-    parallelly,
     pracma,
     Rglpk,
-    rlist,
-    RSpectra
+    slam,
+    ggplot2,
+    grDevices,
+    grid,
 URL: https://github.com/manuelrubio/aramappings
 BugReports: https://github.com/manuelrubio/aramappings/issues
+Suggests: 
+    testthat (>= 3.0.0),
+    parallelly,
+    geometry,
+    ascentTraining,
+    knitr,
+    rmarkdown
+Config/testthat/edition: 3
+VignetteBuilder: knitr

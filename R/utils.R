@@ -1,22 +1,15 @@
-#' Title
-#'
-#' @param V
-#' @param rank_V
-#'
-#' @returns
-#' @export
-#'
-#' @examples
+#' @noRd
 compute_orthogonal_projection_matrix <- function(
     V,
     rank_V) {
   m <- ncol(V)
 
-  # Compute matrix U whose columns form a basis for the subspace spanned by the rows of V (of dimension rank_V)
-  U <- zeros(m, rank_V)
+  # Compute matrix U whose columns form a basis for the subspace spanned by the
+  # rows of V (of dimension rank_V)
+  U <- pracma::zeros(m, rank_V)
 
   k <- 1
-  while (nnz(V[k, ]) == 0) {
+  while (pracma::nnz(V[k, ]) == 0) {
     k <- k + 1
   }
 
@@ -26,27 +19,18 @@ compute_orthogonal_projection_matrix <- function(
     j <- k + 1
     U[, 2] <- t(V[j, ])
 
-    while (rankMatrix(U)[1] < rank_V) {
+    while (Matrix::rankMatrix(U)[1] < rank_V) {
       j <- j + 1
       U[, 2] <- t(V[j, ])
     }
   }
 
   # Orthogonal projection matrix
-  U %*% pinv(U)
+  U %*% pracma::pinv(U)
 }
 
 
-#' Title
-#'
-#' @param n_points
-#' @param V
-#' @param row_offset
-#'
-#' @returns
-#' @export
-#'
-#' @examples
+#' @noRd
 ara_L1_norm_coo_lists <- function(
     n_points,
     V,
@@ -54,13 +38,17 @@ ara_L1_norm_coo_lists <- function(
   n <- nrow(V)
   m <- ncol(V)
 
-  aux_vec <- repmat(pracma::Reshape((1 + row_offset):(2 * n * n_points + row_offset), 2 * n, n_points), m, 1)
+  aux_vec <- pracma::repmat(
+    pracma::Reshape((1 + row_offset):(2 * n * n_points + row_offset), 2 * n, n_points),
+    m,
+    1
+  )
   rows <- c(
     ((1 + row_offset):(2 * n * n_points + row_offset)),
     unlist(as.list(aux_vec))
   )
 
-  aux_vec <- repmat(pracma::Reshape(1:(n * n_points), n, n_points), 2, 1)
+  aux_vec <- pracma::repmat(pracma::Reshape(1:(n * n_points), n, n_points), 2, 1)
   cols <- c(
     unlist(as.list(aux_vec)),
     rep((n_points * n + 1):(n_points * (m + n)), each = 2 * n)
@@ -68,23 +56,14 @@ ara_L1_norm_coo_lists <- function(
 
   vals <- c(
     rep(-1, 2 * n * n_points),
-    repmat(unlist(as.list(rbind(-V, V))), 1, n_points)
+    pracma::repmat(unlist(as.list(rbind(-V, V))), 1, n_points)
   )
 
   list(rows = rows, cols = cols, vals = vals)
 }
 
 
-#' Title
-#'
-#' @param n_points
-#' @param V
-#' @param row_offset
-#'
-#' @returns
-#' @export
-#'
-#' @examples
+#' @noRd
 ara_Linf_norm_coo_lists <- function(
     n_points,
     V,
@@ -92,7 +71,11 @@ ara_Linf_norm_coo_lists <- function(
   n <- nrow(V)
   m <- ncol(V)
 
-  aux_vec <- repmat(pracma::Reshape((1 + row_offset):(2 * n * n_points + row_offset), 2 * n, n_points), m, 1)
+  aux_vec <- pracma::repmat(
+    pracma::Reshape((1 + row_offset):(2 * n * n_points + row_offset), 2 * n, n_points),
+    m,
+    1
+  )
   rows <- c(
     (1 + row_offset):(2 * n * n_points + row_offset),
     unlist(as.list(aux_vec))
@@ -102,7 +85,7 @@ ara_Linf_norm_coo_lists <- function(
 
   vals <- c(
     rep(-1, 2 * n * n_points),
-    repmat(unlist(as.list(rbind(-V, V))), 1, n_points)
+    pracma::repmat(unlist(as.list(rbind(-V, V))), 1, n_points)
   )
 
   list(rows = rows, cols = cols, vals = vals)
@@ -110,17 +93,7 @@ ara_Linf_norm_coo_lists <- function(
 
 
 
-#' Title
-#'
-#' @param axis_vector
-#' @param sort_indices
-#' @param row_offset
-#' @param col_offset
-#'
-#' @returns
-#' @export
-#'
-#' @examples
+#' @noRd
 ara_ordered_inequality_coo_lists <- function(
     axis_vector,
     sort_indices,
@@ -169,31 +142,7 @@ ara_ordered_inequality_coo_lists <- function(
 }
 
 
-#' Title
-#'
-#' @param nrows
-#' @param ncols
-#' @param kind
-#' @param clower
-#' @param cupper
-#' @param obj
-#' @param type_cols
-#' @param rlower
-#' @param rupper
-#' @param type_rows
-#' @param ne
-#' @param rows
-#' @param cols
-#' @param vals
-#' @param use_interior_point
-#' @param init_index
-#' @param n_points
-#' @param m
-#'
-#' @returns
-#' @export
-#'
-#' @examples
+#' @noRd
 solve_glpkAPI_wrapper <- function(
     nrows,
     ncols,
@@ -209,39 +158,58 @@ solve_glpkAPI_wrapper <- function(
     rows,
     cols,
     vals,
-    use_interior_point,
+    use_glpkAPI_simplex,
     init_index,
     n_points,
     m) {
-  lp <- initProbGLPK()
+  lp <- glpkAPI::initProbGLPK()
 
-  setObjDirGLPK(lp, GLP_MIN)
+  glpkAPI::setObjDirGLPK(lp, glpkAPI::GLP_MIN)
 
-  addRowsGLPK(lp, nrows)
-  addColsGLPK(lp, ncols)
+  glpkAPI::addRowsGLPK(lp, nrows)
+  glpkAPI::addColsGLPK(lp, ncols)
 
-  setColsKindGLPK(lp, j = c(1:ncols), kind)
+  glpkAPI::setColsKindGLPK(lp, j = c(1:ncols), kind)
 
-  setColsBndsObjCoefsGLPK(lp = lp, j = c(1:ncols), lb = clower, ub = cupper, obj_coef = obj, type = type_cols)
+  glpkAPI::setColsBndsObjCoefsGLPK(
+    lp = lp,
+    j = c(1:ncols),
+    lb = clower,
+    ub = cupper,
+    obj_coef = obj,
+    type = type_cols
+  )
 
-  setRowsBndsGLPK(lp, i = c(1:nrows), lb = rlower, ub = rupper, type = type_rows)
+  glpkAPI::setRowsBndsGLPK(
+    lp,
+    i = c(1:nrows),
+    lb = rlower,
+    ub = rupper,
+    type = type_rows
+  )
 
 
   # load constraint matrix
-  loadMatrixGLPK(lp = lp, ne = ne, ia = rows, ja = cols, ra = vals)
+  glpkAPI::loadMatrixGLPK(
+    lp = lp,
+    ne = ne,
+    ia = rows,
+    ja = cols,
+    ra = vals
+  )
 
 
   # solve linear problem
-  if (use_interior_point) {
-    setInteriorParmGLPK(MSG_LEV, GLP_MSG_OFF)
-    solveInteriorGLPK(lp)
-    solution_status <- getSolStatIptGLPK(lp)
+  if (use_glpkAPI_simplex) {
+    glpkAPI::setSimplexParmGLPK(glpkAPI::MSG_LEV, glpkAPI::GLP_MSG_OFF)
+    glpkAPI::solveSimplexGLPK(lp)
+    solution_status <- glpkAPI::getSolStatGLPK(lp)
 
-    if ((solution_status == 3) || (solution_status == 5)) {
-      x <- getColsPrimIptGLPK(lp)
+    if (solution_status == 5) {
+      x <- glpkAPI::getColsPrimGLPK(lp)
 
       P <- t(pracma::Reshape(x[init_index:(init_index + n_points * m - 1)], m, n_points))
-      objval <- getObjValIptGLPK(lp)
+      objval <- glpkAPI::getObjValGLPK(lp)
     } else {
       print("Error: glpkAPI failed to compute an optimal solution")
 
@@ -249,15 +217,15 @@ solve_glpkAPI_wrapper <- function(
       objval <- NA
     }
   } else {
-    setSimplexParmGLPK(MSG_LEV, GLP_MSG_OFF)
-    solveSimplexGLPK(lp)
-    solution_status <- getSolStatGLPK(lp)
+    glpkAPI::setInteriorParmGLPK(glpkAPI::MSG_LEV, glpkAPI::GLP_MSG_OFF)
+    glpkAPI::solveInteriorGLPK(lp)
+    solution_status <- glpkAPI::getSolStatIptGLPK(lp)
 
-    if (solution_status == 5) {
-      x <- getColsPrimGLPK(lp)
+    if ((solution_status == 3) || (solution_status == 5)) {
+      x <- glpkAPI::getColsPrimIptGLPK(lp)
 
       P <- t(pracma::Reshape(x[init_index:(init_index + n_points * m - 1)], m, n_points))
-      objval <- getObjValGLPK(lp)
+      objval <- glpkAPI::getObjValIptGLPK(lp)
     } else {
       print("Error: glpkAPI failed to compute an optimal solution")
 
@@ -269,7 +237,7 @@ solve_glpkAPI_wrapper <- function(
   status <- rep(solution_status, n_points)
 
   # remove problem object
-  delProbGLPK(lp)
+  glpkAPI::delProbGLPK(lp)
 
   list(
     P = P,
@@ -279,21 +247,7 @@ solve_glpkAPI_wrapper <- function(
 }
 
 
-#' Title
-#'
-#' @param A
-#' @param b
-#' @param obj
-#' @param cones
-#' @param P
-#' @param init_index
-#' @param n_points
-#' @param m
-#'
-#' @returns
-#' @export
-#'
-#' @examples
+#' @noRd
 solve_clarabel_wrapper <- function(
     A,
     b,
@@ -303,7 +257,7 @@ solve_clarabel_wrapper <- function(
     init_index,
     n_points,
     m) {
-  clarabel_output <- clarabel(
+  clarabel_output <- clarabel::clarabel(
     A = A,
     b = b,
     q = obj,
@@ -335,21 +289,7 @@ solve_clarabel_wrapper <- function(
 }
 
 
-#' Title
-#'
-#' @param A
-#' @param b
-#' @param obj
-#' @param bounds
-#' @param dirs
-#' @param init_index
-#' @param n_points
-#' @param m
-#'
-#' @returns
-#' @export
-#'
-#' @examples
+#' @noRd
 solve_Rglpk_wrapper <- function(
     A,
     b,
@@ -359,7 +299,7 @@ solve_Rglpk_wrapper <- function(
     init_index,
     n_points,
     m) {
-  rglpk_output <- Rglpk_solve_LP(
+  rglpk_output <- Rglpk::Rglpk_solve_LP(
     obj = obj,
     mat = A,
     dir = dirs,
@@ -394,30 +334,8 @@ solve_Rglpk_wrapper <- function(
 
 
 
-#' Title
-#'
-#' @param x
-#' @param nrows
-#' @param ncols
-#' @param kind
-#' @param clower
-#' @param cupper
-#' @param obj
-#' @param type_cols
-#' @param rlower
-#' @param type_rows
-#' @param ne
-#' @param rows
-#' @param cols
-#' @param vals
-#' @param use_interior_point
-#' @param m
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-min_unconstrained_glpkAPI_point <- function(
+#' @noRd
+min_unconstrained_glpkAPI <- function(
     x,
     nrows,
     ncols,
@@ -432,7 +350,7 @@ min_unconstrained_glpkAPI_point <- function(
     rows,
     cols,
     vals,
-    use_interior_point,
+    use_glpkAPI_simplex,
     m) {
   rupper <- c(cbind(-x, x))
 
@@ -451,7 +369,7 @@ min_unconstrained_glpkAPI_point <- function(
     rows,
     cols,
     vals,
-    use_interior_point,
+    use_glpkAPI_simplex,
     length(obj) - m + 1,
     1,
     m
@@ -459,19 +377,8 @@ min_unconstrained_glpkAPI_point <- function(
 }
 
 
-#' Title
-#'
-#' @param x
-#' @param A
-#' @param obj
-#' @param cones
-#' @param m
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-min_unconstrained_clarabel_point <- function(
+#' @noRd
+min_unconstrained_clarabel <- function(
     x,
     A,
     obj,
@@ -492,20 +399,8 @@ min_unconstrained_clarabel_point <- function(
 }
 
 
-#' Title
-#'
-#' @param x
-#' @param A
-#' @param obj
-#' @param bounds
-#' @param dirs
-#' @param m
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-min_unconstrained_Rglpk_point <- function(
+#' @noRd
+min_unconstrained_Rglpk <- function(
     x,
     A,
     obj,
@@ -530,30 +425,8 @@ min_unconstrained_Rglpk_point <- function(
 
 
 
-#' Title
-#'
-#' @param x
-#' @param nrows
-#' @param ncols
-#' @param kind
-#' @param clower
-#' @param cupper
-#' @param obj
-#' @param type_cols
-#' @param type_rows
-#' @param ne
-#' @param rows
-#' @param cols
-#' @param vals
-#' @param variable
-#' @param use_interior_point
-#' @param m
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-min_exact_glpkAPI_point <- function(
+#' @noRd
+min_exact_glpkAPI <- function(
     x,
     nrows,
     ncols,
@@ -568,7 +441,7 @@ min_exact_glpkAPI_point <- function(
     cols,
     vals,
     variable,
-    use_interior_point,
+    use_glpkAPI_simplex,
     m) {
   n <- length(x)
 
@@ -591,7 +464,7 @@ min_exact_glpkAPI_point <- function(
     rows,
     cols,
     vals,
-    use_interior_point,
+    use_glpkAPI_simplex,
     length(obj) - m + 1,
     1,
     m
@@ -599,21 +472,8 @@ min_exact_glpkAPI_point <- function(
 }
 
 
-
-#' Title
-#'
-#' @param x
-#' @param A
-#' @param obj
-#' @param cones
-#' @param variable
-#' @param m
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-min_exact_clarabel_point <- function(
+#' @noRd
+min_exact_clarabel <- function(
     x,
     A,
     obj,
@@ -635,21 +495,8 @@ min_exact_clarabel_point <- function(
 }
 
 
-#' Title
-#'
-#' @param x
-#' @param A
-#' @param obj
-#' @param bounds
-#' @param dirs
-#' @param variable
-#' @param m
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-min_exact_Rglpk_point <- function(
+#' @noRd
+min_exact_Rglpk <- function(
     x,
     A,
     obj,
@@ -668,5 +515,32 @@ min_exact_Rglpk_point <- function(
     length(obj) - m + 1,
     1,
     m
+  )
+}
+
+
+
+#' @noRd
+extract_CVXR_points_status_objval <- function(
+    solution,
+    Pvar,
+    V,
+    N,
+    m) {
+  if (pracma::strcmpi(solution$status, "optimal") || pracma::strcmpi(solution$status, "optimal_inaccurate")) {
+    P <- solution$getValue(Pvar)
+    objval <- solution$value
+  } else {
+    P <- matrix(NA, N, m)
+    objval <- NA
+    print("Error: CVXR failed to compute an optimal solution")
+  }
+
+  status <- rep(solution$status, N)
+
+  list(
+    P = P,
+    status = status,
+    objval = objval
   )
 }
