@@ -236,10 +236,14 @@ draw_ara_plot_2d_standardized <- function(
   meanX <- colMeans(X)
   stdX <- apply(X, 2, stats::sd)
 
+  # Initialize plot
+  my_plot <- ggplot2::ggplot()
+
   # Draw optional reference horizontal & vertical lines
-  my_plot <- ggplot2::ggplot() +
+  my_plot <- my_plot +
     ggplot2::geom_vline(xintercept = 0, linetype = "dashed", color = "gray80", linewidth = 0.5) +
     ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "gray80", linewidth = 0.5)
+
 
   # Draw optional reference circle
   center <- c(0, 0)

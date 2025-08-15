@@ -20,7 +20,7 @@ Imports:
     slam,
     ggplot2,
     grDevices,
-    grid,
+    grid
 URL: https://github.com/manuelrubio/aramappings
 BugReports: https://github.com/manuelrubio/aramappings/issues
 Suggests: 
@@ -28,6 +28,7 @@ Suggests:
     parallelly,
     geometry,
     ascentTraining,
+    liver,
     knitr,
     rmarkdown
 Config/testthat/edition: 3

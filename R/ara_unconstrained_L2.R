@@ -169,23 +169,34 @@ ara_unconstrained_L2 <- function(
 
   ############################   Compute mapping   #############################
 
+  use_weights <- FALSE
   if (length(unique(weights)) > 1) {
+    X_original <- X
+    V_original <- V
+
     W <- diag(weights)
     X <- X %*% W
     V <- W %*% V
+    use_weights <- TRUE
   }
 
   if (pracma::strcmpi(solver, "CVXR")) {
-    ara_unconstrained_L2_CVXR(
+    outputs <- ara_unconstrained_L2_CVXR(
       X,
       V
     )
   } else {
-    ara_unconstrained_L2_formula(
+    outputs <- ara_unconstrained_L2_formula(
       X,
       V
     )
   }
+
+  if (use_weights) {
+    outputs$objval <- norm(outputs$P %*% t(V_original) - X_original, type = "F")^2
+  }
+
+  return(outputs)
 }
 
 

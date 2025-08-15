@@ -189,10 +189,15 @@ ara_unconstrained_Linf <- function(
 
   ############################   Compute mapping   #############################
 
+  use_weights <- FALSE
   if (length(unique(weights)) > 1) {
+    X_original <- X
+    V_original <- V
+
     W <- diag(weights)
     X <- X %*% W
     V <- W %*% V
+    use_weights <- TRUE
   }
 
   if (pracma::strcmpi(solver, "CVXR")) {
@@ -235,6 +240,10 @@ ara_unconstrained_Linf <- function(
       Q <- compute_orthogonal_projection_matrix(V, rank_V)
       outputs$P <- outputs$P %*% Q
     }
+  }
+
+  if (use_weights) {
+    outputs$objval <- max(abs(outputs$P %*% t(V_original) - X_original))
   }
 
   list(
