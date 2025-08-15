@@ -26,7 +26,7 @@ of a data observation in X.}
 \item{\code{status}}{A vector of length N where the i-th element contains the status of the chosen solver when
 calculating the mapping of the i-th data observation. The type of the elements depends on the particular chosen solver.}
 \item{\code{objval}}{The numeric objective value associated with the solution to the optimization problem, considering
-matrix norms.}
+matrix norms, and ignoring weights.}
 }
 When solver is "formula" this function always produces valid solutions (\code{P}), since the pseudo-inverse matrix always
 exists. Thus, the output status vector is not relevant, but is returned in consonance with other adaptable radial axes

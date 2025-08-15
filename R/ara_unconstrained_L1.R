@@ -37,7 +37,7 @@
 #'   \item{\code{status}}{A vector of length N where the i-th element contains the status of the chosen solver when
 #'   calculating the mapping of the i-th data observation. The type of the elements depends on the particular chosen solver.}
 #'   \item{\code{objval}}{The numeric objective value associated with the solution to the optimization problem, considering
-#'   matrix norms.}
+#'   matrix norms, and ignoring weights.}
 #' }
 #' If the chosen solver fails to map one or more data observations (i.e., fails to solve the related optimization problems),
 #' their rows in \code{P} will contain \code{NA} (not available) values. In that case, \code{objval} will also be \code{NA}.
