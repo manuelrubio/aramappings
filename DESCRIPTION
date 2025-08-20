@@ -20,7 +20,8 @@ Imports:
     slam,
     ggplot2,
     grDevices,
-    grid
+    grid,
+    stats
 URL: https://github.com/manuelrubio/aramappings
 BugReports: https://github.com/manuelrubio/aramappings/issues
 Suggests: 
