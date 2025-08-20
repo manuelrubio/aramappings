@@ -73,7 +73,6 @@
 #' # Select variable for exact estimates, and use it for coloring the embedded points
 #' n <- nrow(V)
 #' variable <- sample(1:n, 1)
-#' color_variable <- selected_variables[variable]
 #'
 #' # Compute the mapping
 #' mapping <- ara_ordered_L2(
@@ -84,7 +83,7 @@
 #' )
 #'
 #' # Select variables with labeled axis lines on ARA plot
-#' axis_lines <- color_variable
+#' axis_lines <- variable
 #'
 #' # Draw the ARA plot
 #' draw_ara_plot_2d_standardized(
@@ -93,7 +92,7 @@
 #'   V,
 #'   mapping$P,
 #'   axis_lines = axis_lines,
-#'   color_variable = color_variable
+#'   color_variable = variable
 #' )
 #'
 ara_ordered_L2 <- function(

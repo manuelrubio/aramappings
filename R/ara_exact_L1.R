@@ -71,7 +71,6 @@
 #' # Select variable for exact estimates, and use it for coloring the embedded points
 #' n <- nrow(V)
 #' variable <- sample(1:n, 1)
-#' color_variable <- selected_variables[variable]
 #'
 #' # Detect the number of available CPU cores
 #' library(parallelly)
@@ -94,7 +93,7 @@
 #' parallel::stopCluster(cl)
 #'
 #' # Select variables with labeled axis lines on ARA plot
-#' axis_lines <- color_variable
+#' axis_lines <- variable
 #'
 #' # Draw the ARA plot
 #' draw_ara_plot_2d_standardized(
@@ -103,7 +102,7 @@
 #'   V,
 #'   mapping$P,
 #'   axis_lines = axis_lines,
-#'   color_variable = color_variable
+#'   color_variable = variable
 #' )
 #'
 ara_exact_L1 <- function(
