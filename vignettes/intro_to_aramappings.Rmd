@@ -101,15 +101,21 @@ The function is included in order to show the results of the ARA mapping functio
 
 ## Installation
 
-You can install the development version of regexcite from [GitHub](https://github.com/) with:
+Install a stable version from CRAN
 
-<!--- ```{r installation} -->
+<!--- ```{r}
+install.packages("aramappings")
+``` -->
+
+Install the development version of aramappings from [GitHub](https://github.com/) with:
+
+<!--- ```{r}
+# install.packages("pak")
+pak::pak("manuelrubio/aramappings")
+``` -->
 
 <!--- # devtools::install_github("jennybc/regexcite") # install development version -->
 
-<!--- install.packages("aramappings") # install stable version from CRAN -->
-
-<!--- ``` -->
 
 
 ## Usage examples
