@@ -124,15 +124,15 @@ draw_ara_plot_2d_standardized <- function(
     stop("Input error: P must be a numeric matrix")
   }
 
-  if (!is.double(weights)) {
+  if (!is.double(weights) && !is.integer(weights)) {
     stop("Input error: weights must be a numeric vector")
   }
 
-  if (!is.null(axis_lines) && !is.double(axis_lines)) {
+  if (!is.null(axis_lines) && !is.double(axis_lines) && !is.integer(axis_lines)) {
     stop("Input error: axis_lines must be a numeric value or vector")
   }
 
-  if (!is.null(color_variable) && !is.double(color_variable)) {
+  if (!is.null(color_variable) && !is.double(color_variable) && !is.integer(color_variable)) {
     stop("Input error: color_variable must be an integer")
   }
 

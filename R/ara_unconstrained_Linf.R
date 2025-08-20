@@ -125,7 +125,7 @@ ara_unconstrained_Linf <- function(
     stop("Input error: V must be a numeric matrix")
   }
 
-  if (!is.double(weights)) {
+  if (!is.double(weights) && !is.integer(weights)) {
     stop("Input error: weights must be a numeric vector")
   }
 
