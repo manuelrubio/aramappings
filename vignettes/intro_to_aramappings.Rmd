@@ -26,7 +26,7 @@ Adaptable Radial Axes (ARA) plots [@Rubio17] are an interactive, exploratory dat
 \
 
 ```{r araplot, echo=FALSE, fig.cap="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots.", out.width = '80%'}
-knitr::include_graphics("cereals_ara_bb.svg")
+knitr::include_graphics("./cereals_ara_bb.svg")
 ```
 
 \
