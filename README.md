@@ -168,7 +168,7 @@ mapping <- ara_unconstrained_L2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.037359 secs
+#> Time difference of 0.01110291 secs
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -213,7 +213,7 @@ draw_ara_plot_2d_standardized(
 
 <div class="figure">
 
-<img src="man/figures/autompg_unconstrained_L2.svg" alt="Unconstrained ARA plot with the L2 norm of a subset of the Autompg dataset." width="100%" />
+<img src="man/figures/readme_autompg_unconstrained_L2.svg" alt="Unconstrained ARA plot with the L2 norm of a subset of the Autompg dataset." width="100%" />
 <p class="caption">
 
 Unconstrained ARA plot with the L2 norm of a subset of the Autompg
