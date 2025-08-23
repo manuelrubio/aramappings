@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# aramappings
+# aramappings <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
 
@@ -9,21 +9,22 @@
 
 The goal of aramappings is to compute …
 
-Adaptable Radial Axes (ARA) plots \[@Rubio17\] are an interactive,
-exploratory data visualization technique related to Star Coordinates
-\[@Kandogan00; @Kandogan01\] and Biplots \[@Gabriel71; @Gower95;
-@Hofmann04; @laGrange09; @Greenacre10\]. ARA performs dimensionality
-reduction by representing high-dimensional numerical data as points in a
-plane or three-dimensional space. Unlike many other dimensionality
-reduction methods, ARA plots also visualize variable-specific
-information through “axis vectors” and their corresponding labeled axis
-lines, where each vector is associated with a particular data variable.
-These axis vectors (interactively defined by users, as in Star
-Coordinates) indicate the directions in which the values of their
-associated variables increase within the plot. Additionally, the
-high-dimensional observations are mapped (in an optimal sense) onto the
-plot in order to allow users to estimate variable values by visually
-projecting these points onto the labeled axes, as in Biplots.
+Adaptable Radial Axes (ARA) plots (Rubio-Sánchez, Sanchez, and Lehmann
+2017) are an interactive, exploratory data visualization technique
+related to Star Coordinates (Kandogan 2000, 2001) and Biplots (Gabriel
+1971; Gower and Hand 1995; Hofmann 2004; Grange, Roux, and Gardner-Lubbe
+2009; Greenacre 2010). ARA performs dimensionality reduction by
+representing high-dimensional numerical data as points in a plane or
+three-dimensional space. Unlike many other dimensionality reduction
+methods, ARA plots also visualize variable-specific information through
+“axis vectors” and their corresponding labeled axis lines, where each
+vector is associated with a particular data variable. These axis vectors
+(interactively defined by users, as in Star Coordinates) indicate the
+directions in which the values of their associated variables increase
+within the plot. Additionally, the high-dimensional observations are
+mapped (in an optimal sense) onto the plot in order to allow users to
+estimate variable values by visually projecting these points onto the
+labeled axes, as in Biplots.
 
 ## Overview
 
@@ -60,8 +61,8 @@ library(aramappings)
 
 In the usage examples we will use the **Auto MPG** dataset available in
 packages **ascentTraining** and **grpnet**, Kaggle, or the UCI Machine
-Learning Repository \[@Frank10\]. In this case, we load the dataset in
-the **ascentTraining** package.
+Learning Repository (Frank and Asuncion 2010). In this case, we load the
+dataset in the **ascentTraining** package.
 
 ``` r
 # Load data
@@ -168,7 +169,7 @@ mapping <- ara_unconstrained_L2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.01110291 secs
+#> Time difference of 0.01082993 secs
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -211,13 +212,95 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
-<div class="figure">
+<div class="figure" style="text-align: center">
 
-<img src="man/figures/readme_autompg_unconstrained_L2.svg" alt="Unconstrained ARA plot with the L2 norm of a subset of the Autompg dataset." width="100%" />
+<img src="man/figures/readme_autompg_unconstrained_L2.svg" alt="Unconstrained ARA plot with the L2 norm of a subset of the Autompg dataset." width="80%" />
 <p class="caption">
 
 Unconstrained ARA plot with the L2 norm of a subset of the Autompg
 dataset.
 </p>
+
+</div>
+
+## References
+
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+
+<div id="ref-Frank10" class="csl-entry">
+
+Frank, A., and A. Asuncion. 2010. “UCI Machine Learning Repository.”
+University of California, Irvine, School of Information; Computer
+Sciences. [archive.ics.uci.edu/ml](https://archive.ics.uci.edu/ml).
+
+</div>
+
+<div id="ref-Gabriel71" class="csl-entry">
+
+Gabriel, K. R. 1971. “The Biplot Graphic Display of Matrices with
+Application to Principal Component Analysis.” *Biometrika* 58 (3):
+453–67. <https://doi.org/10.1093/biomet/58.3.453>.
+
+</div>
+
+<div id="ref-Gower95" class="csl-entry">
+
+Gower, John C., and David J. Hand. 1995. *Biplots*. Chapman & Hall/CRC
+Monographs on Statistics & Applied Probability. Taylor & Francis.
+[https://doi.org/10.1002/(SICI)1097-0258(20000130)19:2\<278::AID-SIM332\>3.0.CO;2-3](https://doi.org/10.1002/(SICI)1097-0258(20000130)19:2<278::AID-SIM332>3.0.CO;2-3).
+
+</div>
+
+<div id="ref-laGrange09" class="csl-entry">
+
+Grange, Anthony la, Niël le Roux, and Sugnet Gardner-Lubbe. 2009.
+“BiplotGUI: Interactive Biplots in r.” *Journal of Statistical Software*
+30 (12): 1–37. <https://doi.org/10.18637/jss.v030.i12>.
+
+</div>
+
+<div id="ref-Greenacre10" class="csl-entry">
+
+Greenacre, Michael. 2010. *Biplots in Practice*. BBVA Foundation.
+
+</div>
+
+<div id="ref-Hofmann04" class="csl-entry">
+
+Hofmann, Heike. 2004. “COMPSTAT 2004 — Proceedings in Computational
+Statistics: 16th Symposium Held in Prague, Czech Republic, 2004.” In,
+223–34. Heidelberg: Physica-Verlag HD.
+<https://doi.org/10.1007/978-3-7908-2656-2_18>.
+
+</div>
+
+<div id="ref-Kandogan00" class="csl-entry">
+
+Kandogan, Eser. 2000. “Star Coordinates: A Multi-Dimensional
+Visualization Technique with Uniform Treatment of Dimensions.” In
+*Proceedings of the IEEE Information Visualization Symposium, Late
+Breaking Hot Topics*, 9–12.
+
+</div>
+
+<div id="ref-Kandogan01" class="csl-entry">
+
+———. 2001. “Visualizing Multi-Dimensional Clusters, Trends, and Outliers
+Using Star Coordinates.” In *Proceedings of the Seventh ACM SIGKDD
+International Conference on Knowledge Discovery and Data Mining*,
+107–16. KDD’01. New York, NY, USA: ACM.
+<https://doi.org/10.1145/502512.502530>.
+
+</div>
+
+<div id="ref-Rubio17" class="csl-entry">
+
+Rubio-Sánchez, Manuel, Alberto Sanchez, and Dirk J. Lehmann. 2017.
+“Adaptable Radial Axes Plots for Improved Multivariate Data
+Visualization.” *Computer Graphics Forum* 36 (3): 389–99.
+<https://doi.org/10.1111/cgf.13196>.
+
+</div>
 
 </div>

@@ -25,7 +25,7 @@ Adaptable Radial Axes (ARA) plots [@Rubio17] are an interactive, exploratory dat
 
 \
 
-```{r araplot, echo=FALSE, fig.cap="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots.", out.width = '80%'}
+```{r araplot, echo=FALSE, fig.align = 'center', fig.cap="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots.", out.width = '80%'}
 knitr::include_graphics("../man/figures/vignette_cereals_ara_bb.svg")
 ```
 
@@ -39,7 +39,7 @@ ARA plots are obtained by solving the following general convex optimization prob
 
 $$
   \begin{array}{cl}
-  \displaystyle \begin{array}{c}\mathrm{minimize} \\ \mathbf{P} \in \mathbb{R}^{N\times m} \end{array} & \hspace{-0.2cm} \begin{array}{c} \| (\mathbf{P}\mathbf{V}^{\scriptstyle \top} - \mathbf{X})\mathbf{W} \|, \\ \mbox{} \end{array} \\[10pt]
+  \displaystyle \begin{array}{c}\mathrm{minimize} \\ \mathbf{P} \in \mathbb{R}^{N\times m} \end{array} & \hspace{-0.2cm} \begin{array}{c} \| (\mathbf{P}\mathbf{V}^{\scriptstyle \top} - \mathbf{X})\mathbf{W} \|, \\ \ \end{array} \\[10pt]
   \text{subject to} & \mathcal{C}. \\
   \end{array}
 $$
@@ -241,8 +241,8 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
-```{r unc_L2, echo=FALSE, fig.cap="Unconstrained ARA plot with the L2 norm of a subset of the Autompg dataset.", out.width = '100%'}
-knitr::include_graphics("../man/figures/vignette_autompg_unconstrained_L2.svg")
+```{r unc_L2, echo=FALSE, fig.align = 'center', fig.cap="Unconstrained ARA plot with the L2 norm of a subset of the Autompg dataset.", out.width = '90%'}
+knitr::include_graphics("../man/figures/vignette_autompg_unconstrained_L2_bb.svg")
 ```
 
 \ 
@@ -286,8 +286,8 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
-```{r exact_L2, echo=FALSE, fig.cap="Exact ARA plot with the L2 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'.", out.width = '100%'}
-knitr::include_graphics("../man/figures/vignette_autompg_exact_L2.svg")
+```{r exact_L2, echo=FALSE, fig.align = 'center', fig.cap="Exact ARA plot with the L2 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'.", out.width = '90%'}
+knitr::include_graphics("../man/figures/vignette_autompg_exact_L2_bb.svg")
 ```
 
 \ 
@@ -296,7 +296,7 @@ Note that the colors of the plotted points are in consonance with their position
 
 #### Ordered ARA plot
 
-The optimization problem for the ordered ARA mapping with the $\ell^{2} is a quadratic program (QP). The following code solves the problem through the **clarabel** package.
+The optimization problem for the ordered ARA mapping with the $\ell^{2}$ is a quadratic program (QP). The following code solves the problem through the **clarabel** package.
 
 ```{r echo = T, results = 'show'}
 # Compute the mapping and print the execution time
@@ -325,8 +325,8 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
-```{r ordered_L2, echo=FALSE, fig.cap="Ordered ARA plot with the L2 norm of a subset of the Autompg dataset. The values of 'mpg' are ordered correctly along its corresponding axis.", out.width = '100%'}
-knitr::include_graphics("../man/figures/vignette_autompg_ordered_L2.svg")
+```{r ordered_L2, echo=FALSE, fig.align = 'center', fig.cap="Ordered ARA plot with the L2 norm of a subset of the Autompg dataset. The values of 'mpg' are ordered correctly along its corresponding axis.", out.width = '90%'}
+knitr::include_graphics("../man/figures/vignette_autompg_ordered_L2_bb.svg")
 ```
 
 \ 
@@ -387,8 +387,8 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
-```{r unc_L1, echo=FALSE, fig.cap="Unconstrained ARA plot with the L1 norm of a subset of the Autompg dataset.", out.width = '100%'}
-knitr::include_graphics("../man/figures/vignette_autompg_unconstrained_L1.svg")
+```{r unc_L1, echo=FALSE, fig.align = 'center', fig.cap="Unconstrained ARA plot with the L1 norm of a subset of the Autompg dataset.", out.width = '90%'}
+knitr::include_graphics("../man/figures/vignette_autompg_unconstrained_L1_bb.svg")
 ```
 
 \ 
@@ -423,8 +423,8 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
-```{r exact_L1, echo=FALSE, fig.cap="Exact ARA plot with the L1 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'.", out.width = '100%'}
-knitr::include_graphics("../man/figures/vignette_autompg_exact_L1.svg")
+```{r exact_L1, echo=FALSE, fig.align = 'center', fig.cap="Exact ARA plot with the L1 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'.", out.width = '90%'}
+knitr::include_graphics("../man/figures/vignette_autompg_exact_L1_bb.svg")
 ```
 
 \ 

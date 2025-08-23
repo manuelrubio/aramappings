@@ -1,5 +1,6 @@
 ---
 output: github_document
+bibliography: vignettes/jss2025.bib 
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -9,11 +10,11 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "90%"
 )
 ```
 
-# aramappings
+# aramappings <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -163,6 +164,11 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
-```{r unc_L2, echo=FALSE, fig.cap="Unconstrained ARA plot with the L2 norm of a subset of the Autompg dataset.", out.width = '100%'}
+```{r unc_L2, echo=FALSE, fig.align = 'center', fig.cap="Unconstrained ARA plot with the L2 norm of a subset of the Autompg dataset.", out.width = '80%'}
 knitr::include_graphics("man/figures/readme_autompg_unconstrained_L2.svg")
 ```
+
+## References
+
+::: {#refs}
+:::
