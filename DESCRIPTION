@@ -4,7 +4,7 @@ Version: 0.1.0
 Authors@R: 
     person("Manuel", "Rubio-Sánchez", , "manuel.rubio@urjc.es", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-8692-2553"))
-Description: Package for computing low-dimensional point representations of high-dimensional numerical data according to the data visualization method "Adaptable Radial Axes": RUBIO-SÁNCHEZ M., SANCHEZ A., LEHMANN D. J.: Adaptable radial axes plots for improved multivariate data visualization. Computer Graphics Forum 36, 3 (2017), 389–399. doi:10.1111/cgf.13196. 
+Description: Package for computing low-dimensional point representations of high-dimensional numerical data according to the data visualization method "Adaptable Radial Axes": RUBIO-SÁNCHEZ M., SANCHEZ A., LEHMANN D. J.: Adaptable radial axes plots for improved multivariate data visualization. Computer Graphics Forum 36, 3 (2017), 389–399. <doi:10.1111/cgf.13196>. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

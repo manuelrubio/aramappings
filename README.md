@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/manuelrubio/aramappings/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/manuelrubio/aramappings/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of aramappings is to compute dimensionality reduction mappings
@@ -94,7 +95,7 @@ Install a stable version from CRAN
 
 ``` r
 install.packages("aramappings")
-#> Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpMZU3kz/temp_libpath4c061fa7163'
+#> Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpMZU3kz/temp_libpath4c01d189c2'
 #> (as 'lib' is unspecified)
 #> Warning: package 'aramappings' is not available for this version of R
 #> 
@@ -113,17 +114,17 @@ devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
 #> Downloading GitHub repo manuelrubio/aramappings@HEAD
 #> 
 #> ── R CMD build ─────────────────────────────────────────────────────────────────
-#>          checking for file 'C:\Users\manue\AppData\Local\Temp\RtmpuwQJ7c\remotes22287b87460\manuelrubio-aramappings-3f30a08/DESCRIPTION' ...  ✔  checking for file 'C:\Users\manue\AppData\Local\Temp\RtmpuwQJ7c\remotes22287b87460\manuelrubio-aramappings-3f30a08/DESCRIPTION'
+#>          checking for file 'C:\Users\manue\AppData\Local\Temp\RtmpCidX3v\remotes18a041bc5262\manuelrubio-aramappings-3f30a08/DESCRIPTION' ...  ✔  checking for file 'C:\Users\manue\AppData\Local\Temp\RtmpCidX3v\remotes18a041bc5262\manuelrubio-aramappings-3f30a08/DESCRIPTION'
 #>       ─  preparing 'aramappings':
 #>    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   ✔  checking DESCRIPTION meta-information
 #>       ─  installing the package to build vignettes
-#>          creating vignettes ...     creating vignettes ...   ✔  creating vignettes (8.4s)
-#>       ─  checking for LF line-endings in source and make files and shell scripts (561ms)
+#>          creating vignettes ...     creating vignettes ...   ✔  creating vignettes (8.6s)
+#>       ─  checking for LF line-endings in source and make files and shell scripts (595ms)
 #>       ─  checking for empty or unneeded directories
-#>       ─  building 'aramappings_0.1.0.tar.gz'
+#>       ─  building 'aramappings_0.1.0.tar.gz' (335ms)
 #>      
 #> 
-#> Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpMZU3kz/temp_libpath4c061fa7163'
+#> Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpMZU3kz/temp_libpath4c01d189c2'
 #> (as 'lib' is unspecified)
 ```
 
@@ -255,7 +256,7 @@ mapping <- ara_unconstrained_L2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.01085281 secs
+#> Time difference of 0.01185107 secs
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
