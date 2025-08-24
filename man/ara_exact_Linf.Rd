@@ -57,7 +57,13 @@ forces estimates to be exact for one of the data variables.
 }
 \examples{
 # Load data
-library(ascentTraining) # contains the Auto MPG dataset
+if (!require(ascentTraining)) {    # contains the Auto MPG dataset
+  print("Trying to install package ascentTraining")
+  install.packages("ascentTraining")
+  if(!require(ascentTraining)) {
+    stop("Could not install package ascentTraining")
+  }
+}
 data("auto_mpg")
 
 # Define subset of (numerical) variables
@@ -84,7 +90,13 @@ X <- apply(as.matrix.noquote(X), 2, as.numeric)
 Z <- scale(X)
 
 # Define axis vectors (2-dimensional in this example)
-library(geometry)
+if (!require(geometry)) {
+  print("Trying to install package geometry")
+  install.packages("geometry")
+  if(!require(geometry)) {
+    stop("Could not install package geometry")
+  }
+}
 r <- c(0.8, 1, 1.2, 1)
 theta <- c(225, 100, 315, 80) * 2 * pi / 360
 V <- pol2cart(theta, r)
@@ -94,7 +106,13 @@ n <- nrow(V)
 variable <- sample(1:n, 1)
 
 # Detect the number of available CPU cores
-library(parallelly)
+if (!require(parallelly)) {
+  print("Trying to install package parallelly")
+  install.packages("parallelly")
+  if(!require(parallelly)) {
+    stop("Could not install package parallelly")
+  }
+}
 NCORES <- parallelly::availableCores(omit = 1)
 
 # Create a cluster for parallel processing
