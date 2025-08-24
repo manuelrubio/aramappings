@@ -5,8 +5,19 @@ set.seed(100000)
 #################################   Set data   #################################
 
 # Load data set
-X <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"), header = FALSE)
-X <- X[, !names(X) %in% c("V1")]
+if (!require(datasetsICR)) {
+  print("Trying to install package datasetsICR ")
+  install.packages("datasetsICR ")
+  if(!require(datasetsICR )) {
+    stop("Could not install package datasetsICR ")
+  }
+}
+data("wine")
+
+#wine <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"), header = FALSE)
+
+X <- wine[, 2:ncol(wine)] # Select a subset of variables
+rm(wine)
 
 X <- scale(X) # standardize
 
