@@ -67,6 +67,11 @@ install.packages("aramappings")
 
 Install the development version of aramappings from [GitHub](https://github.com/) with:
 
+```{r install_dev}
+# install.packages("devtools")
+devtools::install_github("manuelrubio/aramappings")
+```
+
 <!--- ```{r install_dev}
 # install.packages("pak")
 pak::pak("manuelrubio/aramappings")

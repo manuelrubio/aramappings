@@ -94,7 +94,7 @@ Install a stable version from CRAN
 
 ``` r
 install.packages("aramappings")
-#> Installing package into 'C:/Users/manue/AppData/Local/Temp/Rtmpu28njX/temp_libpath1d606224245d'
+#> Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpAJeVcv/temp_libpath296c5964f78'
 #> (as 'lib' is unspecified)
 #> Warning: package 'aramappings' is not available for this version of R
 #> 
@@ -105,6 +105,25 @@ install.packages("aramappings")
 
 Install the development version of aramappings from
 [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("manuelrubio/aramappings")
+#> Using GitHub PAT from the git credential store.
+#> Downloading GitHub repo manuelrubio/aramappings@HEAD
+#> 
+#> ── R CMD build ─────────────────────────────────────────────────────────────────
+#>          checking for file 'C:\Users\manue\AppData\Local\Temp\RtmpOokTvf\remotes4bc7cb754a\manuelrubio-aramappings-7fdadee/DESCRIPTION' ...  ✔  checking for file 'C:\Users\manue\AppData\Local\Temp\RtmpOokTvf\remotes4bc7cb754a\manuelrubio-aramappings-7fdadee/DESCRIPTION'
+#>       ─  preparing 'aramappings':
+#>    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   ✔  checking DESCRIPTION meta-information
+#>       ─  checking for LF line-endings in source and make files and shell scripts
+#>       ─  checking for empty or unneeded directories
+#>       ─  building 'aramappings_0.1.0.tar.gz'
+#>      
+#> 
+#> Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpAJeVcv/temp_libpath296c5964f78'
+#> (as 'lib' is unspecified)
+```
 
 <!--- ```{r install_dev}
 # install.packages("pak")
@@ -234,7 +253,7 @@ mapping <- ara_unconstrained_L2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.01123095 secs
+#> Time difference of 0.01106882 secs
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
