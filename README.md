@@ -7,36 +7,101 @@
 
 <!-- badges: end -->
 
-The goal of aramappings is to compute …
+The goal of aramappings is to compute dimensionality reduction mappings
+associated with Adaptable Radial Axes (ARA) plots (Rubio-Sánchez,
+Sanchez, and Lehmann 2017).
 
-Adaptable Radial Axes (ARA) plots (Rubio-Sánchez, Sanchez, and Lehmann
-2017) are an interactive, exploratory data visualization technique
-related to Star Coordinates (Kandogan 2000, 2001) and Biplots (Gabriel
-1971; Gower and Hand 1995; Hofmann 2004; Grange, Roux, and Gardner-Lubbe
-2009; Greenacre 2010). ARA performs dimensionality reduction by
-representing high-dimensional numerical data as points in a plane or
-three-dimensional space. Unlike many other dimensionality reduction
-methods, ARA plots also visualize variable-specific information through
-“axis vectors” and their corresponding labeled axis lines, where each
-vector is associated with a particular data variable. These axis vectors
-(interactively defined by users, as in Star Coordinates) indicate the
-directions in which the values of their associated variables increase
-within the plot. Additionally, the high-dimensional observations are
-mapped (in an optimal sense) onto the plot in order to allow users to
-estimate variable values by visually projecting these points onto the
+ARA is a type of “radial axes” multivariate visualization technique.
+Other prominent examples include star coordinates (SC) (Kandogan 2000,
+2001) and biplots (Gabriel 1971; Gower and Hand 1995; Hofmann 2004;
+Grange, Roux, and Gardner-Lubbe 2009; Greenacre 2010), which have been
+used mainly for exploratory purposes, including cluster analysis,
+outlier and trend detection, decision support tasks. Their main appeal
+is the possibility to simultaneously display information about both data
+observations and variables. In particular, high-dimensional numerical
+data observations are represented as points (or other visual markers) on
+a two- or three-dimensional space, while data variables are represented
+through axis vectors, and optionally line axes, similar to those in a
+Cartesian coordinate system.
+
+With ARA, users create desired visualization by specifying a set of axis
+vectors interactively (as in SC), where each vector is associated with a
+data variable. These axis vectors indicate the directions in which the
+values of their associated variables increase within the plot.
+Additionally, the high-dimensional observations are mapped (in an
+optimal sense) onto the plot in order to allow users to estimate
+variable values by visually projecting these points onto the labeled
+axes, as in Biplots.
+
+<div class="figure" style="text-align: center">
+
+<img src="man/figures/vignette_cereals_ara_bb.svg" alt="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots." width="80%" />
+<p class="caption">
+
+ARA plot of four variables of a breakfast cereal dataset.
+High-dimensional data values can be estimated via projections onto the
 labeled axes, as in Biplots.
+</p>
+
+</div>
+
+The previous figure is an ARA plot of a breakfast cereal dataset. The
+axis vectors associated with the variables are chosen to distinguish
+between healthier cereals (toward the right) and less healthy ones
+(toward the left). For instance, points on the right will generally have
+larger values of Protein and Vitamins, and lower values of Sugar and
+Calories. Users can obtain approximations of data values by visually
+projecting the plotted points onto the labeled axes. For example, users
+would estimate a value of about 57 calories for the point that lies
+further to the right.
 
 ## Overview
 
 <!-- main components of the package. For more complex packages, this will point to vignettes for more details. -->
 
+There are nine types of ARA plots (see the **vignette** for details).
+Thus, **aramappings** provides nine functions to generate each ARA
+mapping:
+
+- `ara_unconstrained_L2()`
+- `ara_unconstrained_L1()`
+- `ara_unconstrained_Linf()`
+- `ara_exact_L2()`
+- `ara_exact_L1()`
+- `ara_exact_Linf()`
+- `ara_ordered_L2()`
+- `ara_ordered_L1()`
+- `ara_ordered_Linf()`
+
+Each function is included in a different source file. In addition, the
+previous functions calculate the two- or three-dimensional coordinates
+of the data observations in the visualization space by solving convex
+optimization problems. The source files include additional functions for
+selecting among several optimization solvers. The functions in the nine
+ARA files also rely on auxiliary methods included in file
+<tt>utils.R</tt>.
+
+The main goal of the package is to provide functionality for generating
+the mappings, but not to create visualizations. Nevertheless, it
+includes a method for generating a two-dimensional plot for standardized
+data:
+
+- `draw_ara_plot_2d_standardized()`
+
 ## Installation
 
 Install a stable version from CRAN
 
-<!--- ```{r install}
+``` r
 install.packages("aramappings")
-``` -->
+#> Installing package into 'C:/Users/manue/AppData/Local/Temp/Rtmpu28njX/temp_libpath1d606224245d'
+#> (as 'lib' is unspecified)
+#> Warning: package 'aramappings' is not available for this version of R
+#> 
+#> A version of this package for your version of R might be available elsewhere,
+#> see the ideas at
+#> https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages
+```
 
 Install the development version of aramappings from
 [GitHub](https://github.com/) with:
@@ -50,9 +115,9 @@ pak::pak("manuelrubio/aramappings")
 
 We recommend starting an exploratory analysis using an unconstrained ARA
 plot with the $\ell^{2}$ norm, which can be generated very efficiently
-since the mappings ($\mathbf{P}$) can be obtained through a closed-form
-expression (i.e., a formula). The obvious first step is to load the
-**aramappings** package:
+since the mappings can be obtained through a closed-form expression
+(i.e., a formula). The obvious first step is to load the **aramappings**
+package:
 
 ``` r
 # Load package
@@ -103,8 +168,8 @@ for (i in 1:N) {
 X <- X[rows_to_delete, ]
 ```
 
-At this moment `X` is a data.frame. In order to use the ARA functions we
-first need to convert it to a matrix:
+At this moment `X` is a <tt>data.frame</tt>. In order to use the ARA
+functions we first need to convert it to a matrix:
 
 ``` r
 # Convert X to matrix
@@ -169,7 +234,7 @@ mapping <- ara_unconstrained_L2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.01082993 secs
+#> Time difference of 0.01123095 secs
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
