@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/manuelrubio/aramappings/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/manuelrubio/aramappings/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/manuelrubio/aramappings/graph/badge.svg)](https://app.codecov.io/gh/manuelrubio/aramappings)
 <!-- badges: end -->
 
 The goal of aramappings is to compute dimensionality reduction mappings associated with Adaptable Radial Axes (ARA) plots [@Rubio17]. 
