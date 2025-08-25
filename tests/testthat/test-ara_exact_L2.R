@@ -350,6 +350,8 @@ if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
 # zero axis vectors
 m <- 3
 variable <- 3
+n <- 3
+X <- X[,1:n]
 
 # Matrix of axis vectors
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)

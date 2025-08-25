@@ -141,6 +141,8 @@ test_that("Function halts if visualization space is not bidimensional", {
 
 
 # Test values
+mapping <- ara_unconstrained_L2(Z, V)
+P <- mapping$P
 
 Zcopy <- Z
 Zcopy[1, 1] <- NA
