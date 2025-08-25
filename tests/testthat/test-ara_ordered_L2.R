@@ -1,6 +1,6 @@
 tolerance <- 0.001
 
-set.seed(100000)
+set.seed(1000000)
 
 #################################   Set data   #################################
 
@@ -17,7 +17,6 @@ data("wine")
 #wine <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"), header = FALSE)
 
 X <- wine[, 2:ncol(wine)] # Select a subset of variables
-rm(wine)
 
 X <- scale(X) # standardize
 
@@ -100,21 +99,21 @@ m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 variable <- 0
 test_that("Function halts if selected variable is not in [1,n]", {
-  expect_error(ara_ordered_L2(X, V, weights = w))
+  expect_error(ara_ordered_L2(X, V, variable = variable))
 })
 
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 variable <- n + 1
 test_that("Function halts if selected variable is not in [1,n]", {
-  expect_error(ara_ordered_L2(X, V, weights = w))
+  expect_error(ara_ordered_L2(X, V, variable = variable))
 })
 
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 variable <- 3 / 2
 test_that("Function halts if selected variable is not an integer", {
-  expect_error(ara_ordered_L2(X, V, weights = w))
+  expect_error(ara_ordered_L2(X, V, variable = variable))
 })
 
 m <- 2

@@ -30,6 +30,7 @@ Suggests:
     geometry,
     ascentTraining,     
     liver,
+    datasetsICR,
     knitr,
     rmarkdown
 Config/testthat/edition: 3

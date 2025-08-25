@@ -1,6 +1,6 @@
 tolerance <- 0.001
 
-set.seed(100000)
+set.seed(1000000)
 
 #################################   Set data   #################################
 
@@ -17,7 +17,6 @@ data("wine")
 #wine <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"), header = FALSE)
 
 X <- wine[, 2:ncol(wine)] # Select a subset of variables
-rm(wine)
 
 X <- scale(X) # standardize
 
@@ -279,7 +278,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-
 R_test <- ara_unconstrained_Linf(X, V, weights = w, solver = "glpkAPI", use_glpkAPI_simplex = TRUE)
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
@@ -295,6 +293,38 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 }
 
 R_test <- ara_unconstrained_Linf(X, V, weights = w, solver = "Rglpk")
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+
+# Correct result - no weights
+R <- ara_unconstrained_Linf(X, V, solver = "clarabel")
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "CVXR")
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "glpkAPI", use_glpkAPI_simplex = TRUE)
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "glpkAPI", use_glpkAPI_simplex = FALSE)
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -324,7 +354,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-
 R_test <- ara_unconstrained_Linf(X, V, weights = w, solver = "glpkAPI", use_glpkAPI_simplex = TRUE)
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
@@ -340,6 +369,38 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 }
 
 R_test <- ara_unconstrained_Linf(X, V, weights = w, solver = "Rglpk")
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+
+# Correct result - no weights
+R <- ara_unconstrained_Linf(X, V, solver = "clarabel")
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "CVXR")
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "glpkAPI", use_glpkAPI_simplex = TRUE)
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "glpkAPI", use_glpkAPI_simplex = FALSE)
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -372,7 +433,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-
 R_test <- ara_unconstrained_Linf(X, V, weights = w, solver = "glpkAPI", use_glpkAPI_simplex = TRUE)
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
@@ -388,6 +448,38 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 }
 
 R_test <- ara_unconstrained_Linf(X, V, weights = w, solver = "Rglpk")
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+
+# Correct result - no weights
+R <- ara_unconstrained_Linf(X, V, solver = "clarabel")
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "CVXR")
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "glpkAPI", use_glpkAPI_simplex = TRUE)
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "glpkAPI", use_glpkAPI_simplex = FALSE)
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -416,7 +508,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-
 R_test <- ara_unconstrained_Linf(X, V, weights = w, solver = "glpkAPI", use_glpkAPI_simplex = TRUE)
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
@@ -438,6 +529,38 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
+
+
+# Correct result - no weights
+R <- ara_unconstrained_Linf(X, V, solver = "clarabel")
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "CVXR")
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "glpkAPI", use_glpkAPI_simplex = TRUE)
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "glpkAPI", use_glpkAPI_simplex = FALSE)
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "Rglpk")
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
 
 
 
@@ -467,7 +590,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-
 R_test <- ara_unconstrained_Linf(X, V, weights = w, solver = "glpkAPI", use_glpkAPI_simplex = TRUE)
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
@@ -490,6 +612,36 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 }
 
 
+# Correct result - no weights
+R <- ara_unconstrained_Linf(X, V, solver = "clarabel")
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "CVXR")
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "glpkAPI", use_glpkAPI_simplex = TRUE)
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "glpkAPI", use_glpkAPI_simplex = FALSE)
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "Rglpk")
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
 
 
 
@@ -515,7 +667,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-
 R_test <- ara_unconstrained_Linf(X, V, weights = w, solver = "glpkAPI", use_glpkAPI_simplex = TRUE)
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
@@ -538,6 +689,36 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 }
 
 
+# Correct result - no weights
+R <- ara_unconstrained_Linf(X, V, solver = "clarabel")
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "CVXR")
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "glpkAPI", use_glpkAPI_simplex = TRUE)
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "glpkAPI", use_glpkAPI_simplex = FALSE)
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
+
+R_test <- ara_unconstrained_Linf(X, V, solver = "Rglpk")
+if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
+  })
+}
 
 
 

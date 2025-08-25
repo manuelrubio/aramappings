@@ -1,6 +1,6 @@
 tolerance <- 0.001
 
-set.seed(100000)
+set.seed(1000000)
 
 #################################   Set data   #################################
 
@@ -17,7 +17,6 @@ data("wine")
 #wine <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"), header = FALSE)
 
 X <- wine[, 2:ncol(wine)] # Select a subset of variables
-rm(wine)
 
 X <- scale(X) # standardize
 
@@ -255,9 +254,6 @@ m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[, 2] <- 0 * V[, 1] # linearly dependent rows
 
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-
 # Variable
 variable <- sample(1:n, 1)
 
@@ -298,9 +294,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 # Matrix of axis vectors
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[, 2] <- 2 * V[, 1] # linearly dependent columns
-
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 
 # Variable
 variable <- sample(1:n, 1)
@@ -348,9 +341,6 @@ m <- 3
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[, 3] <- 2 * V[, 1] # linearly dependent columns
 
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-
 # Variable
 variable <- sample(1:n, 1)
 
@@ -392,9 +382,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 # Matrix of axis vectors
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[, 3] <- 0 * V[, 3]
-
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 
 # Variable
 variable <- sample(1:n, 1)
@@ -442,10 +429,6 @@ V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[, 2] <- 2 * V[, 1] # linearly dependent columns
 V[, 3] <- 3 * V[, 1] # linearly dependent columns
 
-
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-
 # Variable
 variable <- sample(1:n, 1)
 
@@ -488,13 +471,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[, 2] <- 0 * V[, 1] # linearly dependent columns
 V[, 3] <- 0 * V[, 1] # linearly dependent columns
-
-
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-
-# Weights
-w <- runif(n, 0, 1)
 
 # Correct result
 R <- ara_exact_L1(X, V, variable = variable, solver = "clarabel")

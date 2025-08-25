@@ -1,6 +1,6 @@
 tolerance <- 0.001
 
-set.seed(100000)
+set.seed(1000000)
 
 #################################   Set data   #################################
 
@@ -17,7 +17,6 @@ data("wine")
 #wine <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"), header = FALSE)
 
 X <- wine[, 2:ncol(wine)] # Select a subset of variables
-rm(wine)
 
 X <- scale(X) # standardize
 
@@ -345,3 +344,37 @@ if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
     expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
   })
 }
+
+
+
+
+# zero axis vectors
+m <- 3
+
+# Matrix of axis vectors
+V <- matrix(rnorm(n * m), nrow = n, ncol = m)
+V[1, ] <- 0 * V[2, ]
+
+R_formula <- ara_unconstrained_L2(X, V)
+R_CVXR <- ara_unconstrained_L2(X, V, solver = "CVXR")
+
+if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+  })
+}
+
+
+# Matrix of axis vectors
+V <- matrix(rnorm(n * m), nrow = n, ncol = m)
+V[2, ] <- 0 * V[1, ]
+
+R_formula <- ara_unconstrained_L2(X, V)
+R_CVXR <- ara_unconstrained_L2(X, V, solver = "CVXR")
+
+if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+  })
+}
+
