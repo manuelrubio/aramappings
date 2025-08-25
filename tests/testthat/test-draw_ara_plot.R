@@ -79,8 +79,8 @@ test_that("Function halts if P is not a matrix", {
 })
 
 
-w <- runif(n, 0, 1)
-w[1] <- "1"
+wcopy <- runif(n, 0, 1)
+wcopy[1] <- "1"
 test_that("Function halts if weights is not numeric", {
   expect_error(draw_ara_plot_2d_standardized(Z, X, V, P, weights = wcopy))
 })
