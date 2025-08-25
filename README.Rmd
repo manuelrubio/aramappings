@@ -198,6 +198,7 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
+
 ```{r unc_L2, echo=FALSE, fig.align = 'center', fig.cap="Unconstrained ARA plot with the L2 norm of a subset of the Autompg dataset.", out.width = '80%'}
 knitr::include_graphics("man/figures/readme_autompg_unconstrained_L2.svg")
 ```

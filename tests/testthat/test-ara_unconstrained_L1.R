@@ -262,9 +262,6 @@ m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[, 2] <- 0 * V[, 1] # linearly dependent columns
 
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-
 # Weights
 w <- runif(n, 0, 1)
 
@@ -340,9 +337,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 # Matrix of axis vectors
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[, 2] <- 2 * V[, 1] # linearly dependent columns
-
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 
 # Weights
 w <- runif(n, 0, 1)
@@ -421,9 +415,6 @@ m <- 3
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[, 3] <- 2 * V[, 1] # linearly dependent columns
 
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-
 # Weights
 w <- runif(n, 0, 1)
 
@@ -497,9 +488,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 # Matrix of axis vectors
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[, 3] <- 0 * V[, 3]
-
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 
 # Weights
 w <- runif(n, 0, 1)
@@ -579,10 +567,6 @@ V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[, 2] <- 2 * V[, 1] # linearly dependent columns
 V[, 3] <- 3 * V[, 1] # linearly dependent columns
 
-
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-
 # Weights
 w <- runif(n, 0, 1)
 
@@ -656,10 +640,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[, 2] <- 0 * V[, 1] # linearly dependent columns
 V[, 3] <- 0 * V[, 1] # linearly dependent columns
-
-
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 
 # Weights
 w <- runif(n, 0, 1)

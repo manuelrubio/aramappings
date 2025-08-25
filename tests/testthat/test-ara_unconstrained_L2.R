@@ -348,33 +348,5 @@ if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
 
 
 
-# zero axis vectors
-m <- 3
 
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-V[1, ] <- 0 * V[2, ]
-
-R_formula <- ara_unconstrained_L2(X, V)
-R_CVXR <- ara_unconstrained_L2(X, V, solver = "CVXR")
-
-if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
-  })
-}
-
-
-# Matrix of axis vectors
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-V[2, ] <- 0 * V[1, ]
-
-R_formula <- ara_unconstrained_L2(X, V)
-R_CVXR <- ara_unconstrained_L2(X, V, solver = "CVXR")
-
-if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
-  })
-}
 

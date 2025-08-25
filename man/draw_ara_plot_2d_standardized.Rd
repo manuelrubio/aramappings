@@ -32,6 +32,9 @@ Default: NULL.}
 
 \item{color_variable}{Integer (in [1,n]) that indicates the variable used to color the embedded points. Default: NULL.}
 }
+\value{
+Returns 0 if the function terminates without errors
+}
 \description{
 Creates a plot associated with an Adaptable Radial Axes (ARA) mapping
 }

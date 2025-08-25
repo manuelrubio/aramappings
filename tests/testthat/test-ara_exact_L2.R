@@ -344,3 +344,36 @@ if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
     expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
   })
 }
+
+
+
+# zero axis vectors
+m <- 3
+variable <- 3
+
+# Matrix of axis vectors
+V <- matrix(rnorm(n * m), nrow = n, ncol = m)
+V[1, ] <- rep(0, m)
+
+R_formula <- ara_exact_L2(X, V, variable = variable)
+R_CVXR <- ara_exact_L2(X, V, variable = variable, solver = "CVXR")
+
+if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+  })
+}
+
+
+# Matrix of axis vectors
+V <- matrix(rnorm(n * m), nrow = n, ncol = m)
+V[2, ] <- rep(0, m)
+
+R_formula <- ara_exact_L2(X, V, variable = variable)
+R_CVXR <- ara_exact_L2(X, V,  variable = variable, solver = "CVXR")
+
+if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
+  test_that("Methods reach same objective value", {
+    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+  })
+}

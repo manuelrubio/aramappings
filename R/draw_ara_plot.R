@@ -37,6 +37,9 @@
 #' multivariate data visualization. Computer Graphics Forum 36, 3 (2017), 389–399.
 #' [doi:10.1111/cgf.13196](https://onlinelibrary.wiley.com/doi/10.1111/cgf.13196)
 #'
+#' @returns
+#' Returns 0 if the function terminates without errors
+#'
 #' @export
 #'
 #' @examples
@@ -221,7 +224,7 @@ draw_ara_plot_2d_standardized <- function(
   while ((count < length(axis_lines)) && ((axis_lines[count+1]>=1) && (axis_lines[count+1]<=n) && (axis_lines[count+1] %% 1 == 0))) {
     count <- count + 1
   }
-  if ((count > n) || (any(duplicated(axis_lines)))) {
+  if ((count > n) || (count!=length(axis_lines)) || (any(duplicated(axis_lines)))) {
     stop("Input error: axis_lines must contain at most n distinct variable (integer) indices")
   }
 
@@ -426,4 +429,6 @@ draw_ara_plot_2d_standardized <- function(
 
   # Draw plot
   my_plot
+
+  return(0)
 }
