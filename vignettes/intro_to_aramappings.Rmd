@@ -99,22 +99,26 @@ The package also contains an additional basic function for drawing two-dimension
 
 The function is included in order to show the results of the ARA mapping functions (i.e., the embedded points), together wirh the axis vectors and labeled axis lines. However, it does not consider several aspects that may be necessary for generating a clear visualization. Note that ARA should be implemented within an interactive visualization environment that offers extensive features. Such a tool should allow users to dynamically manipulate plots (e.g., by modifying axis vectors; customizing or toggling elements such as axes, labels, and variable names; encoding additional data dimensions through point color, size, or shape; and animating transitions between plots).
 
+
 ## Installation
 
 Install a stable version from CRAN
 
-<!--- ```{r}
+<!--- ```{r install}
 install.packages("aramappings")
 ``` -->
 
 Install the development version of aramappings from [GitHub](https://github.com/) with:
 
-<!--- ```{r}
+<!--- ```{r install_dev}
+# install.packages("devtools")
+devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
+``` -->
+
+<!--- ```{r install_dev}
 # install.packages("pak")
 pak::pak("manuelrubio/aramappings")
 ``` -->
-
-<!--- # devtools::install_github("jennybc/regexcite") # install development version -->
 
 
 

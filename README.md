@@ -97,7 +97,7 @@ Install a stable version from CRAN
 
 ``` r
 install.packages("aramappings")
-#> Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpcTTFWz/temp_libpath340476c77cdc'
+#> Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpcTTFWz/temp_libpath34047e9c1a6e'
 #> (as 'lib' is unspecified)
 #> Warning: package 'aramappings' is not available for this version of R
 #> 
@@ -116,17 +116,17 @@ devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
 #> Downloading GitHub repo manuelrubio/aramappings@HEAD
 #> 
 #> ── R CMD build ─────────────────────────────────────────────────────────────────
-#>          checking for file 'C:\Users\manue\AppData\Local\Temp\Rtmp2RQwHq\remotes11e83ea3010\manuelrubio-aramappings-c8aa78e/DESCRIPTION' ...     checking for file 'C:\Users\manue\AppData\Local\Temp\Rtmp2RQwHq\remotes11e83ea3010\manuelrubio-aramappings-c8aa78e/DESCRIPTION' ...   ✔  checking for file 'C:\Users\manue\AppData\Local\Temp\Rtmp2RQwHq\remotes11e83ea3010\manuelrubio-aramappings-c8aa78e/DESCRIPTION'
+#>          checking for file 'C:\Users\manue\AppData\Local\Temp\RtmpaWs2LS\remotes5b88f721c94\manuelrubio-aramappings-c660829/DESCRIPTION' ...  ✔  checking for file 'C:\Users\manue\AppData\Local\Temp\RtmpaWs2LS\remotes5b88f721c94\manuelrubio-aramappings-c660829/DESCRIPTION'
 #>       ─  preparing 'aramappings':
 #>    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   ✔  checking DESCRIPTION meta-information
 #>       ─  installing the package to build vignettes
-#>          creating vignettes ...     creating vignettes ...   ✔  creating vignettes (22.2s)
-#>       ─  checking for LF line-endings in source and make files and shell scripts (636ms)
+#>          creating vignettes ...     creating vignettes ...   ✔  creating vignettes (8s)
+#>       ─  checking for LF line-endings in source and make files and shell scripts (654ms)
 #>       ─  checking for empty or unneeded directories
-#>       ─  building 'aramappings_0.1.0.tar.gz' (411ms)
+#>       ─  building 'aramappings_0.1.0.tar.gz' (410ms)
 #>      
 #> 
-#> Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpcTTFWz/temp_libpath340476c77cdc'
+#> Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpcTTFWz/temp_libpath34047e9c1a6e'
 #> (as 'lib' is unspecified)
 ```
 
@@ -258,7 +258,7 @@ mapping <- ara_unconstrained_L2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.01134419 secs
+#> Time difference of 0.01157999 secs
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and

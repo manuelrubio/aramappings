@@ -1,4 +1,4 @@
-#' Draws an Adaptable Radial Axes (ARA) plot
+#' Draws a 2D Adaptable Radial Axes (ARA) plot for standardized data
 #'
 #' @description
 #' Creates a plot associated with an Adaptable Radial Axes (ARA) mapping
