@@ -2,7 +2,7 @@
 % Please edit documentation in R/draw_ara_plot.R
 \name{draw_ara_plot_2d_standardized}
 \alias{draw_ara_plot_2d_standardized}
-\title{Draws an Adaptable Radial Axes (ARA) plot}
+\title{Draws a 2D Adaptable Radial Axes (ARA) plot for standardized data}
 \usage{
 draw_ara_plot_2d_standardized(
   Z,
