@@ -11,8 +11,13 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="../katex-auto.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -110,53 +115,58 @@ calories for the point that lies further to the right.</p>
 </h3>
 <p>ARA plots are obtained by solving the following general convex
 optimization problem:</p>
-<span class="math display">\begin{array}{cl}
+<span class="math display">\[\begin{array}{cl}
   \displaystyle \begin{array}{c}\mathrm{minimize} \\ \mathbf{P} \in
 \mathbb{R}^{N\times m} \end{array} &amp; \hspace{-0.2cm}
 \begin{array}{c} \| (\mathbf{P}\mathbf{V}^{\scriptstyle \top} -
 \mathbf{X})\mathbf{W} \|, \\ \ \end{array} \\[10pt]
   \text{subject to} &amp; \mathcal{C}. \\
-  \end{array}</span>
+  \end{array}\]</span>
 <p>Here, we use the following notation:</p>
 <ul>
 <li>
-<span class="math inline">N</span>: Number of data observations =
-number of mapped points.</li>
+<span class="math inline">\(N\)</span>: Number of data observations
+= number of mapped points.</li>
 <li>
-<span class="math inline">n</span>: Number of data variables.</li>
+<span class="math inline">\(n\)</span>: Number of data
+variables.</li>
 <li>
-<span class="math inline">m</span>: Dimensionality of the
+<span class="math inline">\(m\)</span>: Dimensionality of the
 visualization space (2 or 3).</li>
 <li>
-<span class="math inline">\mathbf{X}</span>: Data matrix of
-dimensions <span class="math inline">N\times n</span>, where each row
-represents a data observation.</li>
+<span class="math inline">\(\mathbf{X}\)</span>: Data matrix of
+dimensions <span class="math inline">\(N\times n\)</span>, where each
+row represents a data observation.</li>
 <li>
-<span class="math inline">\mathbf{V}</span>: <span class="math inline">n\times m</span> matrix of axis vectors. The <span class="math inline">i</span>-th row is the axis vector associated with
-the <span class="math inline">i</span>-th data variable.</li>
-<li>
-<span class="math inline">\mathbf{W}</span>: <span class="math inline">n\times n</span> diagonal matrix containing
-non-negative weights. The <span class="math inline">i</span>-th weight
-is related to the <span class="math inline">i</span>-th data
+<span class="math inline">\(\mathbf{V}\)</span>: <span class="math inline">\(n\times m\)</span> matrix of axis vectors. The
+<span class="math inline">\(i\)</span>-th row is the axis vector
+associated with the <span class="math inline">\(i\)</span>-th data
 variable.</li>
 <li>
-<span class="math inline">\mathbf{P}</span>: Matrix of mapped (or
-“embedded”) points of dimensions <span class="math inline">N\times
-m</span>. Each row is the low-dimensional representation (i.e., the
+<span class="math inline">\(\mathbf{W}\)</span>: <span class="math inline">\(n\times n\)</span> diagonal matrix containing
+non-negative weights. The <span class="math inline">\(i\)</span>-th
+weight is related to the <span class="math inline">\(i\)</span>-th data
+variable.</li>
+<li>
+<span class="math inline">\(\mathbf{P}\)</span>: Matrix of mapped
+(or “embedded”) points of dimensions <span class="math inline">\(N\times
+m\)</span>. Each row is the low-dimensional representation (i.e., the
 mapped point) of a data observation.</li>
 <li>
-<span class="math inline">\| \cdot \|</span>: A matrix norm.</li>
+<span class="math inline">\(\| \cdot \|\)</span>: A matrix
+norm.</li>
 <li>
-<span class="math inline">\mathcal{C}</span>: Some possible
+<span class="math inline">\(\mathcal{C}\)</span>: Some possible
 constraints.</li>
 </ul>
-<p>Similarly to Biplots, the product <span class="math inline">\mathbf{P}\mathbf{V}^{\scriptstyle \top}</span>
-represents the estimates of data values in <span class="math inline">\mathbf{X}</span> when projecting the mapped points
-in <span class="math inline">\mathbf{P}</span> on to the axes defined by
-<span class="math inline">\mathbf{V}</span>. Thus, the goal consists of
-finding optimal embedded points to minimize the discrepancy between the
-original data values and the estimates. Lastly, matrix <span class="math inline">\mathbf{W}</span> can be used to control relative
-accuracy of the estimates on each variable.</p>
+<p>Similarly to Biplots, the product <span class="math inline">\(\mathbf{P}\mathbf{V}^{\scriptstyle \top}\)</span>
+represents the estimates of data values in <span class="math inline">\(\mathbf{X}\)</span> when projecting the mapped
+points in <span class="math inline">\(\mathbf{P}\)</span> on to the axes
+defined by <span class="math inline">\(\mathbf{V}\)</span>. Thus, the
+goal consists of finding optimal embedded points to minimize the
+discrepancy between the original data values and the estimates. Lastly,
+matrix <span class="math inline">\(\mathbf{W}\)</span> can be used to
+control relative accuracy of the estimates on each variable.</p>
 <p>It is also worth noting that the variables should have a similar
 scaling. Otherwise, the solutions would focus on providing more accurate
 estimates for variables with larger values. In addition, centering the
@@ -176,21 +186,21 @@ types of matrix norms, and three choices regarding constraints.</p>
 <p>The current version of the package considers three norms:</p>
 <ul>
 <li>
-<span class="math inline">\| \cdot \|_{F}^{2}</span>: Squared <span class="math inline">\ell^{2}</span> (Frobenius) norm (sum of squares of
+<span class="math inline">\(\| \cdot \|_{F}^{2}\)</span>: Squared
+<span class="math inline">\(\ell^{2}\)</span> (Frobenius) norm (sum of
+squares of the entries)</li>
+<li>
+<span class="math inline">\(\| \cdot \|_{1}\)</span>: <span class="math inline">\(\ell^{1}\)</span> norm (sum of absolute values of
 the entries)</li>
 <li>
-<span class="math inline">\| \cdot \|_{1}</span>: <span class="math inline">\ell^{1}</span> norm (sum of absolute values of the
-entries)</li>
-<li>
-<span class="math inline">\| \cdot \|_{\infty}</span>: <span class="math inline">\ell^{\infty}</span> norm (maximum of absolute
+<span class="math inline">\(\| \cdot \|_{\infty}\)</span>: <span class="math inline">\(\ell^{\infty}\)</span> norm (maximum of absolute
 values of the entries)</li>
 </ul>
 <p>The choice of norm reflects the analyst’s tolerance for large
-estimation errors. The <span class="math inline">\ell^{\infty}</span>
-norm emphasizes minimizing the maximum estimation error across all
-variables or axes, making it suitable when the worst-case error is
-critical. The <span class="math inline">\ell^{2}</span> norm also
-penalizes larger errors, but to a lesser extent. In contrast, the <span class="math inline">\ell^{1}</span> norm allows for some large
+estimation errors. The <span class="math inline">\(\ell^{\infty}\)</span> norm emphasizes minimizing
+the maximum estimation error across all variables or axes, making it
+suitable when the worst-case error is critical. The <span class="math inline">\(\ell^{2}\)</span> norm also penalizes larger
+errors, but to a lesser extent. In contrast, the <span class="math inline">\(\ell^{1}\)</span> norm allows for some large
 estimation errors if doing so leads to significantly smaller errors for
 other variables.</p>
 </div>
@@ -202,21 +212,20 @@ the constraints of the ARA optimization problem:</p>
 <ul>
 <li>
 <strong>Unconstrained</strong> problems. These formulations do not
-include constraints but may incorporate the weight matrix <span class="math inline">\mathbf{W}</span>, which, in combination with the
-lengths of the axis vectors, can be used to control the desired relative
-accuracy when estimating values of specific variables. Variables with
-higher associated weights or longer axis vectors will receive greater
-emphasis in the optimization.</li>
+include constraints but may incorporate the weight matrix <span class="math inline">\(\mathbf{W}\)</span>, which, in combination with
+the lengths of the axis vectors, can be used to control the desired
+relative accuracy when estimating values of specific variables.
+Variables with higher associated weights or longer axis vectors will
+receive greater emphasis in the optimization.</li>
 <li>
 <strong>Exact</strong> estimates for one of the variables. In these
-problems, the weight matrix <span class="math inline">\mathbf{W}</span>
-is not used.</li>
+problems, the weight matrix <span class="math inline">\(\mathbf{W}\)</span> is not used.</li>
 <li>
 <strong>Ordered</strong> estimates for one variable. This variant
 imposes a weaker constraint. Instead of requiring exact value estimates
 for a variable, it is sufficient that the estimates preserve the ranking
 of the original data values. As with the exact case, the weight matrix
-<span class="math inline">\mathbf{W}</span> is not used in these
+<span class="math inline">\(\mathbf{W}\)</span> is not used in these
 formulations.</li>
 </ul>
 </div>
@@ -224,8 +233,8 @@ formulations.</li>
 <h4 id="available-functions-in-aramappings">Available functions in aramappings<a class="anchor" aria-label="anchor" href="#available-functions-in-aramappings"></a>
 </h4>
 <p>The <strong>aramappings</strong> package contains nine functions to
-compute ARA mappings (i.e., the embedded points in <span class="math inline">\mathbf{P}</span>), according to the chosen norm and
-type of constraints. The names of thefunctions are shown in the
+compute ARA mappings (i.e., the embedded points in <span class="math inline">\(\mathbf{P}\)</span>), according to the chosen norm
+and type of constraints. The names of thefunctions are shown in the
 following table:</p>
 <table class="table">
 <colgroup>
@@ -243,8 +252,8 @@ following table:</p>
 <tbody>
 <tr class="odd">
 <td align="left">
-<span class="math inline">\ell^{2}</span> <strong>norm
-(squared)</strong>
+<span class="math inline">\(\ell^{2}\)</span>
+<strong>norm (squared)</strong>
 </td>
 <td align="left"><code><a href="../reference/ara_unconstrained_L2.html">ara_unconstrained_L2()</a></code></td>
 <td align="left"><code><a href="../reference/ara_exact_L2.html">ara_exact_L2()</a></code></td>
@@ -252,7 +261,7 @@ following table:</p>
 </tr>
 <tr class="even">
 <td align="left">
-<span class="math inline">\ell^{1}</span>
+<span class="math inline">\(\ell^{1}\)</span>
 <strong>norm</strong>
 </td>
 <td align="left"><code><a href="../reference/ara_unconstrained_L1.html">ara_unconstrained_L1()</a></code></td>
@@ -261,7 +270,7 @@ following table:</p>
 </tr>
 <tr class="odd">
 <td align="left">
-<span class="math inline">\ell^{\infty}</span>
+<span class="math inline">\(\ell^{\infty}\)</span>
 <strong>norm</strong>
 </td>
 <td align="left"><code><a href="../reference/ara_unconstrained_Linf.html">ara_unconstrained_Linf()</a></code></td>
@@ -310,11 +319,11 @@ pak::pak("manuelrubio/aramappings")
 </h2>
 <p>This section presents several usage examples.</p>
 <div class="section level3">
-<h3 id="unconstrained-ara-plot-with-the-ell2-norm">Unconstrained ARA plot with the <span class="math inline">\ell^{2}</span> norm<a class="anchor" aria-label="anchor" href="#unconstrained-ara-plot-with-the-ell2-norm"></a>
+<h3 id="unconstrained-ara-plot-with-the-ell2-norm">Unconstrained ARA plot with the <span class="math inline">\(\ell^{2}\)</span> norm<a class="anchor" aria-label="anchor" href="#unconstrained-ara-plot-with-the-ell2-norm"></a>
 </h3>
 <p>We recommend starting an exploratory analysis using an unconstrained
-ARA plot with the <span class="math inline">\ell^{2}</span> norm, which
-can be generated very efficiently since the mappings (<span class="math inline">\mathbf{P}</span>) can be obtained through a
+ARA plot with the <span class="math inline">\(\ell^{2}\)</span> norm,
+which can be generated very efficiently since the mappings (<span class="math inline">\(\mathbf{P}\)</span>) can be obtained through a
 closed-form expression (i.e., a formula). The obvious first step is to
 load the <strong>aramappings</strong> package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -369,15 +378,14 @@ that draws the plot needs the original values in <code>X</code>.</p>
 <code class="sourceCode R"><span><span class="co"># Standardize data</span></span>
 <span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></code></pre></div>
 <p>Having preprocessed the data, the next step consists of defining the
-axis vectors, which are the rows of <span class="math inline">\mathbf{V}</span>. These can be obtained manually
-(ideally through a graphical user interface), or through an automatic
-method. For instante, <span class="math inline">\mathbf{V}</span> could
-be the matrix defining the Principal Component Analysis transfomation
-(in that case the ARA plot would be a Principal Component Biplot). In
-this example, we simply define a configuration of vectors in polar
-coordinates and transform them to Cartesian coordinates with the
-<code><a href="https://rdrr.io/pkg/geometry/man/pol2cart.html" class="external-link">pol2cart()</a></code> function in package
-<strong>geometry</strong>.</p>
+axis vectors, which are the rows of <span class="math inline">\(\mathbf{V}\)</span>. These can be obtained
+manually (ideally through a graphical user interface), or through an
+automatic method. For instante, <span class="math inline">\(\mathbf{V}\)</span> could be the matrix defining
+the Principal Component Analysis transfomation (in that case the ARA
+plot would be a Principal Component Biplot). In this example, we simply
+define a configuration of vectors in polar coordinates and transform
+them to Cartesian coordinates with the <code><a href="https://rdrr.io/pkg/geometry/man/pol2cart.html" class="external-link">pol2cart()</a></code> function
+in package <strong>geometry</strong>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define axis vectors (2-dimensional in this example)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcsterratt.github.io/geometry/" class="external-link">geometry</a></span><span class="op">)</span></span>
@@ -395,7 +403,7 @@ color the axis vectors in the ARA plot.</p>
 <span><span class="va">weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.75</span>, <span class="fl">0.75</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p>Having defined the data (<code>Z</code>), axis vectors
 (<code>V</code>), and weights (<code>weights</code>), we can proceed to
-compute the ARA mapping. For unconstrained ARA plots with the <span class="math inline">\ell^{2}</span> norm the <code>solver</code>
+compute the ARA mapping. For unconstrained ARA plots with the <span class="math inline">\(\ell^{2}\)</span> norm the <code>solver</code>
 parameter should be set to “formula” (the default), in order to obtain
 the mapping through a closed-form expression. The following code
 computes the embedded points and saves them in <code>mapping$P</code>,
@@ -411,7 +419,7 @@ and shows the execution runtime involved in computing the mapping.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.0105176 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.01054621 secs</span></span></code></pre></div>
 <p>ARA plots can get cluttered when showing all of the axis lines and
 corresponding labels at the tick marks. Thus, the function that we will
 use to draw the ARA plot (<code><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>)
@@ -464,7 +472,7 @@ ordering the plotted points:</p>
 <div class="section level4">
 <h4 id="exact-ara-plot">Exact ARA plot<a class="anchor" aria-label="anchor" href="#exact-ara-plot"></a>
 </h4>
-<p>The exact ARA mapping for the <span class="math inline">\ell^{2}</span> norm is computed through:</p>
+<p>The exact ARA mapping for the <span class="math inline">\(\ell^{2}\)</span> norm is computed through:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute the mapping and print the execution time</span></span>
 <span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -476,7 +484,7 @@ ordering the plotted points:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.6849236 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.6661861 secs</span></span></code></pre></div>
 <p>Note that it is also very efficient since the solution can also be
 expressed as a formula. Finally, we generate the ARA plot:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -503,7 +511,7 @@ their position along the “mpg” axis.</p>
 <div class="section level4">
 <h4 id="ordered-ara-plot">Ordered ARA plot<a class="anchor" aria-label="anchor" href="#ordered-ara-plot"></a>
 </h4>
-<p>The optimization problem for the ordered ARA mapping with the <span class="math inline">\ell^{2}</span> is a quadratic program (QP). The
+<p>The optimization problem for the ordered ARA mapping with the <span class="math inline">\(\ell^{2}\)</span> is a quadratic program (QP). The
 following code solves the problem through the <strong>clarabel</strong>
 package.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
@@ -517,7 +525,7 @@ package.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.02681899 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.02649641 secs</span></span></code></pre></div>
 <p>Finally, we generate the ARA plot:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Draw the ARA plot</span></span>
@@ -546,7 +554,7 @@ for other variables.</p>
 <div class="section level3">
 <h3 id="ara-plots-using-parallel-processing">ARA plots using parallel processing<a class="anchor" aria-label="anchor" href="#ara-plots-using-parallel-processing"></a>
 </h3>
-<p>ARA mappings of unconstrained and exact problems with the <span class="math inline">\ell^{1}</span> or <span class="math inline">\ell^{\infty}</span> can be computed in parallel
+<p>ARA mappings of unconstrained and exact problems with the <span class="math inline">\(\ell^{1}\)</span> or <span class="math inline">\(\ell^{\infty}\)</span> can be computed in parallel
 using several cores. The ideal number of cores to use depends on the
 size of the input data matrix. In general, it grows with the number of
 observations. Users are advised to analyze runtimes on their computers
@@ -568,7 +576,7 @@ specifying the number of cores to use.</p>
 <code class="sourceCode R"><span><span class="co"># Create a cluster for parallel processing</span></span>
 <span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="va">NCORES</span><span class="op">)</span></span></code></pre></div>
 <p>In this example we will compute an ARA unconstrained mapping with the
-<span class="math inline">\ell^{1}</span> norm. This function admits
+<span class="math inline">\(\ell^{1}\)</span> norm. This function admits
 weights, and lets us choose between several solvers. When using the
 solver from package <strong>glpkAPI</strong> we can specify whether to
 use a simplex algorithm, when parameter <code>use_glpkAPI_simplex</code>
@@ -588,7 +596,7 @@ cluster object created above.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.2666202 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.2635579 secs</span></span></code></pre></div>
 <p>The ARA plot generated through:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
@@ -609,7 +617,7 @@ dataset.
 </div>
 <p> </p>
 <p>Alternatively, the following code computes an exact ARA mapping with
-the <span class="math inline">\ell^{1}</span> norm:</p>
+the <span class="math inline">\(\ell^{1}\)</span> norm:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute the mapping and print the execution time</span></span>
 <span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -623,7 +631,7 @@ the <span class="math inline">\ell^{1}</span> norm:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.2023683 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.2013092 secs</span></span></code></pre></div>
 <p>The ARA plot generated through:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
