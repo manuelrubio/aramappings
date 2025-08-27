@@ -22,7 +22,7 @@ Imports:
     grDevices,
     grid,
     stats
-URL: https://github.com/manuelrubio/aramappings
+URL: https://github.com/manuelrubio/aramappings, https://manuelrubio.github.io/aramappings/
 BugReports: https://github.com/manuelrubio/aramappings/issues
 Suggests: 
     testthat (>= 3.0.0),
