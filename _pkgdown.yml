@@ -1,4 +1,4 @@
 url: https://manuelrubio.github.io/aramappings/
 template:
   bootstrap: 5
-  math-rendering: katex
+  math-rendering: mathjax
