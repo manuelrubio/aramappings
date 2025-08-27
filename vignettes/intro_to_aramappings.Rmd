@@ -37,12 +37,10 @@ In the previous ARA plot, the "axis" vectors associated with the variables are c
 
 ARA plots are obtained by solving the following general convex optimization problem:
 
-\[
-  \begin{array}{cl}
+$$ \begin{array}{cl}
   \displaystyle \begin{array}{c}\mathrm{minimize} \\ \mathbf{P} \in \mathbb{R}^{N\times m} \end{array} & \hspace{-0.2cm} \begin{array}{c} \| (\mathbf{P}\mathbf{V}^{\scriptstyle \top} - \mathbf{X})\mathbf{W} \|, \\ \ \end{array} \\[10pt]
   \text{subject to} & \mathcal{C}. \\
-  \end{array}
-\]
+  \end{array} $$
 
 Here, we use the following notation:
 
