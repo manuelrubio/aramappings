@@ -5,9 +5,9 @@ template:
 
 reference:
 - title: ARA Functions
-    desc: >
-      Functions for computing ARA mappings
-    contents:
+  desc: >
+    Functions for computing ARA mappings
+  contents:
     - ara_exact_L1
     - ara_exact_L2
     - ara_exact_Linf
@@ -18,7 +18,7 @@ reference:
     - ara_unconstrained_L2
     - ara_unconstrained_Linf
 - title: Plotting functions
-    desc: >
-      Functions for creating an ARA plot
-    contents:
+  desc: >
+    Functions for creating an ARA plot
+  contents:
     - draw_ara_plot_2d_standardized
