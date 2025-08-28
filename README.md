@@ -10,9 +10,9 @@
 coverage](https://codecov.io/gh/manuelrubio/aramappings/graph/badge.svg)](https://app.codecov.io/gh/manuelrubio/aramappings)
 <!-- badges: end -->
 
-The goal of aramappings is to compute dimensionality reduction mappings
-associated with Adaptable Radial Axes (ARA) plots (Rubio-Sánchez,
-Sanchez, and Lehmann 2017).
+**aramappings** computes dimensionality reduction mappings associated
+with Adaptable Radial Axes (ARA) plots (Rubio-Sánchez, Sanchez, and
+Lehmann 2017).
 
 ARA is a type of “radial axes” multivariate visualization technique.
 Other prominent examples include star coordinates (SC) (Kandogan 2000,
@@ -24,17 +24,17 @@ is the possibility to simultaneously display information about both data
 observations and variables. In particular, high-dimensional numerical
 data observations are represented as points (or other visual markers) on
 a two- or three-dimensional space, while data variables are represented
-through axis vectors, and optionally line axes, similar to those in a
-Cartesian coordinate system.
+through axis vectors, and optionally labeled line axes, similar to those
+in a Cartesian coordinate system.
 
-With ARA, users create desired visualization by specifying a set of axis
-vectors interactively (as in SC), where each vector is associated with a
-data variable. These axis vectors indicate the directions in which the
-values of their associated variables increase within the plot.
-Additionally, the high-dimensional observations are mapped (in an
-optimal sense) onto the plot in order to allow users to estimate
-variable values by visually projecting these points onto the labeled
-axes, as in Biplots.
+With ARA, users create desired visualizations by selecting specific sets
+of axis vectors interactively (as in SC), where each vector is
+associated with a data variable. These axis vectors indicate the
+directions in which the values of their associated variables generally
+increase within the plot. Additionally, the high-dimensional
+observations are mapped onto the plot (in an optimal sense) in order to
+allow users to estimate variable values by visually projecting these
+points onto the labeled axes, as in Biplots.
 
 <div class="figure" style="text-align: center">
 
@@ -62,7 +62,8 @@ further to the right.
 
 <!-- main components of the package. For more complex packages, this will point to vignettes for more details. -->
 
-There are nine types of ARA plots (see the **vignette** for details).
+There are nine types of ARA plots (see the
+[**vignette**](https://manuelrubio.github.io/aramappings/articles/intro_to_aramappings.html)).
 Thus, **aramappings** provides nine functions to generate each ARA
 mapping:
 
@@ -76,12 +77,11 @@ mapping:
 - `ara_ordered_L1()`
 - `ara_ordered_Linf()`
 
-Each function is included in a different source file. In addition, the
-previous functions calculate the two- or three-dimensional coordinates
-of the data observations in the visualization space by solving convex
-optimization problems. The source files include additional functions for
-selecting among several optimization solvers. The functions in the nine
-ARA files also rely on auxiliary methods included in file
+Each function solves a convex optimization problem to map
+high-dimensional data observations onto two- or three-dimensional points
+that can be visualized in a plot. Each function is included in a
+separate source file, and calls (optimization) solver-specific
+functions. These functions rely on auxiliary methods included in file
 <tt>utils.R</tt>.
 
 The main goal of the package is to provide functionality for generating
@@ -95,42 +95,19 @@ data:
 
 Install a stable version from CRAN
 
-``` r
+<!-- ```{r install}
 install.packages("aramappings")
-#> Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpcTTFWz/temp_libpath34047e9c1a6e'
-#> (as 'lib' is unspecified)
-#> Warning: package 'aramappings' is not available for this version of R
-#> 
-#> A version of this package for your version of R might be available elsewhere,
-#> see the ideas at
-#> https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages
-```
+``` -->
 
 Install the development version of aramappings from
 [GitHub](https://github.com/) with:
 
-``` r
+<!-- ```{r install_dev}
 # install.packages("devtools")
 devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
-#> Using GitHub PAT from the git credential store.
-#> Downloading GitHub repo manuelrubio/aramappings@HEAD
-#> 
-#> ── R CMD build ─────────────────────────────────────────────────────────────────
-#>          checking for file 'C:\Users\manue\AppData\Local\Temp\RtmpaWs2LS\remotes5b88f721c94\manuelrubio-aramappings-c660829/DESCRIPTION' ...  ✔  checking for file 'C:\Users\manue\AppData\Local\Temp\RtmpaWs2LS\remotes5b88f721c94\manuelrubio-aramappings-c660829/DESCRIPTION'
-#>       ─  preparing 'aramappings':
-#>    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   ✔  checking DESCRIPTION meta-information
-#>       ─  installing the package to build vignettes
-#>          creating vignettes ...     creating vignettes ...   ✔  creating vignettes (8s)
-#>       ─  checking for LF line-endings in source and make files and shell scripts (654ms)
-#>       ─  checking for empty or unneeded directories
-#>       ─  building 'aramappings_0.1.0.tar.gz' (410ms)
-#>      
-#> 
-#> Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpcTTFWz/temp_libpath34047e9c1a6e'
-#> (as 'lib' is unspecified)
-```
+``` -->
 
-<!--- ```{r install_dev}
+<!-- ```{r install_dev}
 # install.packages("pak")
 pak::pak("manuelrubio/aramappings")
 ``` -->
@@ -258,7 +235,7 @@ mapping <- ara_unconstrained_L2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.01157999 secs
+#> Time difference of 0.0109632 secs
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and

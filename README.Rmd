@@ -21,11 +21,11 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/manuelrubio/aramappings/graph/badge.svg)](https://app.codecov.io/gh/manuelrubio/aramappings)
 <!-- badges: end -->
 
-The goal of aramappings is to compute dimensionality reduction mappings associated with Adaptable Radial Axes (ARA) plots [@Rubio17]. 
+**aramappings** computes dimensionality reduction mappings associated with Adaptable Radial Axes (ARA) plots [@Rubio17]. 
 
-ARA is a type of "radial axes" multivariate visualization technique. Other prominent examples include star coordinates (SC) [@Kandogan00; @Kandogan01] and biplots [@Gabriel71; @Gower95; @Hofmann04; @laGrange09; @Greenacre10], which have been used mainly for exploratory purposes, including cluster analysis, outlier and trend detection, decision support tasks. Their main appeal is the possibility to simultaneously display information about both data observations and variables. In particular, high-dimensional numerical data observations are represented as points (or other visual markers) on a two- or three-dimensional space, while data variables are represented through axis vectors, and optionally line axes, similar to those in a Cartesian coordinate system. 
+ARA is a type of "radial axes" multivariate visualization technique. Other prominent examples include star coordinates (SC) [@Kandogan00; @Kandogan01] and biplots [@Gabriel71; @Gower95; @Hofmann04; @laGrange09; @Greenacre10], which have been used mainly for exploratory purposes, including cluster analysis, outlier and trend detection, decision support tasks. Their main appeal is the possibility to simultaneously display information about both data observations and variables. In particular, high-dimensional numerical data observations are represented as points (or other visual markers) on a two- or three-dimensional space, while data variables are represented through axis vectors, and optionally labeled line axes, similar to those in a Cartesian coordinate system. 
 
-With ARA, users create desired visualization by specifying a set of axis vectors interactively (as in SC), where each vector is associated with a data variable. These axis vectors indicate the directions in which the values of their associated variables increase within the plot. Additionally, the high-dimensional observations are mapped (in an optimal sense) onto the plot in order to allow users to estimate variable values by visually projecting these points onto the labeled axes, as in Biplots. 
+With ARA, users create desired visualizations by selecting specific sets of axis vectors interactively (as in SC), where each vector is associated with a data variable. These axis vectors indicate the directions in which the values of their associated variables generally increase within the plot. Additionally, the high-dimensional observations are mapped onto the plot (in an optimal sense) in order to allow users to estimate variable values by visually projecting these points onto the labeled axes, as in Biplots. 
 
 ```{r araplot, echo=FALSE, fig.align = 'center', fig.cap="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots.", out.width = '80%'}
 knitr::include_graphics("man/figures/vignette_cereals_ara_bb.svg")
@@ -38,7 +38,7 @@ The previous figure is an ARA plot of a breakfast cereal dataset. The axis vecto
 
 <!-- main components of the package. For more complex packages, this will point to vignettes for more details. -->
 
-There are nine types of ARA plots (see the **vignette** for details). Thus, **aramappings** provides nine functions to generate each ARA mapping:
+There are nine types of ARA plots (see the [**vignette**](https://manuelrubio.github.io/aramappings/articles/intro_to_aramappings.html)). Thus, **aramappings** provides nine functions to generate each ARA mapping:
 
 -   `ara_unconstrained_L2()`
 -   `ara_unconstrained_L1()`
@@ -50,7 +50,7 @@ There are nine types of ARA plots (see the **vignette** for details). Thus, **ar
 -   `ara_ordered_L1()`
 -   `ara_ordered_Linf()`
 
-Each function is included in a different source file. In addition, the previous functions calculate the two- or three-dimensional coordinates of the data observations in the visualization space by solving convex optimization problems. The source files include additional functions for selecting among several optimization solvers. The functions in the nine ARA files also rely on auxiliary methods included in file <tt>utils.R</tt>.
+Each function solves a convex optimization problem to map high-dimensional data observations onto two- or three-dimensional points that can be visualized in a plot. Each function is included in a separate source file, and calls (optimization) solver-specific functions. These functions rely on auxiliary methods included in file <tt>utils.R</tt>.
 
 The main goal of the package is to provide functionality for generating the mappings, but not to create visualizations. Nevertheless, it includes a method for generating a two-dimensional plot for standardized data:
 
@@ -63,18 +63,18 @@ The main goal of the package is to provide functionality for generating the mapp
 
 Install a stable version from CRAN
 
-```{r install}
+<!-- ```{r install}
 install.packages("aramappings")
-```
+``` -->
 
 Install the development version of aramappings from [GitHub](https://github.com/) with:
 
-```{r install_dev}
+<!-- ```{r install_dev}
 # install.packages("devtools")
 devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
-```
+``` -->
 
-<!--- ```{r install_dev}
+<!-- ```{r install_dev}
 # install.packages("pak")
 pak::pak("manuelrubio/aramappings")
 ``` -->
