@@ -71,9 +71,9 @@
 </div>
 <!-- badges: start -->
 
-<p>The goal of aramappings is to compute dimensionality reduction mappings associated with Adaptable Radial Axes (ARA) plots (Rubio-Sánchez, Sanchez, and Lehmann 2017).</p>
-<p>ARA is a type of “radial axes” multivariate visualization technique. Other prominent examples include star coordinates (SC) (Kandogan 2000, 2001) and biplots (Gabriel 1971; Gower and Hand 1995; Hofmann 2004; Grange, Roux, and Gardner-Lubbe 2009; Greenacre 2010), which have been used mainly for exploratory purposes, including cluster analysis, outlier and trend detection, decision support tasks. Their main appeal is the possibility to simultaneously display information about both data observations and variables. In particular, high-dimensional numerical data observations are represented as points (or other visual markers) on a two- or three-dimensional space, while data variables are represented through axis vectors, and optionally line axes, similar to those in a Cartesian coordinate system.</p>
-<p>With ARA, users create desired visualization by specifying a set of axis vectors interactively (as in SC), where each vector is associated with a data variable. These axis vectors indicate the directions in which the values of their associated variables increase within the plot. Additionally, the high-dimensional observations are mapped (in an optimal sense) onto the plot in order to allow users to estimate variable values by visually projecting these points onto the labeled axes, as in Biplots.</p>
+<p><strong>aramappings</strong> computes dimensionality reduction mappings associated with Adaptable Radial Axes (ARA) plots (Rubio-Sánchez, Sanchez, and Lehmann 2017).</p>
+<p>ARA is a type of “radial axes” multivariate visualization technique. Other prominent examples include star coordinates (SC) (Kandogan 2000, 2001) and biplots (Gabriel 1971; Gower and Hand 1995; Hofmann 2004; Grange, Roux, and Gardner-Lubbe 2009; Greenacre 2010), which have been used mainly for exploratory purposes, including cluster analysis, outlier and trend detection, decision support tasks. Their main appeal is the possibility to simultaneously display information about both data observations and variables. In particular, high-dimensional numerical data observations are represented as points (or other visual markers) on a two- or three-dimensional space, while data variables are represented through axis vectors, and optionally labeled line axes, similar to those in a Cartesian coordinate system.</p>
+<p>With ARA, users create desired visualizations by selecting specific sets of axis vectors interactively (as in SC), where each vector is associated with a data variable. These axis vectors indicate the directions in which the values of their associated variables generally increase within the plot. Additionally, the high-dimensional observations are mapped onto the plot (in an optimal sense) in order to allow users to estimate variable values by visually projecting these points onto the labeled axes, as in Biplots.</p>
 <div class="figure" style="text-align: center">
 <img src="reference/figures/vignette_cereals_ara_bb.svg" alt="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots." width="80%"><p class="caption">
 ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots.
@@ -84,7 +84,7 @@ ARA plot of four variables of a breakfast cereal dataset. High-dimensional data 
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <!-- main components of the package. For more complex packages, this will point to vignettes for more details. -->
-<p>There are nine types of ARA plots (see the <strong>vignette</strong> for details). Thus, <strong>aramappings</strong> provides nine functions to generate each ARA mapping:</p>
+<p>There are nine types of ARA plots (see the <a href="https://manuelrubio.github.io/aramappings/articles/intro_to_aramappings.html"><strong>vignette</strong></a>). Thus, <strong>aramappings</strong> provides nine functions to generate each ARA mapping:</p>
 <ul>
 <li><code><a href="reference/ara_unconstrained_L2.html">ara_unconstrained_L2()</a></code></li>
 <li><code><a href="reference/ara_unconstrained_L1.html">ara_unconstrained_L1()</a></code></li>
@@ -96,7 +96,7 @@ ARA plot of four variables of a breakfast cereal dataset. High-dimensional data 
 <li><code><a href="reference/ara_ordered_L1.html">ara_ordered_L1()</a></code></li>
 <li><code><a href="reference/ara_ordered_Linf.html">ara_ordered_Linf()</a></code></li>
 </ul>
-<p>Each function is included in a different source file. In addition, the previous functions calculate the two- or three-dimensional coordinates of the data observations in the visualization space by solving convex optimization problems. The source files include additional functions for selecting among several optimization solvers. The functions in the nine ARA files also rely on auxiliary methods included in file <tt>utils.R</tt>.</p>
+<p>Each function solves a convex optimization problem to map high-dimensional data observations onto two- or three-dimensional points that can be visualized in a plot. Each function is included in a separate source file, and calls (optimization) solver-specific functions. These functions rely on auxiliary methods included in file <tt>utils.R</tt>.</p>
 <p>The main goal of the package is to provide functionality for generating the mappings, but not to create visualizations. Nevertheless, it includes a method for generating a two-dimensional plot for standardized data:</p>
 <ul>
 <li><code><a href="reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code></li>
@@ -106,36 +106,15 @@ ARA plot of four variables of a breakfast cereal dataset. High-dimensional data 
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Install a stable version from CRAN</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"aramappings"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpcTTFWz/temp_libpath34047e9c1a6e'</span></span>
-<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
-<span><span class="co">#&gt; Warning: package 'aramappings' is not available for this version of R</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; A version of this package for your version of R might be available elsewhere,</span></span>
-<span><span class="co">#&gt; see the ideas at</span></span>
-<span><span class="co">#&gt; https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</span></span></code></pre></div>
+<!-- ```{r install}
+install.packages("aramappings")
+``` -->
 <p>Install the development version of aramappings from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"manuelrubio/aramappings"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Using GitHub PAT from the git credential store.</span></span>
-<span><span class="co">#&gt; Downloading GitHub repo manuelrubio/aramappings@HEAD</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── R CMD build ─────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;          checking for file 'C:\Users\manue\AppData\Local\Temp\RtmpaWs2LS\remotes5b88f721c94\manuelrubio-aramappings-c660829/DESCRIPTION' ...  ✔  checking for file 'C:\Users\manue\AppData\Local\Temp\RtmpaWs2LS\remotes5b88f721c94\manuelrubio-aramappings-c660829/DESCRIPTION'</span></span>
-<span><span class="co">#&gt;       ─  preparing 'aramappings':</span></span>
-<span><span class="co">#&gt;    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   ✔  checking DESCRIPTION meta-information</span></span>
-<span><span class="co">#&gt;       ─  installing the package to build vignettes</span></span>
-<span><span class="co">#&gt;          creating vignettes ...     creating vignettes ...   ✔  creating vignettes (8s)</span></span>
-<span><span class="co">#&gt;       ─  checking for LF line-endings in source and make files and shell scripts (654ms)</span></span>
-<span><span class="co">#&gt;       ─  checking for empty or unneeded directories</span></span>
-<span><span class="co">#&gt;       ─  building 'aramappings_0.1.0.tar.gz' (410ms)</span></span>
-<span><span class="co">#&gt;      </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Installing package into 'C:/Users/manue/AppData/Local/Temp/RtmpcTTFWz/temp_libpath34047e9c1a6e'</span></span>
-<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span></code></pre></div>
-<!--- ```{r install_dev}
+<!-- ```{r install_dev}
+# install.packages("devtools")
+devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
+``` -->
+<!-- ```{r install_dev}
 # install.packages("pak")
 pak::pak("manuelrubio/aramappings")
 ``` -->
@@ -144,16 +123,16 @@ pak::pak("manuelrubio/aramappings")
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>We recommend starting an exploratory analysis using an unconstrained ARA plot with the <span class="math inline">\(\ell^{2}\)</span> norm, which can be generated very efficiently since the mappings can be obtained through a closed-form expression (i.e., a formula). The obvious first step is to load the <strong>aramappings</strong> package:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/manuelrubio/aramappings" class="external-link">aramappings</a></span><span class="op">)</span></span></code></pre></div>
 <p>In the usage examples we will use the <strong>Auto MPG</strong> dataset available in packages <strong>ascentTraining</strong> and <strong>grpnet</strong>, Kaggle, or the UCI Machine Learning Repository (Frank and Asuncion 2010). In this case, we load the dataset in the <strong>ascentTraining</strong> package.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load data</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.ascent.io/" class="external-link">ascentTraining</a></span><span class="op">)</span> <span class="co"># contains the Auto MPG dataset</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"auto_mpg"</span><span class="op">)</span></span></code></pre></div>
 <p>Next, we select a subset of numerical variables from the dataset. The selected variables are specified through a vector containing their column indices in the original dataset. Furthermore, we rename the data set to <code>X</code>, simply for clarity with respect to the notation defined above.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define subset of (numerical) variables</span></span>
 <span><span class="va">selected_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span>   <span class="co"># 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")</span></span>
 <span></span>
@@ -162,7 +141,7 @@ pak::pak("manuelrubio/aramappings")
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">auto_mpg</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in rm(auto_mpg): objeto 'auto_mpg' no encontrado</span></span></code></pre></div>
 <p>The ARA functions halt if the data or other parameters contain missing values. Thus, we proceed eliminating any row (data observation) that contains missing values. Naturally, another approach consists of replacing missing values by some other substituted values (imputation).</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Remove rows with missing values from X</span></span>
 <span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
 <span><span class="va">rows_to_delete</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
@@ -173,26 +152,26 @@ pak::pak("manuelrubio/aramappings")
 <span><span class="op">}</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">X</span><span class="op">[</span><span class="va">rows_to_delete</span>, <span class="op">]</span></span></code></pre></div>
 <p>At this moment <code>X</code> is a <tt>data.frame</tt>. In order to use the ARA functions we first need to convert it to a matrix:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Convert X to matrix</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/noquote.html" class="external-link">as.matrix.noquote</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span>, <span class="fl">2</span>, <span class="va">as.numeric</span><span class="op">)</span></span></code></pre></div>
 <p>In addition, we strongly recommend standardizing the data when using ARA. We save the result in variable <code>Z</code> since the function that draws the plot needs the original values in <code>X</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Standardize data</span></span>
 <span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></code></pre></div>
 <p>Having preprocessed the data, the next step consists of defining the axis vectors, which are the rows of <span class="math inline">\(\mathbf{V}\)</span>. These can be obtained manually (ideally through a graphical user interface), or through an automatic method. For instante, <span class="math inline">\(\mathbf{V}\)</span> could be the matrix defining the Principal Component Analysis transfomation (in that case the ARA plot would be a Principal Component Biplot). In this example, we simply define a configuration of vectors in polar coordinates and transform them to Cartesian coordinates with the <code><a href="https://rdrr.io/pkg/geometry/man/pol2cart.html" class="external-link">pol2cart()</a></code> function in package <strong>geometry</strong>.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define axis vectors (2-dimensional in this example)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcsterratt.github.io/geometry/" class="external-link">geometry</a></span><span class="op">)</span></span>
 <span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">1</span>, <span class="fl">1.2</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">225</span>, <span class="fl">100</span>, <span class="fl">315</span>, <span class="fl">80</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">pi</span> <span class="op">/</span> <span class="fl">360</span></span>
 <span><span class="va">V</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geometry/man/pol2cart.html" class="external-link">pol2cart</a></span><span class="op">(</span><span class="va">theta</span>, <span class="va">r</span><span class="op">)</span></span></code></pre></div>
 <p>It is also possible to define weights in order to control the relative importance of estimating accurately on each axis. This is nevertheless complex, since the accuracy also depends on the length of the axis vectors. In this case, we have set two weigths to 1 and another two to 0.75. Visually, the weights determine the level of gray used to color the axis vectors in the ARA plot.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define weights</span></span>
 <span><span class="va">weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.75</span>, <span class="fl">0.75</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p>Having defined the data (<code>Z</code>), axis vectors (<code>V</code>), and weights (<code>weights</code>), we can proceed to compute the ARA mapping. For unconstrained ARA plots with the <span class="math inline">\(\ell^{2}\)</span> norm the <code>solver</code> parameter should be set to “formula” (the default), in order to obtain the mapping through a closed-form expression. The following code computes the embedded points and saves them in <code>mapping$P</code>, and shows the execution runtime involved in computing the mapping.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute the mapping and print the execution time</span></span>
 <span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ara_unconstrained_L2.html">ara_unconstrained_L2</a></span><span class="op">(</span></span>
@@ -203,17 +182,17 @@ pak::pak("manuelrubio/aramappings")
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.01157999 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.0109632 secs</span></span></code></pre></div>
 <p>ARA plots can get cluttered when showing all of the axis lines and corresponding labels at the tick marks. Thus, the function that we will use to draw the ARA plot (<code><a href="reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>) contains a parameter called <code>axis_lines</code> for specifying the subset of axis lines (and labels) we wish to visualize. In this example we will show the axes associated with variables “mpg” and “acceleration”. Note that in the original data frame these were variables 1 and 6. However, since we only retained four variables (“mpg”, “horsepower”, “weight”, and “acceleration”), the column index of “acceleration” is now 4.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select variables with labeled axis lines on ARA plot</span></span>
 <span><span class="va">axis_lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>   <span class="co"># 1:"mpg", 4:"acceleration")</span></span></code></pre></div>
 <p>Also, the plotted points can be colored according to the values of a particular variable. In this example, we will color the points according to the value of variable “mpg”.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select variable used for coloring embedded points</span></span>
 <span><span class="va">color_variable</span> <span class="op">&lt;-</span> <span class="fl">1</span>    <span class="co"># "mpg"</span></span></code></pre></div>
 <p>Finally, we generate the ARA plot by calling <code><a href="reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Draw the ARA plot</span></span>
 <span><span class="fu"><a href="reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
 <span>  <span class="va">Z</span>,</span>
