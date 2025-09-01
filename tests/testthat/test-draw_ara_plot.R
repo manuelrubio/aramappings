@@ -8,13 +8,14 @@ set.seed(1000000)
 if (!require(datasetsICR)) {
   print("Trying to install package datasetsICR ")
   install.packages("datasetsICR ")
-  if(!require(datasetsICR )) {
+  if (!require(datasetsICR)) {
     stop("Could not install package datasetsICR ")
   }
 }
 data("wine")
 
-#wine <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"), header = FALSE)
+# wine <- read.csv(url("https://archive.ics.uci.edu/ml/
+# machine-learning-databases/wine/wine.data"), header = FALSE)
 
 X <- wine[, 2:ncol(wine)] # Select a subset of variables
 X <- apply(as.matrix.noquote(X), 2, as.numeric)
@@ -35,7 +36,7 @@ P <- mapping$P
 # Test types
 
 Zcopy <- Z
-Zcopy[1, 1] <- 'a'
+Zcopy[1, 1] <- "a"
 test_that("Function halts if Z is not numeric", {
   expect_error(draw_ara_plot_2d_standardized(Zcopy, X, V, P))
 })
@@ -46,7 +47,7 @@ test_that("Function halts if Z is not a matrix", {
 })
 
 Xcopy <- X
-Xcopy[1, 1] <- 'a'
+Xcopy[1, 1] <- "a"
 test_that("Function halts if X is not numeric", {
   expect_error(draw_ara_plot_2d_standardized(Z, Xcopy, V, P))
 })
@@ -57,7 +58,7 @@ test_that("Function halts if X is not a matrix", {
 })
 
 Vcopy <- V
-Vcopy[1, 1] <- 'a'
+Vcopy[1, 1] <- "a"
 test_that("Function halts if V is not numeric", {
   expect_error(draw_ara_plot_2d_standardized(Z, X, Vcopy, P))
 })
@@ -68,7 +69,7 @@ test_that("Function halts if V is not a matrix", {
 })
 
 Pcopy <- P
-Pcopy[1, 1] <- 'a'
+Pcopy[1, 1] <- "a"
 test_that("Function halts if P is not numeric", {
   expect_error(draw_ara_plot_2d_standardized(Z, X, V, Pcopy))
 })
@@ -86,9 +87,11 @@ test_that("Function halts if weights is not numeric", {
 })
 
 
-axis_lines <- c("2","4","7")
+axis_lines <- c("2", "4", "7")
 test_that("Function halts if axis_lines is not numeric", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P, axis_lines = axis_lines))
+  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P,
+    axis_lines = axis_lines
+  ))
 })
 
 
@@ -102,27 +105,27 @@ test_that("Function halts if color_variable is not an integer", {
 
 
 test_that("Function halts if mismatch in number of observations", {
-  expect_error(draw_ara_plot_2d_standardized(Z[2:N,], X, V, P))
+  expect_error(draw_ara_plot_2d_standardized(Z[2:N, ], X, V, P))
 })
 
 test_that("Function halts if mismatch in number of observations", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X[2:N,], V, P))
+  expect_error(draw_ara_plot_2d_standardized(Z, X[2:N, ], V, P))
 })
 
 test_that("Function halts if mismatch in number of observations", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P[2:N,]))
+  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P[2:N, ]))
 })
 
 test_that("Function halts if mismatch in number of variables", {
-  expect_error(draw_ara_plot_2d_standardized(Z[,2:n], X, V, P))
+  expect_error(draw_ara_plot_2d_standardized(Z[, 2:n], X, V, P))
 })
 
 test_that("Function halts if mismatch in number of variables", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X[,2:n], V, P))
+  expect_error(draw_ara_plot_2d_standardized(Z, X[, 2:n], V, P))
 })
 
 test_that("Function halts if mismatch in number of variables", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X, V[2:n,], P))
+  expect_error(draw_ara_plot_2d_standardized(Z, X, V[2:n, ], P))
 })
 
 m <- 3
@@ -180,10 +183,12 @@ test_that("Function halts if weights contains missing values (NA)", {
 mapping <- ara_unconstrained_L2(Z, V)
 P <- mapping$P
 test_that("Function halts if weights does not contain n entries", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P, weights = c(1,0.5,1)))
+  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P,
+    weights = c(1, 0.5, 1)
+  ))
 })
 
-w <- runif(n+1, 0, 1)
+w <- runif(n + 1, 0, 1)
 test_that("Function halts if weights does not contain n entries", {
   expect_error(draw_ara_plot_2d_standardized(Z, X, V, P, weights = w))
 })
@@ -195,35 +200,51 @@ test_that("Function halts if weights contains negative entries", {
 })
 
 test_that("Function halts if axis_lines contains duplicate entries", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P, axis_lines = c(2,4,2)))
+  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P,
+    axis_lines = c(2, 4, 2)
+  ))
 })
 
 test_that("Function halts if axis_lines contains entries outside [1,n]", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P, axis_lines = c(0,2,4)))
+  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P,
+    axis_lines = c(0, 2, 4)
+  ))
 })
 
 test_that("Function halts if axis_lines contains entries outside [1,n]", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P, axis_lines = c(1,2,15)))
+  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P,
+    axis_lines = c(1, 2, 15)
+  ))
 })
 
 test_that("Function halts if axis_lines contains fractional entries", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P, axis_lines = c(1,2.5,7)))
+  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P,
+    axis_lines = c(1, 2.5, 7)
+  ))
 })
 
 test_that("Function halts if axis_lines contains more than n entries", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P, axis_lines = 1:(n+1)))
+  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P,
+    axis_lines = 1:(n + 1)
+  ))
 })
 
 test_that("Function halts if color_variable is not an integer in [1,n]", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P, color_variable = 0))
+  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P,
+    color_variable = 0
+  ))
 })
 
 test_that("Function halts if color_variable is not an integer in [1,n]", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P, color_variable = n+1))
+  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P,
+    color_variable = n + 1
+  ))
 })
 
 test_that("Function halts if color_variable is not an integer in [1,n]", {
-  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P, color_variable = 1.5))
+  expect_error(draw_ara_plot_2d_standardized(Z, X, V, P,
+    color_variable = 1.5
+  ))
 })
 
 
@@ -237,23 +258,47 @@ weights <- runif(n, 0, 1)
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 mapping <- ara_unconstrained_L2(X, V, weights = weights, solver = "formula")
 P <- mapping$P
-axis_lines <- c(2,4,7,9)
+axis_lines <- c(2, 4, 7, 9)
 color_variable <- 3
 
 
 test_that("draw_ara_plot_2d_standardized() terminates without errors", {
-  expect_equal(draw_ara_plot_2d_standardized(Z,X,V,P,weights = weights,axis_lines = axis_lines,color_variable = color_variable), 0, tolerance = 0)
+  expect_equal(
+    draw_ara_plot_2d_standardized(Z, X, V, P,
+      weights = weights,
+      axis_lines = axis_lines,
+      color_variable = color_variable
+    ),
+    0,
+    tolerance = 0
+  )
 })
 
 test_that("draw_ara_plot_2d_standardized() terminates without errors", {
-  expect_equal(draw_ara_plot_2d_standardized(Z,X,V,P,weights = weights,axis_lines = axis_lines), 0, tolerance = 00)
+  expect_equal(
+    draw_ara_plot_2d_standardized(Z, X, V, P,
+      weights = weights,
+      axis_lines = axis_lines
+    ),
+    0,
+    tolerance = 00
+  )
 })
 
 test_that("draw_ara_plot_2d_standardized() terminates without errors", {
-  expect_equal(draw_ara_plot_2d_standardized(Z,X,V,P,weights = weights), 0, tolerance = 0)
+  expect_equal(draw_ara_plot_2d_standardized(Z, X, V, P, weights = weights),
+    0,
+    tolerance = 0
+  )
 })
 
 test_that("draw_ara_plot_2d_standardized() terminates without errors", {
-  expect_equal(draw_ara_plot_2d_standardized(Z,X,V,P,weights = weights,color_variable = color_variable), 0, tolerance = 0)
+  expect_equal(
+    draw_ara_plot_2d_standardized(Z, X, V, P,
+      weights = weights,
+      color_variable = color_variable
+    ),
+    0,
+    tolerance = 0
+  )
 })
-

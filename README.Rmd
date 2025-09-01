@@ -101,7 +101,7 @@ Next, we select a subset of numerical variables from the dataset. The selected v
 
 ```{r}
 # Define subset of (numerical) variables
-selected_variables <- c(1,4,5,6)   # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+selected_variables <- c(1, 4, 5, 6) # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
 
 # Retain only selected variables and rename dataset as X
 X <- auto_mpg[, selected_variables] # Select a subset of variables
@@ -173,14 +173,14 @@ ARA plots can get cluttered when showing all of the axis lines and corresponding
 
 ```{r}
 # Select variables with labeled axis lines on ARA plot
-axis_lines <- c(1,4)   # 1:"mpg", 4:"acceleration")
+axis_lines <- c(1, 4) # 1:"mpg", 4:"acceleration")
 ```
 
 Also, the plotted points can be colored according to the values of a particular variable. In this example, we will color the points according to the value of variable "mpg".
 
 ```{r}
 # Select variable used for coloring embedded points
-color_variable <- 1    # "mpg"
+color_variable <- 1 # "mpg"
 ```
 
 Finally, we generate the ARA plot by calling `draw_ara_plot_2d_standardized()`:

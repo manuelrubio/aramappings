@@ -7,56 +7,66 @@
 ara_ordered_L1(X, V, variable = 1, solver = "clarabel")
 }
 \arguments{
-\item{X}{Numeric data matrix of dimensions N x n, where N is the number of observations, and n is the number of variables.}
+\item{X}{Numeric data matrix of dimensions N x n, where N is the number of
+observations, and n is the number of variables.}
 
-\item{V}{Numeric matrix defining the axes or "axis vectors". Its dimensions are n x m, where 1<=m<=3 is the dimension
-of the visualization space. Each row of \code{V} defines an axis vector.}
+\item{V}{Numeric matrix defining the axes or "axis vectors". Its dimensions are n x m,
+where 1<=m<=3 is the dimension of the visualization space. Each row of
+\code{V} defines an axis vector.}
 
-\item{variable}{Integer that indicates the variable (in [1,n]) for which the estimates of high-dimensional data will be exact.
-Default: variable = 1.}
+\item{variable}{Integer that indicates the variable (in [1,n]) for which the estimates of
+high-dimensional data will be exact. Default: variable = 1.}
 
-\item{solver}{String indicating a package for solving the linear problem(s). It can be "clarabel" (default), "glpkAPI", "Rglpk", or "CVXR".}
+\item{solver}{String indicating a package for solving the linear problem(s). It can be
+"clarabel" (default), "glpkAPI", "Rglpk", or "CVXR".}
 }
 \value{
 A list with the three following entries:
 \describe{
-\item{\code{P}}{A numeric N x m matrix containing the mapped points. Each row is the low-dimensional representation
-of a data observation in X.}
-\item{\code{status}}{A vector of length N where the i-th element contains the status of the chosen solver when
-calculating the mapping of the i-th data observation. The type of the elements depends on the particular chosen solver.}
-\item{\code{objval}}{The numeric objective value associated with the solution to the optimization problem, considering
-matrix norms.}
+\item{\code{P}}{A numeric N x m matrix containing the mapped points. Each
+row is the low-dimensional representation of a data observation in X.}
+\item{\code{status}}{A vector of length N where the i-th element contains
+the status of the chosen solver when calculating the mapping of the i-th
+data observation. The type of the elements depends on the particular chosen
+solver.}
+\item{\code{objval}}{The numeric objective value associated with the
+solution to the optimization problem, considering matrix norms.}
 }
-If the chosen solver fails to map the data (i.e., fails to solve the related optimization problem), \code{P} will
-contain \code{NA} (not available) values. In that case, \code{objval} will also be \code{NA}.
+If the chosen solver fails to map the data (i.e., fails to solve the related
+optimization problem), \code{P} will contain \code{NA} (not available)
+values. In that case, \code{objval} will also be \code{NA}.
 }
 \description{
-\code{ara_ordered_L1()} computes \strong{ordered} \strong{Adaptable Radial Axes} (ARA) mappings for
-the \strong{L1 norm}
+\code{ara_ordered_L1()} computes \strong{ordered} \strong{Adaptable Radial
+Axes} (ARA) mappings for the \strong{L1 norm}
 }
 \details{
-\code{ara_ordered_L1()} computes low-dimensional point representations of high-dimensional
-numerical data (\code{X}) according to the data visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017),
-which describes a collection of convex norm optimization problems aimed at minimizing estimates of original
-values in \code{X} through dot products of the mapped points with the axis vectors (rows of \code{V}). This particular
-function solves the constrained optimization problem in Eq. (14), for the L1 norm. The inequality
-constraint ensures that the estimates for a selected variable are ordered in accordance with its original values.
-In other words, ignoring any ties, the estimate for the data observation with the i-th smallest value will
-correspond to the i-th smallest estimate.
+\code{ara_ordered_L1()} computes low-dimensional point representations of
+high-dimensional numerical data (\code{X}) according to the data
+visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017), which
+describes a collection of convex norm optimization problems aimed at
+minimizing estimates of original values in \code{X} through dot products of
+the mapped points with the axis vectors (rows of \code{V}). This particular
+function solves the constrained optimization problem in Eq. (14), for the L1
+norm. The inequality constraint ensures that the estimates for a selected
+variable are ordered in accordance with its original values. In other words,
+ignoring any ties, the estimate for the data observation with the i-th
+smallest value will correspond to the i-th smallest estimate.
 }
 \examples{
 # Load data
-if (!require(ascentTraining)) {    # contains the Auto MPG dataset
+if (!require(ascentTraining)) { # contains the Auto MPG dataset
   print("Trying to install package ascentTraining")
   install.packages("ascentTraining")
-  if(!require(ascentTraining)) {
+  if (!require(ascentTraining)) {
     stop("Could not install package ascentTraining")
   }
 }
 data("auto_mpg")
 
 # Define subset of (numerical) variables
-selected_variables <- c(1,4,5,6)   # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+# 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"
+selected_variables <- c(1, 4, 5, 6)
 
 # Retain only selected variables and rename dataset as X
 X <- auto_mpg[, selected_variables] # Select a subset of variables
@@ -82,7 +92,7 @@ Z <- scale(X)
 if (!require(geometry)) {
   print("Trying to install package geometry")
   install.packages("geometry")
-  if(!require(geometry)) {
+  if (!require(geometry)) {
     stop("Could not install package geometry")
   }
 }
@@ -90,7 +100,8 @@ r <- c(0.8, 1, 1.2, 1)
 theta <- c(225, 100, 315, 80) * 2 * pi / 360
 V <- pol2cart(theta, r)
 
-# Select variable for exact estimates, and use it for coloring the embedded points
+# Select variable for exact estimates, and use it for coloring the embedded
+# points
 n <- nrow(V)
 variable <- sample(1:n, 1)
 
@@ -117,7 +128,7 @@ draw_ara_plot_2d_standardized(
 
 }
 \references{
-M. Rubio-Sánchez, A. Sanchez, D. J. Lehmann: Adaptable radial axes plots for improved
-multivariate data visualization. Computer Graphics Forum 36, 3 (2017), 389–399.
-\href{https://onlinelibrary.wiley.com/doi/10.1111/cgf.13196}{doi:10.1111/cgf.13196}
+M. Rubio-Sánchez, A. Sanchez, D. J. Lehmann: Adaptable radial axes plots for
+improved multivariate data visualization. Computer Graphics Forum 36, 3
+(2017), 389–399. \href{https://onlinelibrary.wiley.com/doi/10.1111/cgf.13196}{doi:10.1111/cgf.13196}
 }

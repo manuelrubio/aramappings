@@ -144,7 +144,7 @@ above.
 
 ``` r
 # Define subset of (numerical) variables
-selected_variables <- c(1,4,5,6)   # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+selected_variables <- c(1, 4, 5, 6) # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
 
 # Retain only selected variables and rename dataset as X
 X <- auto_mpg[, selected_variables] # Select a subset of variables
@@ -235,7 +235,7 @@ mapping <- ara_unconstrained_L2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.0109632 secs
+#> Time difference of 0.01072788 secs
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -250,7 +250,7 @@ retained four variables (“mpg”, “horsepower”, “weight”, and
 
 ``` r
 # Select variables with labeled axis lines on ARA plot
-axis_lines <- c(1,4)   # 1:"mpg", 4:"acceleration")
+axis_lines <- c(1, 4) # 1:"mpg", 4:"acceleration")
 ```
 
 Also, the plotted points can be colored according to the values of a
@@ -259,7 +259,7 @@ to the value of variable “mpg”.
 
 ``` r
 # Select variable used for coloring embedded points
-color_variable <- 1    # "mpg"
+color_variable <- 1 # "mpg"
 ```
 
 Finally, we generate the ARA plot by calling

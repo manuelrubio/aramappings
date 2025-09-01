@@ -148,7 +148,7 @@ Next, we select a subset of numerical variables from the dataset. The selected v
 
 ```{r}
 # Define subset of (numerical) variables
-selected_variables <- c(1,4,5,6)   # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+selected_variables <- c(1, 4, 5, 6) # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
 
 # Retain only selected variables and rename dataset as X
 X <- auto_mpg[, selected_variables] # Select a subset of variables
@@ -220,14 +220,14 @@ ARA plots can get cluttered when showing all of the axis lines and corresponding
 
 ```{r}
 # Select variables with labeled axis lines on ARA plot
-axis_lines <- c(1,4)   # 1:"mpg", 4:"acceleration")
+axis_lines <- c(1, 4) # 1:"mpg", 4:"acceleration")
 ```
 
 Also, the plotted points can be colored according to the values of a particular variable. In this example, we will color the points according to the value of variable "mpg".
 
 ```{r}
 # Select variable used for coloring embedded points
-color_variable <- 1    # "mpg"
+color_variable <- 1 # "mpg"
 ```
 
 Finally, we generate the ARA plot by calling `draw_ara_plot_2d_standardized()`:
@@ -256,7 +256,7 @@ knitr::include_graphics("../man/figures/vignette_autompg_unconstrained_L2_bb.svg
 Exact and ordered ARA plots do not use weights, but it is necessary to specify the variable for which to obtain exact estimates, or for ordering the plotted points:
 
 ```{r echo = T, results = 'show'}
-variable <- 1    # "mpg"
+variable <- 1 # "mpg"
 ```
 
 #### Exact ARA plot
@@ -348,8 +348,8 @@ In the following example, we first detect the available number of cores (`NCORES
 # Detect the number of available CPU cores
 library(parallelly)
 NCORES <- parallelly::availableCores()
-if (NCORES>1) {
-  NCORES <- floor(NCORES/2)  
+if (NCORES > 1) {
+  NCORES <- floor(NCORES / 2)
 }
 ```
 

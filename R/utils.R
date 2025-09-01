@@ -39,7 +39,11 @@ ara_L1_norm_coo_lists <- function(
   m <- ncol(V)
 
   aux_vec <- pracma::repmat(
-    pracma::Reshape((1 + row_offset):(2 * n * n_points + row_offset), 2 * n, n_points),
+    pracma::Reshape(
+      (1 + row_offset):(2 * n * n_points + row_offset),
+      2 * n,
+      n_points
+    ),
     m,
     1
   )
@@ -48,7 +52,11 @@ ara_L1_norm_coo_lists <- function(
     unlist(as.list(aux_vec))
   )
 
-  aux_vec <- pracma::repmat(pracma::Reshape(1:(n * n_points), n, n_points), 2, 1)
+  aux_vec <- pracma::repmat(
+    pracma::Reshape(1:(n * n_points), n, n_points),
+    2,
+    1
+  )
   cols <- c(
     unlist(as.list(aux_vec)),
     rep((n_points * n + 1):(n_points * (m + n)), each = 2 * n)
@@ -72,7 +80,11 @@ ara_Linf_norm_coo_lists <- function(
   m <- ncol(V)
 
   aux_vec <- pracma::repmat(
-    pracma::Reshape((1 + row_offset):(2 * n * n_points + row_offset), 2 * n, n_points),
+    pracma::Reshape(
+      (1 + row_offset):(2 * n * n_points + row_offset),
+      2 * n,
+      n_points
+    ),
     m,
     1
   )
@@ -102,7 +114,8 @@ ara_ordered_inequality_coo_lists <- function(
   N <- length(sort_indices)
   m <- length(axis_vector)
 
-  ranks <- order(sort_indices) # Data ranks for selected variable (in increasing order)
+  # Data ranks for selected variable (in increasing order)
+  ranks <- order(sort_indices)
 
   rows <- rep(NA, 2 * m * (N - 1))
   cols <- rep(NA, 2 * m * (N - 1))
@@ -126,7 +139,8 @@ ara_ordered_inequality_coo_lists <- function(
       idx <- idx + m
       col <- col + m
     } else {
-      rows[idx:(idx + 2 * m - 1)] <- rep((ranks[i] - 1 + row_offset):(ranks[i] + row_offset), m)
+      rows[idx:(idx + 2 * m - 1)] <-
+        rep((ranks[i] - 1 + row_offset):(ranks[i] + row_offset), m)
       cols[idx:(idx + 2 * m - 1)] <- rep(col:(col + m - 1), each = 2)
       vals[idx:(idx + 2 * m - 1)] <- v_block
       idx <- idx + 2 * m
@@ -208,7 +222,11 @@ solve_glpkAPI_wrapper <- function(
     if (solution_status == 5) {
       x <- glpkAPI::getColsPrimGLPK(lp)
 
-      P <- t(pracma::Reshape(x[init_index:(init_index + n_points * m - 1)], m, n_points))
+      P <- t(pracma::Reshape(
+        x[init_index:(init_index + n_points * m - 1)],
+        m,
+        n_points
+      ))
       objval <- glpkAPI::getObjValGLPK(lp)
     } else {
       print("Error: glpkAPI failed to compute an optimal solution")
@@ -224,7 +242,11 @@ solve_glpkAPI_wrapper <- function(
     if ((solution_status == 3) || (solution_status == 5)) {
       x <- glpkAPI::getColsPrimIptGLPK(lp)
 
-      P <- t(pracma::Reshape(x[init_index:(init_index + n_points * m - 1)], m, n_points))
+      P <- t(pracma::Reshape(
+        x[init_index:(init_index + n_points * m - 1)],
+        m,
+        n_points
+      ))
       objval <- glpkAPI::getObjValIptGLPK(lp)
     } else {
       print("Error: glpkAPI failed to compute an optimal solution")
@@ -270,7 +292,11 @@ solve_clarabel_wrapper <- function(
   if (clarabel_output$status == 2) {
     x <- clarabel_output$x
 
-    P <- t(pracma::Reshape(x[init_index:(init_index + n_points * m - 1)], m, n_points))
+    P <- t(pracma::Reshape(
+      x[init_index:(init_index + n_points * m - 1)],
+      m,
+      n_points
+    ))
     objval <- clarabel_output$obj_val
   } else {
     print("Error: clarabel failed to compute an optimal solution")
@@ -313,7 +339,11 @@ solve_Rglpk_wrapper <- function(
   if (rglpk_output$status == 5) {
     x <- rglpk_output$solution
 
-    P <- t(pracma::Reshape(x[init_index:(init_index + n_points * m - 1)], m, n_points))
+    P <- t(pracma::Reshape(
+      x[init_index:(init_index + n_points * m - 1)],
+      m,
+      n_points
+    ))
     objval <- rglpk_output$optimum
   } else {
     print("Error: Rglpk failed to compute an optimal solution")
@@ -354,7 +384,7 @@ min_unconstrained_glpkAPI <- function(
     m) {
   rupper <- c(cbind(-x, x))
 
-  glpkAPI_output <- solve_glpkAPI_wrapper(
+  solve_glpkAPI_wrapper(
     nrows,
     ncols,
     kind,
@@ -386,7 +416,7 @@ min_unconstrained_clarabel <- function(
     m) {
   b <- c(cbind(-x, x))
 
-  clarabel_output <- solve_clarabel_wrapper(
+  solve_clarabel_wrapper(
     A,
     b,
     obj,
@@ -409,7 +439,7 @@ min_unconstrained_Rglpk <- function(
     m) {
   b <- c(cbind(-x, x))
 
-  rglpk_output <- solve_Rglpk_wrapper(
+  solve_Rglpk_wrapper(
     A,
     b,
     obj,
@@ -482,7 +512,7 @@ min_exact_clarabel <- function(
     m) {
   b <- c(x[variable], cbind(-x, x))
 
-  clarabel_output <- solve_clarabel_wrapper(
+  solve_clarabel_wrapper(
     A,
     b,
     obj,
@@ -506,7 +536,7 @@ min_exact_Rglpk <- function(
     m) {
   b <- c(x[variable], cbind(-x, x))
 
-  rglpk_output <- solve_Rglpk_wrapper(
+  solve_Rglpk_wrapper(
     A,
     b,
     obj,
@@ -527,7 +557,8 @@ extract_CVXR_points_status_objval <- function(
     V,
     N,
     m) {
-  if (pracma::strcmpi(solution$status, "optimal") || pracma::strcmpi(solution$status, "optimal_inaccurate")) {
+  if (pracma::strcmpi(solution$status, "optimal") ||
+    pracma::strcmpi(solution$status, "optimal_inaccurate")) {
     P <- solution$getValue(Pvar)
     objval <- solution$value
   } else {

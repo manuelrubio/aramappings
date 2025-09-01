@@ -1,32 +1,41 @@
 #' Unconstrained Adaptable Radial Axes (ARA) mappings using the L-infinity norm
 #'
 #' @description
-#' \code{ara_unconstrained_Linf()} computes \strong{unconstrained} \strong{Adaptable Radial Axes} (ARA) mappings for
-#' the \strong{L-infinity norm}
+#' \code{ara_unconstrained_Linf()} computes \strong{unconstrained}
+#' \strong{Adaptable Radial Axes} (ARA) mappings for the \strong{L-infinity
+#' norm}
 #'
 #' @details
-#' \code{ara_unconstrained_Linf()} computes low-dimensional point representations of high-dimensional
-#' numerical data (\code{X}) according to the data visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017),
-#' which describes a collection of convex norm optimization problems aimed at minimizing estimates of original
-#' values in \code{X} through dot products of the mapped points with the axis vectors (rows of \code{V}). This particular
-#' function solves the unconstrained optimization problem in Eq. (10), for the L-infinity vector norm. Specifically, it solves
-#' equivalent linear problems as described in (12). Optional non-negative weights (\code{weights}) associated with each data
-#' variable can be supplied to solve the problem in Eq. (15).
+#' \code{ara_unconstrained_Linf()} computes low-dimensional point
+#' representations of high-dimensional numerical data (\code{X}) according to
+#' the data visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017),
+#' which describes a collection of convex norm optimization problems aimed at
+#' minimizing estimates of original values in \code{X} through dot products of
+#' the mapped points with the axis vectors (rows of \code{V}). This particular
+#' function solves the unconstrained optimization problem in Eq. (10), for the
+#' L-infinity vector norm. Specifically, it solves equivalent linear problems as
+#' described in (12). Optional non-negative weights (\code{weights}) associated
+#' with each data variable can be supplied to solve the problem in Eq. (15).
 #'
 #' @inheritParams ara_unconstrained_L1
 #'
 #' @returns
 #' A list with the three following entries:
 #' \describe{
-#'   \item{\code{P}}{A numeric N x m matrix containing the mapped points. Each row is the low-dimensional representation
-#'   of a data observation in X.}
-#'   \item{\code{status}}{A vector of length N where the i-th element contains the status of the chosen solver when
-#'   calculating the mapping of the i-th data observation. The type of the elements depends on the particular chosen solver.}
-#'   \item{\code{objval}}{The numeric objective value associated with the solution to the optimization problem, considering
-#'   matrix norms, and ignoring weights.}
+#'   \item{\code{P}}{A numeric N x m matrix containing the mapped points. Each
+#'   row is the low-dimensional representation of a data observation in X.}
+#'   \item{\code{status}}{A vector of length N where the i-th element contains
+#'   the status of the chosen solver when calculating the mapping of the i-th
+#'   data observation. The type of the elements depends on the particular chosen
+#'   solver.}
+#'   \item{\code{objval}}{The numeric objective value associated with the
+#'   solution to the optimization problem, considering matrix norms, and
+#'   ignoring weights.}
 #' }
-#' If the chosen solver fails to map one or more data observations (i.e., fails to solve the related optimization problems),
-#' their rows in \code{P} will contain \code{NA} (not available) values. In that case, \code{objval} will also be \code{NA}.
+#' If the chosen solver fails to map one or more data observations (i.e., fails
+#' to solve the related optimization problems), their rows in \code{P} will
+#' contain \code{NA} (not available) values. In that case, \code{objval} will
+#' also be \code{NA}.
 #'
 #' @inherit ara_unconstrained_L1 references
 #'
@@ -34,17 +43,18 @@
 #'
 #' @examples
 #' # Load data
-#' if (!require(ascentTraining)) {    # contains the Auto MPG dataset
+#' if (!require(ascentTraining)) { # contains the Auto MPG dataset
 #'   print("Trying to install package ascentTraining")
 #'   install.packages("ascentTraining")
-#'   if(!require(ascentTraining)) {
+#'   if (!require(ascentTraining)) {
 #'     stop("Could not install package ascentTraining")
 #'   }
 #' }
 #' data("auto_mpg")
 #'
 #' # Define subset of (numerical) variables
-#' selected_variables <- c(1,4,5,6)   # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+#' # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"
+#' selected_variables <- c(1, 4, 5, 6)
 #'
 #' # Retain only selected variables and rename dataset as X
 #' X <- auto_mpg[, selected_variables] # Select a subset of variables
@@ -70,7 +80,7 @@
 #' if (!require(geometry)) {
 #'   print("Trying to install package geometry")
 #'   install.packages("geometry")
-#'   if(!require(geometry)) {
+#'   if (!require(geometry)) {
 #'     stop("Could not install package geometry")
 #'   }
 #' }
@@ -85,7 +95,7 @@
 #' if (!require(parallelly)) {
 #'   print("Trying to install package parallelly")
 #'   install.packages("parallelly")
-#'   if(!require(parallelly)) {
+#'   if (!require(parallelly)) {
 #'     stop("Could not install package parallelly")
 #'   }
 #' }
@@ -108,10 +118,10 @@
 #' parallel::stopCluster(cl)
 #'
 #' # Select variables with labeled axis lines on ARA plot
-#' axis_lines <- c(1,4)   # 1:"mpg", 4:"acceleration")
+#' axis_lines <- c(1, 4) # 1:"mpg", 4:"acceleration")
 #'
 #' # Select variable used for coloring embedded points
-#' color_variable <- 1    # "mpg"
+#' color_variable <- 1 # "mpg"
 #'
 #' # Draw the ARA plot
 #' draw_ara_plot_2d_standardized(
@@ -155,24 +165,26 @@ ara_unconstrained_Linf <- function(
     stop("Input error: use_glpkAPI_simplex must be logical (Boolean)")
   }
 
-  if ((!is.null(cluster)) && !(inherits(cluster, "SOCKcluster") || inherits(cluster, "cluster"))) {
+  if ((!is.null(cluster)) &&
+    !(inherits(cluster, "SOCKcluster") || inherits(cluster, "cluster"))) {
     stop("Input error: invalid cluster argument")
   }
 
 
   # Check dimensions of matrices -----------------------------------------------
 
-  N <- nrow(X)
   nX <- ncol(X)
   nV <- nrow(V)
   m <- ncol(V)
 
   if ((m < 1) || (m > 3)) {
-    stop("Input error: The dimensionality of the visualization space (columns of V) must be 1, 2, or 3")
+    stop("Input error: The dimensionality of the visualization space (columns of
+         V) must be 1, 2, or 3")
   }
 
   if (nX != nV) {
-    stop("Input error: The number of variables of X (columns) must match the number of variables of V (rows)")
+    stop("Input error: The number of variables of X (columns) must match the
+         number of variables of V (rows)")
   }
 
   n <- nX
@@ -196,12 +208,16 @@ ara_unconstrained_Linf <- function(
   # Check additional preconditions on input parameters -------------------------
 
   if ((length(weights) != n) || (min(weights) < 0)) {
-    stop("Input error: weights must be vector of length n with non-negative values")
+    stop("Input error: weights must be vector of length n with non-negative
+         values")
   }
 
-  if ((!pracma::strcmpi(solver, "clarabel")) && (!pracma::strcmpi(solver, "glpkAPI")) &&
-    (!pracma::strcmpi(solver, "Rglpk")) && (!pracma::strcmpi(solver, "CVXR"))) {
-    stop('Input error: solver must be "clarabel", "glpkAPI", "Rglpk", or "CVXR"')
+  if ((!pracma::strcmpi(solver, "clarabel")) &&
+    (!pracma::strcmpi(solver, "glpkAPI")) &&
+    (!pracma::strcmpi(solver, "Rglpk")) &&
+    (!pracma::strcmpi(solver, "CVXR"))) {
+    stop('Input error: solver must be "clarabel", "glpkAPI", "Rglpk", or
+         "CVXR"')
   }
 
 
@@ -287,8 +303,14 @@ ara_unconstrained_Linf_CVXR <- function(
   obj <- CVXR::Minimize(sum(tvar))
 
   constraints <- list()
-  constraints <- append(constraints, -tvar %*% pracma::ones(1, n) <= Pvar %*% t(V) - X)
-  constraints <- append(constraints, Pvar %*% t(V) - X <= tvar %*% pracma::ones(1, n))
+  constraints <- append(
+    constraints,
+    -tvar %*% pracma::ones(1, n) <= Pvar %*% t(V) - X
+  )
+  constraints <- append(
+    constraints,
+    Pvar %*% t(V) - X <= tvar %*% pracma::ones(1, n)
+  )
 
   prob <- CVXR::Problem(obj, constraints)
   solution <- CVXR::solve(prob, solver = "ECOS")
@@ -354,7 +376,13 @@ ara_unconstrained_Linf_glpkAPI <- function(
     })
   } else {
     parallel::clusterEvalQ(cluster, library(glpkAPI))
-    parallel::clusterExport(cluster, c("min_unconstrained_glpkAPI", "solve_glpkAPI_wrapper"), envir = environment())
+    parallel::clusterExport(cluster,
+      c(
+        "min_unconstrained_glpkAPI",
+        "solve_glpkAPI_wrapper"
+      ),
+      envir = environment()
+    )
 
     sol <- parallel::parApply(cluster, X = X, MARGIN = 1, function(x) {
       min_unconstrained_glpkAPI(
@@ -415,7 +443,13 @@ ara_unconstrained_Linf_clarabel <- function(
     })
   } else {
     parallel::clusterEvalQ(cluster, library(clarabel))
-    parallel::clusterExport(cluster, c("min_unconstrained_clarabel", "solve_clarabel_wrapper"), envir = environment())
+    parallel::clusterExport(cluster,
+      c(
+        "min_unconstrained_clarabel",
+        "solve_clarabel_wrapper"
+      ),
+      envir = environment()
+    )
 
     sol <- parallel::parApply(cluster, X = X, MARGIN = 1, function(x) {
       min_unconstrained_clarabel(
@@ -459,7 +493,10 @@ ara_unconstrained_Linf_Rglpk <- function(
     ncol = 1 + m
   )
 
-  bounds <- list(lower = list(ind = 2:(1 + m), val = rep(-Inf, m)), upper = list())
+  bounds <- list(
+    lower = list(ind = 2:(1 + m), val = rep(-Inf, m)),
+    upper = list()
+  )
 
   dirs <- rep("<=", 2 * n)
 
@@ -476,7 +513,13 @@ ara_unconstrained_Linf_Rglpk <- function(
     })
   } else {
     parallel::clusterEvalQ(cluster, library(Rglpk))
-    parallel::clusterExport(cluster, c("min_unconstrained_Rglpk", "solve_Rglpk_wrapper"), envir = environment())
+    parallel::clusterExport(cluster,
+      c(
+        "min_unconstrained_Rglpk",
+        "solve_Rglpk_wrapper"
+      ),
+      envir = environment()
+    )
 
     sol <- parallel::parApply(cluster, X = X, MARGIN = 1, function(x) {
       min_unconstrained_Rglpk(

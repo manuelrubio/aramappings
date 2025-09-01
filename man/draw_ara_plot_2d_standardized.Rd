@@ -15,22 +15,26 @@ draw_ara_plot_2d_standardized(
 )
 }
 \arguments{
-\item{Z}{Standardized numeric data matrix of dimensions N x n, where N is the number of observations, and n is the number of variables.}
+\item{Z}{Standardized numeric data matrix of dimensions N x n, where N is the number
+of observations, and n is the number of variables.}
 
 \item{X}{Original numeric data matrix (before standardizing) of dimensions N x n}
 
-\item{V}{Numeric matrix of "axis vectors" of dimensions n x 2, where each row of \code{V} defines an axis vector.}
+\item{V}{Numeric matrix of "axis vectors" of dimensions n x 2, where each row of
+\code{V} defines an axis vector.}
 
-\item{P}{Numeric data matrix of dimensions N x 2 containing the N 2-dimensional representations of the data observations
+\item{P}{Numeric data matrix of dimensions N x 2 containing the N 2-dimensional
+representations of the data observations
 (i.e., the embedded points).}
 
-\item{weights}{Numeric array specifying non-negative weights associated with each variable. Can also be a 1D matrix. Default:
-array of n ones.}
+\item{weights}{Numeric array specifying non-negative weights associated with each variable.
+Can also be a 1D matrix. Default: array of n ones.}
 
-\item{axis_lines}{Array of integer variable indices (in [1,n]) indicating which calibrated axis lines are to be displayed.
-Default: NULL.}
+\item{axis_lines}{Array of integer variable indices (in [1,n]) indicating which calibrated
+axis lines are to be displayed. Default: NULL.}
 
-\item{color_variable}{Integer (in [1,n]) that indicates the variable used to color the embedded points. Default: NULL.}
+\item{color_variable}{Integer (in [1,n]) that indicates the variable used to color the embedded
+points. Default: NULL.}
 }
 \value{
 Returns 0 if the function terminates without errors
@@ -39,29 +43,35 @@ Returns 0 if the function terminates without errors
 Creates a plot associated with an Adaptable Radial Axes (ARA) mapping
 }
 \details{
-The function \code{draw_ara_plot_2d_standardized()} generates a basic two-dimensional plot related to an "Adaptable
-Radial Axes" (ARA) mapping (Rubio-Sánchez, 2017) for high-dimensional numerical data (\code{X}) that has been previously
-standardized (\code{Z}). The plot displays a set of 2D points (\code{P}), each representing an observation from the
-high-dimensional dataset. It also includes a collection of axis vectors (\code{V}), each corresponding to a specific
-data variable. If the ARA mapping incorporates weights (\code{weights}), these axis vectors are colored accordingly to
-reflect the weighting. For a user-specified subset of variables (\code{axis_lines}), the function additionally draws
-axis lines with tick marks that represent values of the selected variables. Users can estimate the values of the
-high-dimensional data by visually projecting the plotted points orthogonally onto these axes. The plotted points can
-also be colored according to the values of the variable \code{color_variable}.
+The function \code{draw_ara_plot_2d_standardized()} generates a basic
+two-dimensional plot related to an "Adaptable Radial Axes" (ARA) mapping
+(Rubio-Sánchez, 2017) for high-dimensional numerical data (\code{X}) that has
+been previously standardized (\code{Z}). The plot displays a set of 2D points
+(\code{P}), each representing an observation from the high-dimensional
+dataset. It also includes a collection of axis vectors (\code{V}), each
+corresponding to a specific data variable. If the ARA mapping incorporates
+weights (\code{weights}), these axis vectors are colored accordingly to
+reflect the weighting. For a user-specified subset of variables
+(\code{axis_lines}), the function additionally draws axis lines with tick
+marks that represent values of the selected variables. Users can estimate the
+values of the high-dimensional data by visually projecting the plotted points
+orthogonally onto these axes. The plotted points can also be colored
+according to the values of the variable \code{color_variable}.
 }
 \examples{
 # Load data
-if (!require(ascentTraining)) {    # contains the Auto MPG dataset
+if (!require(ascentTraining)) { # contains the Auto MPG dataset
   print("Trying to install package ascentTraining")
   install.packages("ascentTraining")
-  if(!require(ascentTraining)) {
+  if (!require(ascentTraining)) {
     stop("Could not install package ascentTraining")
   }
 }
 data("auto_mpg")
 
 # Define subset of (numerical) variables
-selected_variables <- c(1,4,5,6)   # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+# 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"
+selected_variables <- c(1, 4, 5, 6)
 
 # Retain only selected variables and rename dataset as X
 X <- auto_mpg[, selected_variables] # Select a subset of variables
@@ -87,7 +97,7 @@ Z <- scale(X)
 if (!require(geometry)) {
   print("Trying to install package geometry")
   install.packages("geometry")
-  if(!require(geometry)) {
+  if (!require(geometry)) {
     stop("Could not install package geometry")
   }
 }
@@ -102,10 +112,10 @@ weights <- c(1, 0.75, 0.75, 1)
 mapping <- ara_unconstrained_L2(Z, V, weights = weights, solver = "formula")
 
 # Select variables with labeled axis lines on ARA plot
-axis_lines <- c(1,4)   # 1:"mpg", 4:"acceleration")
+axis_lines <- c(1, 4) # 1:"mpg", 4:"acceleration")
 
 # Select variable used for coloring embedded points
-color_variable <- 1    # "mpg"
+color_variable <- 1 # "mpg"
 
 # Draw the ARA plot
 draw_ara_plot_2d_standardized(
@@ -120,7 +130,7 @@ draw_ara_plot_2d_standardized(
 
 }
 \references{
-M. Rubio-Sánchez, A. Sanchez, D. J. Lehmann: Adaptable radial axes plots for improved
-multivariate data visualization. Computer Graphics Forum 36, 3 (2017), 389–399.
-\href{https://onlinelibrary.wiley.com/doi/10.1111/cgf.13196}{doi:10.1111/cgf.13196}
+M. Rubio-Sánchez, A. Sanchez, D. J. Lehmann: Adaptable radial axes plots for
+improved multivariate data visualization. Computer Graphics Forum 36, 3
+(2017), 389–399. \href{https://onlinelibrary.wiley.com/doi/10.1111/cgf.13196}{doi:10.1111/cgf.13196}
 }

@@ -8,13 +8,14 @@ set.seed(1000000)
 if (!require(datasetsICR)) {
   print("Trying to install package datasetsICR ")
   install.packages("datasetsICR ")
-  if(!require(datasetsICR )) {
+  if (!require(datasetsICR)) {
     stop("Could not install package datasetsICR ")
   }
 }
 data("wine")
 
-#wine <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"), header = FALSE)
+# wine <- read.csv(url("https://archive.ics.uci.edu/ml/
+# machine-learning-databases/wine/wine.data"), header = FALSE)
 
 X <- wine[, 2:ncol(wine)] # Select a subset of variables
 
@@ -30,7 +31,7 @@ n <- ncol(X)
 m <- 3
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 Xcopy <- X
-Xcopy[1,1] <- 'a'
+Xcopy[1, 1] <- "a"
 test_that("Function halts if X is not numeric", {
   expect_error(ara_ordered_L1(Xcopy, V))
 })
@@ -40,7 +41,7 @@ test_that("Function halts if X is not a matrix", {
   expect_error(ara_ordered_L1(Xlist, V))
 })
 
-V[1,1] <- 'a'
+V[1, 1] <- "a"
 test_that("Function halts if V is not numeric", {
   expect_error(ara_ordered_L1(X, V))
 })
@@ -75,7 +76,8 @@ test_that("Function halts if the number of columns of V is zero", {
 
 m <- 2
 V <- matrix(rnorm((n + 1) * m), nrow = n + 1, ncol = m)
-test_that("Function halts if the number axis vectors (rows of V) is different than the number data variables (rows of X)", {
+test_that("Function halts if the number axis vectors (rows of V) is different
+          than the number data variables (rows of X)", {
   expect_error(ara_ordered_L1(X, V))
 })
 
@@ -118,7 +120,8 @@ test_that("Function halts if selected variable is not an integer", {
 
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-test_that("Function halts if the specified solver is not 'clarabel', 'glpkAPI', 'Rglpk'', or 'CVXR'", {
+test_that("Function halts if the specified solver is not 'clarabel', 'glpkAPI',
+          'Rglpk'', or 'CVXR'", {
   expect_error(ara_ordered_L1(X, V, solver = "some invalid solver"))
 })
 

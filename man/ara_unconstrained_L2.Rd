@@ -7,57 +7,72 @@
 ara_unconstrained_L2(X, V, weights = rep(1, ncol(X)), solver = "formula")
 }
 \arguments{
-\item{X}{Numeric data matrix of dimensions N x n, where N is the number of observations, and n is the number of variables.}
+\item{X}{Numeric data matrix of dimensions N x n, where N is the number of
+observations, and n is the number of variables.}
 
-\item{V}{Numeric matrix defining the axes or "axis vectors". Its dimensions are n x m, where 1<=m<=3 is the dimension
-of the visualization space. Each row of \code{V} defines an axis vector.}
+\item{V}{Numeric matrix defining the axes or "axis vectors". Its dimensions are n x m,
+where 1<=m<=3 is the dimension of the visualization space. Each row of
+\code{V} defines an axis vector.}
 
-\item{weights}{Numeric array specifying optional non-negative weights associated with each variable. The function only considers
-them if they do not share the same value. Default: array of n ones.}
+\item{weights}{Numeric array specifying optional non-negative weights associated with each
+variable. The function only considers them if they do not share the same
+value. Default: array of n ones.}
 
-\item{solver}{String indicating a package or method for solving the optimization problem. It can be "formula" (default), where the
-solution is obtained through a closed-form formula, or "CVXR".}
+\item{solver}{String indicating a package or method for solving the optimization problem.
+It can be "formula" (default), where the solution is obtained through a
+closed-form formula, or "CVXR".}
 }
 \value{
 A list with the three following entries:
 \describe{
-\item{\code{P}}{A numeric N x m matrix containing the mapped points. Each row is the low-dimensional representation
-of a data observation in X.}
-\item{\code{status}}{A vector of length N where the i-th element contains the status of the chosen solver when
-calculating the mapping of the i-th data observation. The type of the elements depends on the particular chosen solver.}
-\item{\code{objval}}{The numeric objective value associated with the solution to the optimization problem, considering
-matrix norms, and ignoring weights.}
+\item{\code{P}}{A numeric N x m matrix containing the mapped points. Each
+row is the low-dimensional representation of a data observation in X.}
+\item{\code{status}}{A vector of length N where the i-th element contains
+the status of the chosen solver when calculating the mapping of the i-th
+data observation. The type of the elements depends on the particular chosen
+solver.}
+\item{\code{objval}}{The numeric objective value associated with the
+solution to the optimization problem, considering matrix norms, and
+ignoring weights.}
 }
-When solver is "formula" this function always produces valid solutions (\code{P}), since the pseudo-inverse matrix always
-exists. Thus, the output status vector is not relevant, but is returned in consonance with other adaptable radial axes
-functions in the package. If \pkg{CVRX} were used and failed to map the data observations (i.e., failed to solve
-the related optimization problem), \code{P} would be a matrix containing \code{NA} (not available) values, and \code{objval}
-would be also be \code{NA}.
+When solver is "formula" this function always produces valid solutions
+(\code{P}), since the pseudo-inverse matrix always exists. Thus, the output
+status vector is not relevant, but is returned in consonance with other
+adaptable radial axes functions in the package. If \pkg{CVRX} were used and
+failed to map the data observations (i.e., failed to solve the related
+optimization problem), \code{P} would be a matrix containing \code{NA} (not
+available) values, and \code{objval} would be also be \code{NA}.
 }
 \description{
-\code{ara_unconstrained_L2()} computes \strong{unconstrained} \strong{Adaptable Radial Axes} (ARA) mappings for the \strong{L2 norm}
+\code{ara_unconstrained_L2()} computes \strong{unconstrained}
+\strong{Adaptable Radial Axes} (ARA) mappings for the \strong{L2 norm}
 }
 \details{
-\code{ara_unconstrained_L2()} computes low-dimensional point representations of high-dimensional
-numerical data (\code{X}) according to the data visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017),
-which describes a collection of convex norm optimization problems aimed at minimizing estimates of original
-values in \code{X} through dot products of the mapped points with the axis vectors (rows of \code{V}). This particular
-function solves the unconstrained optimization problem in Eq. (10), for the squared-Euclidean norm. Optional
-non-negative weights (\code{weights}) associated with each data variable can be supplied to solve the problem in Eq. (15).
+\code{ara_unconstrained_L2()} computes low-dimensional point representations
+of high-dimensional numerical data (\code{X}) according to the data
+visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017), which
+describes a collection of convex norm optimization problems aimed at
+minimizing estimates of original values in \code{X} through dot products of
+the mapped points with the axis vectors (rows of \code{V}). This particular
+function solves the unconstrained optimization problem in Eq. (10), for the
+squared-Euclidean norm. Optional non-negative weights (\code{weights})
+associated with each data variable can be supplied to solve the problem in
+Eq. (15).
 }
 \examples{
 # Load data
-if (!require(ascentTraining)) {    # contains the Auto MPG dataset
+if (!require(ascentTraining)) { # contains the Auto MPG dataset
   print("Trying to install package ascentTraining")
   install.packages("ascentTraining")
-  if(!require(ascentTraining)) {
+  if (!require(ascentTraining)) {
     stop("Could not install package ascentTraining")
   }
 }
 data("auto_mpg")
 
 # Define subset of (numerical) variables
-selected_variables <- c(1,4,5,6)   # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+# 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"
+selected_variables <- c(1, 4, 5, 6)
 
 # Retain only selected variables and rename dataset as X
 X <- auto_mpg[, selected_variables] # Select a subset of variables
@@ -83,7 +98,7 @@ Z <- scale(X)
 if (!require(geometry)) {
   print("Trying to install package geometry")
   install.packages("geometry")
-  if(!require(geometry)) {
+  if (!require(geometry)) {
     stop("Could not install package geometry")
   }
 }
@@ -103,10 +118,10 @@ mapping <- ara_unconstrained_L2(
 )
 
 # Select variables with labeled axis lines on ARA plot
-axis_lines <- c(1,4)   # 1:"mpg", 4:"acceleration")
+axis_lines <- c(1, 4) # 1:"mpg", 4:"acceleration")
 
 # Select variable used for coloring embedded points
-color_variable <- 1    # "mpg"
+color_variable <- 1 # "mpg"
 
 # Draw the ARA plot
 draw_ara_plot_2d_standardized(

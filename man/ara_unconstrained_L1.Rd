@@ -14,60 +14,76 @@ ara_unconstrained_L1(
 )
 }
 \arguments{
-\item{X}{Numeric data matrix of dimensions N x n, where N is the number of observations, and n is the number of variables.}
+\item{X}{Numeric data matrix of dimensions N x n, where N is the number of
+observations, and n is the number of variables.}
 
-\item{V}{Numeric matrix defining the axes or "axis vectors". Its dimensions are n x m, where 1<=m<=3 is the dimension
-of the visualization space. Each row of \code{V} defines an axis vector.}
+\item{V}{Numeric matrix defining the axes or "axis vectors". Its dimensions are n x m,
+where 1<=m<=3 is the dimension of the visualization space. Each row of
+\code{V} defines an axis vector.}
 
-\item{weights}{Numeric array specifying optional non-negative weights associated with each variable. The function only considers
-them if they do not share the same value. Default: array of n ones.}
+\item{weights}{Numeric array specifying optional non-negative weights associated with each
+variable. The function only considers them if they do not share the same
+value. Default: array of n ones.}
 
-\item{solver}{String indicating a package for solving the linear problem(s). It can be "clarabel" (default), "glpkAPI", "Rglpk", or "CVXR".}
+\item{solver}{String indicating a package for solving the linear problem(s). It can be
+"clarabel" (default), "glpkAPI", "Rglpk", or "CVXR".}
 
-\item{use_glpkAPI_simplex}{Boolean parameter that indicates whether to use the simplex algorithm (if \code{TRUE}) or an interior point method
-(if \code{FALSE}), when using the \pkg{glpkAPI} solver. The default is \code{TRUE}.}
+\item{use_glpkAPI_simplex}{Boolean parameter that indicates whether to use the simplex algorithm (if
+\code{TRUE}) or an interior point method (if \code{FALSE}), when using the
+\pkg{glpkAPI} solver. The default is \code{TRUE}.}
 
-\item{cluster}{Optional cluster object related to the parallel package. If supplied, and \code{n_LP_problems} is N, the method
-computes the mappings using parallel processing.}
+\item{cluster}{Optional cluster object related to the parallel package. If supplied, and
+\code{n_LP_problems} is N, the method computes the mappings using parallel
+processing.}
 }
 \value{
 A list with the three following entries:
 \describe{
-\item{\code{P}}{A numeric N x m matrix containing the mapped points. Each row is the low-dimensional representation
-of a data observation in X.}
-\item{\code{status}}{A vector of length N where the i-th element contains the status of the chosen solver when
-calculating the mapping of the i-th data observation. The type of the elements depends on the particular chosen solver.}
-\item{\code{objval}}{The numeric objective value associated with the solution to the optimization problem, considering
-matrix norms, and ignoring weights.}
+\item{\code{P}}{A numeric N x m matrix containing the mapped points. Each
+row is the low-dimensional representation of a data observation in X.}
+\item{\code{status}}{A vector of length N where the i-th element contains
+the status of the chosen solver when calculating the mapping of the i-th
+data observation. The type of the elements depends on the particular chosen
+solver.}
+\item{\code{objval}}{The numeric objective value associated with the
+solution to the optimization problem, considering matrix norms, and
+ignoring weights.}
 }
-If the chosen solver fails to map one or more data observations (i.e., fails to solve the related optimization problems),
-their rows in \code{P} will contain \code{NA} (not available) values. In that case, \code{objval} will also be \code{NA}.
+If the chosen solver fails to map one or more data observations (i.e., fails
+to solve the related optimization problems), their rows in \code{P} will
+contain \code{NA} (not available) values. In that case, \code{objval} will
+also be \code{NA}.
 }
 \description{
-\code{ara_unconstrained_L1()} computes \strong{unconstrained} \strong{Adaptable Radial Axes} (ARA) mappings for the \strong{L1 norm}
+\code{ara_unconstrained_L1()} computes \strong{unconstrained}
+\strong{Adaptable Radial Axes} (ARA) mappings for the \strong{L1 norm}
 }
 \details{
-\code{ara_unconstrained_L1()} computes low-dimensional point representations of high-dimensional
-numerical data (\code{X}) according to the data visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017),
-which describes a collection of convex norm optimization problems aimed at minimizing estimates of original
-values in \code{X} through dot products of the mapped points with the axis vectors (rows of \code{V}). This particular
-function solves the unconstrained optimization problem in Eq. (10), for the L1 vector norm. Specifically, it solves
-equivalent linear problems as described in (11). Optional non-negative weights (\code{weights}) associated with each data
-variable can be supplied to solve the problem in Eq. (15).
+\code{ara_unconstrained_L1()} computes low-dimensional point representations
+of high-dimensional numerical data (\code{X}) according to the data
+visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017), which
+describes a collection of convex norm optimization problems aimed at
+minimizing estimates of original values in \code{X} through dot products of
+the mapped points with the axis vectors (rows of \code{V}). This particular
+function solves the unconstrained optimization problem in Eq. (10), for the
+L1 vector norm. Specifically, it solves equivalent linear problems as
+described in (11). Optional non-negative weights (\code{weights}) associated
+with each data variable can be supplied to solve the problem in Eq. (15).
 }
 \examples{
 # Load data
-if (!require(ascentTraining)) {    # contains the Auto MPG dataset
+if (!require(ascentTraining)) { # contains the Auto MPG dataset
   print("Trying to install package ascentTraining")
   install.packages("ascentTraining")
-  if(!require(ascentTraining)) {
+  if (!require(ascentTraining)) {
     stop("Could not install package ascentTraining")
   }
 }
 data("auto_mpg")
 
 # Define subset of (numerical) variables
-selected_variables <- c(1,4,5,6)   # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+# 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"
+selected_variables <- c(1, 4, 5, 6)
 
 # Retain only selected variables and rename dataset as X
 X <- auto_mpg[, selected_variables] # Select a subset of variables
@@ -93,7 +109,7 @@ Z <- scale(X)
 if (!require(geometry)) {
   print("Trying to install package geometry")
   install.packages("geometry")
-  if(!require(geometry)) {
+  if (!require(geometry)) {
     stop("Could not install package geometry")
   }
 }
@@ -108,7 +124,7 @@ weights <- c(1, 0.75, 0.75, 1)
 if (!require(parallelly)) {
   print("Trying to install package parallelly")
   install.packages("parallelly")
-  if(!require(parallelly)) {
+  if (!require(parallelly)) {
     stop("Could not install package parallelly")
   }
 }
@@ -131,10 +147,10 @@ mapping <- ara_unconstrained_L1(
 parallel::stopCluster(cl)
 
 # Select variables with labeled axis lines on ARA plot
-axis_lines <- c(1,4)   # 1:"mpg", 4:"acceleration")
+axis_lines <- c(1, 4) # 1:"mpg", 4:"acceleration")
 
 # Select variable used for coloring embedded points
-color_variable <- 1    # "mpg"
+color_variable <- 1 # "mpg"
 
 # Draw the ARA plot
 draw_ara_plot_2d_standardized(
@@ -149,7 +165,7 @@ draw_ara_plot_2d_standardized(
 
 }
 \references{
-M. Rubio-Sánchez, A. Sanchez, D. J. Lehmann: Adaptable radial axes plots for improved
-multivariate data visualization. Computer Graphics Forum 36, 3 (2017), 389–399.
-\href{https://onlinelibrary.wiley.com/doi/10.1111/cgf.13196}{doi:10.1111/cgf.13196}
+M. Rubio-Sánchez, A. Sanchez, D. J. Lehmann: Adaptable radial axes plots for
+improved multivariate data visualization. Computer Graphics Forum 36, 3
+(2017), 389–399. \href{https://onlinelibrary.wiley.com/doi/10.1111/cgf.13196}{doi:10.1111/cgf.13196}
 }

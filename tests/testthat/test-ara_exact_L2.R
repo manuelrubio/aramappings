@@ -8,13 +8,14 @@ set.seed(1000000)
 if (!require(datasetsICR)) {
   print("Trying to install package datasetsICR ")
   install.packages("datasetsICR ")
-  if(!require(datasetsICR )) {
+  if (!require(datasetsICR)) {
     stop("Could not install package datasetsICR ")
   }
 }
 data("wine")
 
-#wine <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"), header = FALSE)
+# wine <- read.csv(url("https://archive.ics.uci.edu/ml/
+# machine-learning-databases/wine/wine.data"), header = FALSE)
 
 X <- wine[, 2:ncol(wine)] # Select a subset of variables
 
@@ -30,7 +31,7 @@ n <- ncol(X)
 m <- 3
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 Xcopy <- X
-Xcopy[1,1] <- 'a'
+Xcopy[1, 1] <- "a"
 test_that("Function halts if X is not numeric", {
   expect_error(ara_exact_L2(Xcopy, V))
 })
@@ -40,7 +41,7 @@ test_that("Function halts if X is not a matrix", {
   expect_error(ara_exact_L2(Xlist, V))
 })
 
-V[1,1] <- 'a'
+V[1, 1] <- "a"
 test_that("Function halts if V is not numeric", {
   expect_error(ara_exact_L2(X, V))
 })
@@ -75,7 +76,8 @@ test_that("Function halts if the number of columns of V is zero", {
 
 m <- 2
 V <- matrix(rnorm((n + 1) * m), nrow = n + 1, ncol = m)
-test_that("Function halts if the number axis vectors (rows of V) is different than the number data variables (rows of X)", {
+test_that("Function halts if the number axis vectors (rows of V) is different
+          than the number data variables (rows of X)", {
   expect_error(ara_exact_L2(X, V))
 })
 
@@ -135,7 +137,10 @@ for (m in 1:3) {
 
   if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
     test_that("Methods reach same objective value", {
-      expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+      expect_equal(abs(R_formula$objval - R_CVXR$objval),
+        0,
+        tolerance = tolerance
+      )
     })
   }
 
@@ -148,7 +153,10 @@ for (m in 1:3) {
 
   if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
     test_that("Methods reach same objective value", {
-      expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+      expect_equal(abs(R_formula$objval - R_CVXR$objval),
+        0,
+        tolerance = tolerance
+      )
     })
   }
 }
@@ -171,7 +179,10 @@ R_CVXR <- ara_exact_L2(X, V, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -184,7 +195,10 @@ R_CVXR <- ara_exact_L2(X, V, variable = variable, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -200,7 +214,10 @@ R_CVXR <- ara_exact_L2(X, V, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -213,7 +230,10 @@ R_CVXR <- ara_exact_L2(X, V, variable = variable, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -234,7 +254,10 @@ R_CVXR <- ara_exact_L2(X, V, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -247,7 +270,10 @@ R_CVXR <- ara_exact_L2(X, V, variable = variable, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -263,7 +289,10 @@ R_CVXR <- ara_exact_L2(X, V, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -276,7 +305,10 @@ R_CVXR <- ara_exact_L2(X, V, variable = variable, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -298,7 +330,10 @@ R_CVXR <- ara_exact_L2(X, V, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -311,7 +346,10 @@ R_CVXR <- ara_exact_L2(X, V, variable = variable, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -328,7 +366,10 @@ R_CVXR <- ara_exact_L2(X, V, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -341,7 +382,10 @@ R_CVXR <- ara_exact_L2(X, V, variable = variable, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -351,7 +395,7 @@ if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
 m <- 3
 variable <- 3
 n <- 3
-X <- X[,1:n]
+X <- X[, 1:n]
 
 # Matrix of axis vectors
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
@@ -362,7 +406,10 @@ R_CVXR <- ara_exact_L2(X, V, variable = variable, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }
 
@@ -372,10 +419,13 @@ V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[2, ] <- rep(0, m)
 
 R_formula <- ara_exact_L2(X, V, variable = variable)
-R_CVXR <- ara_exact_L2(X, V,  variable = variable, solver = "CVXR")
+R_CVXR <- ara_exact_L2(X, V, variable = variable, solver = "CVXR")
 
 if (!any(is.na(R_formula$objval)) && !any(is.na(R_CVXR$objval))) {
   test_that("Methods reach same objective value", {
-    expect_equal(abs(R_formula$objval - R_CVXR$objval), 0, tolerance = tolerance)
+    expect_equal(abs(R_formula$objval - R_CVXR$objval),
+      0,
+      tolerance = tolerance
+    )
   })
 }

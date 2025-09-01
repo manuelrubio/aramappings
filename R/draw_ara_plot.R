@@ -4,38 +4,47 @@
 #' Creates a plot associated with an Adaptable Radial Axes (ARA) mapping
 #'
 #' @details
-#' The function \code{draw_ara_plot_2d_standardized()} generates a basic two-dimensional plot related to an "Adaptable
-#' Radial Axes" (ARA) mapping (Rubio-Sánchez, 2017) for high-dimensional numerical data (\code{X}) that has been previously
-#' standardized (\code{Z}). The plot displays a set of 2D points (\code{P}), each representing an observation from the
-#' high-dimensional dataset. It also includes a collection of axis vectors (\code{V}), each corresponding to a specific
-#' data variable. If the ARA mapping incorporates weights (\code{weights}), these axis vectors are colored accordingly to
-#' reflect the weighting. For a user-specified subset of variables (\code{axis_lines}), the function additionally draws
-#' axis lines with tick marks that represent values of the selected variables. Users can estimate the values of the
-#' high-dimensional data by visually projecting the plotted points orthogonally onto these axes. The plotted points can
-#' also be colored according to the values of the variable \code{color_variable}.
+#' The function \code{draw_ara_plot_2d_standardized()} generates a basic
+#' two-dimensional plot related to an "Adaptable Radial Axes" (ARA) mapping
+#' (Rubio-Sánchez, 2017) for high-dimensional numerical data (\code{X}) that has
+#' been previously standardized (\code{Z}). The plot displays a set of 2D points
+#' (\code{P}), each representing an observation from the high-dimensional
+#' dataset. It also includes a collection of axis vectors (\code{V}), each
+#' corresponding to a specific data variable. If the ARA mapping incorporates
+#' weights (\code{weights}), these axis vectors are colored accordingly to
+#' reflect the weighting. For a user-specified subset of variables
+#' (\code{axis_lines}), the function additionally draws axis lines with tick
+#' marks that represent values of the selected variables. Users can estimate the
+#' values of the high-dimensional data by visually projecting the plotted points
+#' orthogonally onto these axes. The plotted points can also be colored
+#' according to the values of the variable \code{color_variable}.
 #'
 #' @param Z
-#' Standardized numeric data matrix of dimensions N x n, where N is the number of observations, and n is the number of variables.
+#' Standardized numeric data matrix of dimensions N x n, where N is the number
+#' of observations, and n is the number of variables.
 #' @param X
 #' Original numeric data matrix (before standardizing) of dimensions N x n
 #' @param V
-#' Numeric matrix of "axis vectors" of dimensions n x 2, where each row of \code{V} defines an axis vector.
+#' Numeric matrix of "axis vectors" of dimensions n x 2, where each row of
+#' \code{V} defines an axis vector.
 #' @param P
-#' Numeric data matrix of dimensions N x 2 containing the N 2-dimensional representations of the data observations
+#' Numeric data matrix of dimensions N x 2 containing the N 2-dimensional
+#' representations of the data observations
 #' (i.e., the embedded points).
 #' @param weights
-#' Numeric array specifying non-negative weights associated with each variable. Can also be a 1D matrix. Default:
-#' array of n ones.
+#' Numeric array specifying non-negative weights associated with each variable.
+#' Can also be a 1D matrix. Default: array of n ones.
 #' @param axis_lines
-#' Array of integer variable indices (in \[1,n\]) indicating which calibrated axis lines are to be displayed.
-#' Default: NULL.
+#' Array of integer variable indices (in \[1,n\]) indicating which calibrated
+#' axis lines are to be displayed. Default: NULL.
 #' @param color_variable
-#' Integer (in \[1,n\]) that indicates the variable used to color the embedded points. Default: NULL.
+#' Integer (in \[1,n\]) that indicates the variable used to color the embedded
+#' points. Default: NULL.
 #'
 #' @references
-#' M. Rubio-Sánchez, A. Sanchez, D. J. Lehmann: Adaptable radial axes plots for improved
-#' multivariate data visualization. Computer Graphics Forum 36, 3 (2017), 389–399.
-#' [doi:10.1111/cgf.13196](https://onlinelibrary.wiley.com/doi/10.1111/cgf.13196)
+#' M. Rubio-Sánchez, A. Sanchez, D. J. Lehmann: Adaptable radial axes plots for
+#' improved multivariate data visualization. Computer Graphics Forum 36, 3
+#' (2017), 389–399. [doi:10.1111/cgf.13196](https://onlinelibrary.wiley.com/doi/10.1111/cgf.13196)
 #'
 #' @returns
 #' Returns 0 if the function terminates without errors
@@ -44,17 +53,18 @@
 #'
 #' @examples
 #' # Load data
-#' if (!require(ascentTraining)) {    # contains the Auto MPG dataset
+#' if (!require(ascentTraining)) { # contains the Auto MPG dataset
 #'   print("Trying to install package ascentTraining")
 #'   install.packages("ascentTraining")
-#'   if(!require(ascentTraining)) {
+#'   if (!require(ascentTraining)) {
 #'     stop("Could not install package ascentTraining")
 #'   }
 #' }
 #' data("auto_mpg")
 #'
 #' # Define subset of (numerical) variables
-#' selected_variables <- c(1,4,5,6)   # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+#' # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"
+#' selected_variables <- c(1, 4, 5, 6)
 #'
 #' # Retain only selected variables and rename dataset as X
 #' X <- auto_mpg[, selected_variables] # Select a subset of variables
@@ -80,7 +90,7 @@
 #' if (!require(geometry)) {
 #'   print("Trying to install package geometry")
 #'   install.packages("geometry")
-#'   if(!require(geometry)) {
+#'   if (!require(geometry)) {
 #'     stop("Could not install package geometry")
 #'   }
 #' }
@@ -95,10 +105,10 @@
 #' mapping <- ara_unconstrained_L2(Z, V, weights = weights, solver = "formula")
 #'
 #' # Select variables with labeled axis lines on ARA plot
-#' axis_lines <- c(1,4)   # 1:"mpg", 4:"acceleration")
+#' axis_lines <- c(1, 4) # 1:"mpg", 4:"acceleration")
 #'
 #' # Select variable used for coloring embedded points
-#' color_variable <- 1    # "mpg"
+#' color_variable <- 1 # "mpg"
 #'
 #' # Draw the ARA plot
 #' draw_ara_plot_2d_standardized(
@@ -143,11 +153,15 @@ draw_ara_plot_2d_standardized <- function(
     stop("Input error: weights must be a numeric vector")
   }
 
-  if (!is.null(axis_lines) && !is.double(axis_lines) && !is.integer(axis_lines)) {
+  if (!is.null(axis_lines) &&
+    !is.double(axis_lines) &&
+    !is.integer(axis_lines)) {
     stop("Input error: axis_lines must be a numeric value or vector")
   }
 
-  if (!is.null(color_variable) && !is.double(color_variable) && !is.integer(color_variable)) {
+  if (!is.null(color_variable) &&
+    !is.double(color_variable) &&
+    !is.integer(color_variable)) {
     stop("Input error: color_variable must be an integer")
   }
 
@@ -165,29 +179,35 @@ draw_ara_plot_2d_standardized <- function(
   mP <- ncol(P)
 
   if (NZ != NP) {
-    stop("Input error: The number of observations (rows) of Z must match the number of embedded points (rows) of P")
+    stop("Input error: The number of observations (rows) of Z must match the
+         number of embedded points (rows) of P")
   }
 
   if (NX != NP) {
-    stop("Input error: The number of observations (rows) of X must match the number of embedded points (rows) of P")
+    stop("Input error: The number of observations (rows) of X must match the
+         number of embedded points (rows) of P")
   }
 
   if (nZ != nV) {
-    stop("Input error: The number of variables of Z (columns) must match the number of variables of V (rows)")
+    stop("Input error: The number of variables of Z (columns) must match the
+         number of variables of V (rows)")
   }
 
   if (nX != nV) {
-    stop("Input error: The number of variables of X (columns) must match the number of variables of V (rows)")
+    stop("Input error: The number of variables of X (columns) must match the
+         number of variables of V (rows)")
   }
   n <- nV
 
 
   if (mV != 2) {
-    stop("Input error: The number of columns of V must be 2 (the dimensionality of the visualization space)")
+    stop("Input error: The number of columns of V must be 2 (the dimensionality
+         of the visualization space)")
   }
 
   if (mP != 2) {
-    stop("Input error: The number of columns of P must be 2 (the dimensionality of the visualization space)")
+    stop("Input error: The number of columns of P must be 2 (the dimensionality
+         of the visualization space)")
   }
 
 
@@ -217,18 +237,28 @@ draw_ara_plot_2d_standardized <- function(
   # Check additional preconditions on input parameters -------------------------
 
   if ((length(weights) != n) || (min(weights) < 0)) {
-    stop("Input error: weights must be vector of length n with non-negative values")
+    stop("Input error: weights must be vector of length n with non-negative
+         values")
   }
 
-  count <- 0  # Count number of integers in [1,n] contained in axis_lines
-  while ((count < length(axis_lines)) && ((axis_lines[count+1]>=1) && (axis_lines[count+1]<=n) && (axis_lines[count+1] %% 1 == 0))) {
+  count <- 0 # Count number of integers in [1,n] contained in axis_lines
+  while ((count < length(axis_lines)) &&
+    ((axis_lines[count + 1] >= 1) &&
+      (axis_lines[count + 1] <= n) &&
+      (axis_lines[count + 1] %% 1 == 0))) {
     count <- count + 1
   }
-  if ((count > n) || (count!=length(axis_lines)) || (any(duplicated(axis_lines)))) {
-    stop("Input error: axis_lines must contain at most n distinct variable (integer) indices")
+  if ((count > n) ||
+    (count != length(axis_lines)) ||
+    (any(duplicated(axis_lines)))) {
+    stop("Input error: axis_lines must contain at most n distinct variable
+         (integer) indices")
   }
 
-  if (!is.null(color_variable) &&  ((color_variable < 1) || (color_variable > n) || (color_variable %% 1 != 0))) {
+  if (!is.null(color_variable) &&
+    ((color_variable < 1) ||
+      (color_variable > n) ||
+      (color_variable %% 1 != 0))) {
     stop("Input error: color_variable must be an integer in [1,n]")
   }
 
@@ -236,7 +266,7 @@ draw_ara_plot_2d_standardized <- function(
   ###########################   Generate ARA plot   ############################
 
   # Declare local variables
-  w <- x <- y <- P1 <- P2 <- V1 <- V2 <- V3 <- V4 <- NULL
+  x <- y <- P1 <- P2 <- V1 <- V2 <- V3 <- V4 <- NULL
 
 
   colnames(P) <- c("P1", "P2")
@@ -256,8 +286,18 @@ draw_ara_plot_2d_standardized <- function(
 
   # Draw optional reference horizontal & vertical lines
   my_plot <- my_plot +
-    ggplot2::geom_vline(xintercept = 0, linetype = "dashed", color = "gray80", linewidth = 0.5) +
-    ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "gray80", linewidth = 0.5)
+    ggplot2::geom_vline(
+      xintercept = 0,
+      linetype = "dashed",
+      color = "gray80",
+      linewidth = 0.5
+    ) +
+    ggplot2::geom_hline(
+      yintercept = 0,
+      linetype = "dashed",
+      color = "gray80",
+      linewidth = 0.5
+    )
 
 
   # Draw optional reference circle
@@ -267,12 +307,17 @@ draw_ara_plot_2d_standardized <- function(
   xx <- center[1] + cos(tt)
   yy <- center[2] + sin(tt)
   dfC <- data.frame(x = xx, y = yy)
-  my_plot <- my_plot + ggplot2::geom_path(data = dfC, ggplot2::aes(x, y), linetype = "dotted", color = "gray80", linewidth = 0.5)
+  my_plot <- my_plot +
+    ggplot2::geom_path(
+      data = dfC,
+      ggplot2::aes(x, y),
+      linetype = "dotted",
+      color = "gray80",
+      linewidth = 0.5
+    )
 
   # Set equal axes and empty background
   my_plot <- my_plot + ggplot2::coord_equal() + ggplot2::theme_void()
-
-
 
 
   # Draw mapped points on a Cartesian plane
@@ -283,31 +328,61 @@ draw_ara_plot_2d_standardized <- function(
   if (is.null(color_variable_name)) {
     dfPZ <- cbind(dfP, dfZ)
 
-    my_plot <- my_plot + ggplot2::geom_point(data = dfPZ, mapping = ggplot2::aes(x = P1, y = P2), color = "#4488FF", size = 2, alpha = 1, show.legend = FALSE)
+    my_plot <- my_plot +
+      ggplot2::geom_point(
+        data = dfPZ,
+        mapping = ggplot2::aes(x = P1, y = P2),
+        color = "#4488FF",
+        size = 2,
+        alpha = 1,
+        show.legend = FALSE
+      )
   } else {
     colorVar <- dfX[, match(color_variable_name, variable_names)]
     dfPZ <- cbind(dfP, dfZ, colorVar)
 
-    my_plot <- my_plot + ggplot2::geom_point(data = dfPZ, mapping = ggplot2::aes(x = P1, y = P2, color = colorVar), size = 2, alpha = 1, show.legend = TRUE)
+    my_plot <- my_plot +
+      ggplot2::geom_point(
+        data = dfPZ,
+        mapping = ggplot2::aes(
+          x = P1,
+          y = P2,
+          color = colorVar
+        ),
+        size = 2,
+        alpha = 1,
+        show.legend = TRUE
+      )
 
     # Color points using a viridis palette
     my_plot <- my_plot + ggplot2::scale_colour_viridis_c()
 
     # Add colorbar
-    my_plot <- my_plot + ggplot2::theme(legend.key.height = grid::unit(2, "cm")) + ggplot2::theme(
-      legend.title = ggplot2::element_text(size = 16),
-      legend.text = ggplot2::element_text(size = 16)
-    )
+    my_plot <- my_plot +
+      ggplot2::theme(legend.key.height = grid::unit(2, "cm")) +
+      ggplot2::theme(
+        legend.title = ggplot2::element_text(size = 16),
+        legend.text = ggplot2::element_text(size = 16)
+      )
 
     my_plot <- my_plot + ggplot2::labs(colour = color_variable_name)
   }
 
 
   # Add a rectangular frame
-  my_plot <- my_plot + ggplot2::theme(panel.border = ggplot2::element_rect(fill = "transparent", color = "gray70", linewidth = 2), legend.position = "right")
+  my_plot <- my_plot +
+    ggplot2::theme(
+      panel.border = ggplot2::element_rect(
+        fill = "transparent",
+        color = "gray70",
+        linewidth = 2
+      ),
+      legend.position = "right"
+    )
 
   # Set margins
-  my_plot <- my_plot + ggplot2::theme(plot.margin = ggplot2::margin(0.5, 0.5, 0.5, 0.5, "cm"))
+  my_plot <- my_plot +
+    ggplot2::theme(plot.margin = ggplot2::margin(0.5, 0.5, 0.5, 0.5, "cm"))
 
 
 
@@ -327,8 +402,11 @@ draw_ara_plot_2d_standardized <- function(
       E <- cbind(lo * vs, up * vs) # endpoints
       dfE <- as.data.frame(E)
       my_plot <- my_plot + ggplot2::geom_segment(
-        data = dfE, mapping = ggplot2::aes(x = V1, y = V2, xend = V3, yend = V4),
-        alpha = 0.7, color = "gray30", linewidth = 1
+        data = dfE,
+        mapping = ggplot2::aes(x = V1, y = V2, xend = V3, yend = V4),
+        alpha = 0.7,
+        color = "gray30",
+        linewidth = 1
       )
 
 
@@ -339,21 +417,24 @@ draw_ara_plot_2d_standardized <- function(
       v_perp[1, 2] <- v[1, 1]
       v_perp <- v_perp / norm(v_perp, type = "2") * size_tick_mark / 2
 
-      T <- matrix(0, up - lo + 1, 6)
+      Ticks <- matrix(0, up - lo + 1, 6)
       i <- 1
       for (k in lo:up) {
-        T[i, ] <- cbind(k * vs + v_perp, k * vs - v_perp, k * vs)
+        Ticks[i, ] <- cbind(k * vs + v_perp, k * vs - v_perp, k * vs)
         i <- i + 1
       }
-      dfT <- as.data.frame(T)
+      dfT <- as.data.frame(Ticks)
       my_plot <- my_plot + ggplot2::geom_segment(
-        data = dfT, mapping = ggplot2::aes(x = V1, y = V2, xend = V3, yend = V4),
-        alpha = 0.7, color = "gray30", linewidth = 1
+        data = dfT,
+        mapping = ggplot2::aes(x = V1, y = V2, xend = V3, yend = V4),
+        alpha = 0.7,
+        color = "gray30",
+        linewidth = 1
       )
 
 
       # Draw numeric values at tick marks
-      TL <- cbind(rep(0, up - lo + 1, 1), T[, 5:6])
+      TL <- cbind(rep(0, up - lo + 1, 1), Ticks[, 5:6])
       colnames(TL) <- c("ticklabel", "x", "y")
       dfTL <- as.data.frame(TL)
 
@@ -370,8 +451,14 @@ draw_ara_plot_2d_standardized <- function(
       x_offset <- v_perp[1] * factor + 0.25
       y_offset <- v_perp[2] * factor
       my_plot <- my_plot + ggplot2::geom_text(
-        data = dfTL, mapping = ggplot2::aes(x = x, y = y), label = dfTL$ticklabel, color = "gray30", fontface = "bold",
-        nudge_x = x_offset, nudge_y = y_offset, check_overlap = T
+        data = dfTL,
+        mapping = ggplot2::aes(x = x, y = y),
+        label = dfTL$ticklabel,
+        color = "gray30",
+        fontface = "bold",
+        nudge_x = x_offset,
+        nudge_y = y_offset,
+        check_overlap = TRUE
       )
     }
   }
@@ -390,11 +477,27 @@ draw_ara_plot_2d_standardized <- function(
 
   dfV <- cbind(dfV, vector_colors)
 
-  my_plot <- my_plot + ggplot2::geom_segment(
-    data = dfV, mapping = ggplot2::aes(x = 0, y = 0, xend = V1, yend = V2),
-    arrow = ggplot2::arrow(angle = 30, length = grid::unit(7, "pt"), type = "closed", ends = "last"),
-    lineend = "round", linejoin = "mitre", alpha = 1, color = vector_colors, linewidth = 1
-  )
+  my_plot <- my_plot +
+    ggplot2::geom_segment(
+      data = dfV,
+      mapping = ggplot2::aes(
+        x = 0,
+        y = 0,
+        xend = V1,
+        yend = V2
+      ),
+      arrow = ggplot2::arrow(
+        angle = 30,
+        length = grid::unit(7, "pt"),
+        type = "closed",
+        ends = "last"
+      ),
+      lineend = "round",
+      linejoin = "mitre",
+      alpha = 1,
+      color = vector_colors,
+      linewidth = 1
+    )
 
 
   # Draw variable names
@@ -406,15 +509,19 @@ draw_ara_plot_2d_standardized <- function(
 
     if (V[i, 2] <= 0) {
       if (V[i, 1] <= 0) {
-        V_names_pos[i, ] <- V_names_pos[i, ] + c(-varname_length * horizontal_factor, -vertical_offset)
+        V_names_pos[i, ] <- V_names_pos[i, ] +
+          c(-varname_length * horizontal_factor, -vertical_offset)
       } else {
-        V_names_pos[i, ] <- V_names_pos[i, ] + c(varname_length * horizontal_factor, -vertical_offset)
+        V_names_pos[i, ] <- V_names_pos[i, ] +
+          c(varname_length * horizontal_factor, -vertical_offset)
       }
     } else {
       if (V[i, 1] <= 0) {
-        V_names_pos[i, ] <- V_names_pos[i, ] + c(-varname_length * horizontal_factor, vertical_offset + 0.1)
+        V_names_pos[i, ] <- V_names_pos[i, ] +
+          c(-varname_length * horizontal_factor, vertical_offset + 0.1)
       } else {
-        V_names_pos[i, ] <- V_names_pos[i, ] + c(varname_length * horizontal_factor, vertical_offset + 0.1)
+        V_names_pos[i, ] <- V_names_pos[i, ] +
+          c(varname_length * horizontal_factor, vertical_offset + 0.1)
       }
     }
   }
@@ -424,7 +531,17 @@ draw_ara_plot_2d_standardized <- function(
     x = V_names_pos[, 1],
     y = V_names_pos[, 2]
   )
-  my_plot <- my_plot + ggplot2::geom_text(data = dfVN, mapping = ggplot2::aes(x = x, y = y), label = dfVN$varnames, family = "sans", fontface = "bold", color = "black", check_overlap = F, size = 6)
+  my_plot <- my_plot +
+    ggplot2::geom_text(
+      data = dfVN,
+      mapping = ggplot2::aes(x = x, y = y),
+      label = dfVN$varnames,
+      family = "sans",
+      fontface = "bold",
+      color = "black",
+      check_overlap = FALSE,
+      size = 6
+    )
 
 
   # Draw plot

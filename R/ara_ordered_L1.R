@@ -1,36 +1,42 @@
 #' Ordered Adaptable Radial Axes (ARA) mappings using the L1 norm
 #'
 #' @description
-#' \code{ara_ordered_L1()} computes \strong{ordered} \strong{Adaptable Radial Axes} (ARA) mappings for
-#' the \strong{L1 norm}
+#' \code{ara_ordered_L1()} computes \strong{ordered} \strong{Adaptable Radial
+#' Axes} (ARA) mappings for the \strong{L1 norm}
 #'
 #' @details
-#' \code{ara_ordered_L1()} computes low-dimensional point representations of high-dimensional
-#' numerical data (\code{X}) according to the data visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017),
-#' which describes a collection of convex norm optimization problems aimed at minimizing estimates of original
-#' values in \code{X} through dot products of the mapped points with the axis vectors (rows of \code{V}). This particular
-#' function solves the constrained optimization problem in Eq. (14), for the L1 norm. The inequality
-#' constraint ensures that the estimates for a selected variable are ordered in accordance with its original values.
-#' In other words, ignoring any ties, the estimate for the data observation with the i-th smallest value will
-#' correspond to the i-th smallest estimate.
+#' \code{ara_ordered_L1()} computes low-dimensional point representations of
+#' high-dimensional numerical data (\code{X}) according to the data
+#' visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017), which
+#' describes a collection of convex norm optimization problems aimed at
+#' minimizing estimates of original values in \code{X} through dot products of
+#' the mapped points with the axis vectors (rows of \code{V}). This particular
+#' function solves the constrained optimization problem in Eq. (14), for the L1
+#' norm. The inequality constraint ensures that the estimates for a selected
+#' variable are ordered in accordance with its original values. In other words,
+#' ignoring any ties, the estimate for the data observation with the i-th
+#' smallest value will correspond to the i-th smallest estimate.
 #'
 #' @inheritParams ara_unconstrained_L1
 #' @param variable
-#' Integer that indicates the variable (in \[1,n\]) for which the estimates of high-dimensional data will be exact.
-#' Default: variable = 1.
+#' Integer that indicates the variable (in \[1,n\]) for which the estimates of
+#' high-dimensional data will be exact. Default: variable = 1.
 #'
 #' @returns
 #' A list with the three following entries:
 #' \describe{
-#'   \item{\code{P}}{A numeric N x m matrix containing the mapped points. Each row is the low-dimensional representation
-#'   of a data observation in X.}
-#'   \item{\code{status}}{A vector of length N where the i-th element contains the status of the chosen solver when
-#'   calculating the mapping of the i-th data observation. The type of the elements depends on the particular chosen solver.}
-#'   \item{\code{objval}}{The numeric objective value associated with the solution to the optimization problem, considering
-#'   matrix norms.}
+#'   \item{\code{P}}{A numeric N x m matrix containing the mapped points. Each
+#'   row is the low-dimensional representation of a data observation in X.}
+#'   \item{\code{status}}{A vector of length N where the i-th element contains
+#'   the status of the chosen solver when calculating the mapping of the i-th
+#'   data observation. The type of the elements depends on the particular chosen
+#'   solver.}
+#'   \item{\code{objval}}{The numeric objective value associated with the
+#'   solution to the optimization problem, considering matrix norms.}
 #' }
-#' If the chosen solver fails to map the data (i.e., fails to solve the related optimization problem), \code{P} will
-#' contain \code{NA} (not available) values. In that case, \code{objval} will also be \code{NA}.
+#' If the chosen solver fails to map the data (i.e., fails to solve the related
+#' optimization problem), \code{P} will contain \code{NA} (not available)
+#' values. In that case, \code{objval} will also be \code{NA}.
 #'
 #' @inherit ara_unconstrained_L1 references
 #'
@@ -38,17 +44,18 @@
 #'
 #' @examples
 #' # Load data
-#' if (!require(ascentTraining)) {    # contains the Auto MPG dataset
+#' if (!require(ascentTraining)) { # contains the Auto MPG dataset
 #'   print("Trying to install package ascentTraining")
 #'   install.packages("ascentTraining")
-#'   if(!require(ascentTraining)) {
+#'   if (!require(ascentTraining)) {
 #'     stop("Could not install package ascentTraining")
 #'   }
 #' }
 #' data("auto_mpg")
 #'
 #' # Define subset of (numerical) variables
-#' selected_variables <- c(1,4,5,6)   # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+#' # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"
+#' selected_variables <- c(1, 4, 5, 6)
 #'
 #' # Retain only selected variables and rename dataset as X
 #' X <- auto_mpg[, selected_variables] # Select a subset of variables
@@ -74,7 +81,7 @@
 #' if (!require(geometry)) {
 #'   print("Trying to install package geometry")
 #'   install.packages("geometry")
-#'   if(!require(geometry)) {
+#'   if (!require(geometry)) {
 #'     stop("Could not install package geometry")
 #'   }
 #' }
@@ -82,7 +89,8 @@
 #' theta <- c(225, 100, 315, 80) * 2 * pi / 360
 #' V <- pol2cart(theta, r)
 #'
-#' # Select variable for exact estimates, and use it for coloring the embedded points
+#' # Select variable for exact estimates, and use it for coloring the embedded
+#' # points
 #' n <- nrow(V)
 #' variable <- sample(1:n, 1)
 #'
@@ -135,17 +143,18 @@ ara_ordered_L1 <- function(
 
   # Check dimensions of matrices -----------------------------------------------
 
-  N <- nrow(X)
   nX <- ncol(X)
   nV <- nrow(V)
   m <- ncol(V)
 
   if ((m < 1) || (m > 3)) {
-    stop("Input error: The dimensionality of the visualization space (columns of V) must be 1, 2, or 3")
+    stop("Input error: The dimensionality of the visualization space (columns of
+         V) must be 1, 2, or 3")
   }
 
   if (nX != nV) {
-    stop("Input error: The number of variables of X (columns) must match the number of variables of V (rows)")
+    stop("Input error: The number of variables of X (columns) must match the
+         number of variables of V (rows)")
   }
 
   n <- nX
@@ -165,11 +174,16 @@ ara_ordered_L1 <- function(
   # Check additional preconditions on input parameters -------------------------
 
   if ((variable < 1) || (variable > n) || (variable %% 1 != 0)) {
-    stop("Input error: variable must be an integer in [1,n], where n is the number of variables")
+    stop("Input error: variable must be an integer in [1,n], where n is the
+         number of variables")
   }
 
-  if ((!pracma::strcmpi(solver, "clarabel")) && (!pracma::strcmpi(solver, "glpkAPI")) && (!pracma::strcmpi(solver, "Rglpk")) && (!pracma::strcmpi(solver, "CVXR"))) {
-    stop('Input error: solver must be "clarabel", "glpkAPI", "Rglpk", or "CVXR"')
+  if ((!pracma::strcmpi(solver, "clarabel")) &&
+    (!pracma::strcmpi(solver, "glpkAPI")) &&
+    (!pracma::strcmpi(solver, "Rglpk")) &&
+    (!pracma::strcmpi(solver, "CVXR"))) {
+    stop('Input error: solver must be "clarabel", "glpkAPI", "Rglpk", or
+         "CVXR"')
   }
 
 
@@ -238,7 +252,11 @@ ara_ordered_L1_CVXR <- function(
   constraints <- append(constraints, -Tvar <= Pvar %*% t(V) - X)
   constraints <- append(constraints, Pvar %*% t(V) - X <= Tvar)
 
-  constraints <- append(constraints, Pvar[sort_indices[1:(N - 1)], ] %*% v_k <= Pvar[sort_indices[2:N], ] %*% v_k)
+  constraints <- append(
+    constraints,
+    Pvar[sort_indices[1:(N - 1)], ] %*%
+      v_k <= Pvar[sort_indices[2:N], ] %*% v_k
+  )
 
   prob <- CVXR::Problem(obj, constraints)
   solution <- CVXR::solve(prob, solver = "ECOS")
@@ -296,7 +314,7 @@ ara_ordered_L1_glpkAPI <- function(
   rlower <- rep(-Inf, nrows)
   rupper <- b
 
-  glpkAPI_output <- solve_glpkAPI_wrapper(
+  solve_glpkAPI_wrapper(
     nrows,
     ncols,
     kind,
@@ -357,7 +375,7 @@ ara_ordered_L1_clarabel <- function(
 
   cones <- list(l = (2 * n * N + N - 1))
 
-  clarabel_output <- solve_clarabel_wrapper(
+  solve_clarabel_wrapper(
     A,
     b,
     obj,
@@ -416,7 +434,7 @@ ara_ordered_L1_Rglpk <- function(
 
   dirs <- rep("<=", 2 * n * N + N - 1)
 
-  Rglpk_output <- solve_Rglpk_wrapper(
+  solve_Rglpk_wrapper(
     A,
     b,
     obj,
