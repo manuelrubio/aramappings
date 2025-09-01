@@ -346,7 +346,7 @@ set to <code>X</code>, simply for clarity with respect to the notation
 defined above.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define subset of (numerical) variables</span></span>
-<span><span class="va">selected_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span>   <span class="co"># 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")</span></span>
+<span><span class="va">selected_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span> <span class="co"># 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")</span></span>
 <span></span>
 <span><span class="co"># Retain only selected variables and rename dataset as X</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">auto_mpg</span><span class="op">[</span>, <span class="va">selected_variables</span><span class="op">]</span> <span class="co"># Select a subset of variables</span></span>
@@ -419,7 +419,7 @@ and shows the execution runtime involved in computing the mapping.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.01003289 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.00978899 secs</span></span></code></pre></div>
 <p>ARA plots can get cluttered when showing all of the axis lines and
 corresponding labels at the tick marks. Thus, the function that we will
 use to draw the ARA plot (<code><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>)
@@ -432,13 +432,13 @@ variables 1 and 6. However, since we only retained four variables
 “acceleration” is now 4.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select variables with labeled axis lines on ARA plot</span></span>
-<span><span class="va">axis_lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>   <span class="co"># 1:"mpg", 4:"acceleration")</span></span></code></pre></div>
+<span><span class="va">axis_lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span> <span class="co"># 1:"mpg", 4:"acceleration")</span></span></code></pre></div>
 <p>Also, the plotted points can be colored according to the values of a
 particular variable. In this example, we will color the points according
 to the value of variable “mpg”.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select variable used for coloring embedded points</span></span>
-<span><span class="va">color_variable</span> <span class="op">&lt;-</span> <span class="fl">1</span>    <span class="co"># "mpg"</span></span></code></pre></div>
+<span><span class="va">color_variable</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co"># "mpg"</span></span></code></pre></div>
 <p>Finally, we generate the ARA plot by calling
 <code><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -468,7 +468,7 @@ dataset.
 to specify the variable for which to obtain exact estimates, or for
 ordering the plotted points:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">variable</span> <span class="op">&lt;-</span> <span class="fl">1</span>    <span class="co"># "mpg"</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">variable</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co"># "mpg"</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="exact-ara-plot">Exact ARA plot<a class="anchor" aria-label="anchor" href="#exact-ara-plot"></a>
 </h4>
@@ -484,7 +484,7 @@ ordering the plotted points:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.662616 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.6744533 secs</span></span></code></pre></div>
 <p>Note that it is also very efficient since the solution can also be
 expressed as a formula. Finally, we generate the ARA plot:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -525,7 +525,7 @@ package.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.0268476 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.02636671 secs</span></span></code></pre></div>
 <p>Finally, we generate the ARA plot:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Draw the ARA plot</span></span>
@@ -566,8 +566,8 @@ and will use half of them (if several are available).</p>
 <code class="sourceCode R"><span><span class="co"># Detect the number of available CPU cores</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://parallelly.futureverse.org" class="external-link">parallelly</a></span><span class="op">)</span></span>
 <span><span class="va">NCORES</span> <span class="op">&lt;-</span> <span class="fu">parallelly</span><span class="fu">::</span><span class="fu"><a href="https://parallelly.futureverse.org/reference/availableCores.html" class="external-link">availableCores</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="va">NCORES</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">NCORES</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">floor</a></span><span class="op">(</span><span class="va">NCORES</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span>  </span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="va">NCORES</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">NCORES</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">floor</a></span><span class="op">(</span><span class="va">NCORES</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>We then create a cluster object with function
 <code>makeCluster()</code> of the <strong>parallel</strong> package,
@@ -596,7 +596,7 @@ cluster object created above.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.2644444 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.2636499 secs</span></span></code></pre></div>
 <p>The ARA plot generated through:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
@@ -631,7 +631,7 @@ the <span class="math inline">\(\ell^{1}\)</span> norm:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.2012892 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.2032342 secs</span></span></code></pre></div>
 <p>The ARA plot generated through:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>

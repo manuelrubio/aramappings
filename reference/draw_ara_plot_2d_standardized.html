@@ -64,7 +64,8 @@
 
 
 <dl><dt id="arg-z">Z<a class="anchor" aria-label="anchor" href="#arg-z"></a></dt>
-<dd><p>Standardized numeric data matrix of dimensions N x n, where N is the number of observations, and n is the number of variables.</p></dd>
+<dd><p>Standardized numeric data matrix of dimensions N x n, where N is the number
+of observations, and n is the number of variables.</p></dd>
 
 
 <dt id="arg-x">X<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
@@ -72,26 +73,29 @@
 
 
 <dt id="arg-v">V<a class="anchor" aria-label="anchor" href="#arg-v"></a></dt>
-<dd><p>Numeric matrix of "axis vectors" of dimensions n x 2, where each row of <code>V</code> defines an axis vector.</p></dd>
+<dd><p>Numeric matrix of "axis vectors" of dimensions n x 2, where each row of
+<code>V</code> defines an axis vector.</p></dd>
 
 
 <dt id="arg-p">P<a class="anchor" aria-label="anchor" href="#arg-p"></a></dt>
-<dd><p>Numeric data matrix of dimensions N x 2 containing the N 2-dimensional representations of the data observations
+<dd><p>Numeric data matrix of dimensions N x 2 containing the N 2-dimensional
+representations of the data observations
 (i.e., the embedded points).</p></dd>
 
 
 <dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
-<dd><p>Numeric array specifying non-negative weights associated with each variable. Can also be a 1D matrix. Default:
-array of n ones.</p></dd>
+<dd><p>Numeric array specifying non-negative weights associated with each variable.
+Can also be a 1D matrix. Default: array of n ones.</p></dd>
 
 
 <dt id="arg-axis-lines">axis_lines<a class="anchor" aria-label="anchor" href="#arg-axis-lines"></a></dt>
-<dd><p>Array of integer variable indices (in [1,n]) indicating which calibrated axis lines are to be displayed.
-Default: NULL.</p></dd>
+<dd><p>Array of integer variable indices (in [1,n]) indicating which calibrated
+axis lines are to be displayed. Default: NULL.</p></dd>
 
 
 <dt id="arg-color-variable">color_variable<a class="anchor" aria-label="anchor" href="#arg-color-variable"></a></dt>
-<dd><p>Integer (in [1,n]) that indicates the variable used to color the embedded points. Default: NULL.</p></dd>
+<dd><p>Integer (in [1,n]) that indicates the variable used to color the embedded
+points. Default: NULL.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -100,37 +104,43 @@ Default: NULL.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The function <code>draw_ara_plot_2d_standardized()</code> generates a basic two-dimensional plot related to an "Adaptable
-Radial Axes" (ARA) mapping (Rubio-Sánchez, 2017) for high-dimensional numerical data (<code>X</code>) that has been previously
-standardized (<code>Z</code>). The plot displays a set of 2D points (<code>P</code>), each representing an observation from the
-high-dimensional dataset. It also includes a collection of axis vectors (<code>V</code>), each corresponding to a specific
-data variable. If the ARA mapping incorporates weights (<code>weights</code>), these axis vectors are colored accordingly to
-reflect the weighting. For a user-specified subset of variables (<code>axis_lines</code>), the function additionally draws
-axis lines with tick marks that represent values of the selected variables. Users can estimate the values of the
-high-dimensional data by visually projecting the plotted points orthogonally onto these axes. The plotted points can
-also be colored according to the values of the variable <code>color_variable</code>.</p>
+    <p>The function <code>draw_ara_plot_2d_standardized()</code> generates a basic
+two-dimensional plot related to an "Adaptable Radial Axes" (ARA) mapping
+(Rubio-Sánchez, 2017) for high-dimensional numerical data (<code>X</code>) that has
+been previously standardized (<code>Z</code>). The plot displays a set of 2D points
+(<code>P</code>), each representing an observation from the high-dimensional
+dataset. It also includes a collection of axis vectors (<code>V</code>), each
+corresponding to a specific data variable. If the ARA mapping incorporates
+weights (<code>weights</code>), these axis vectors are colored accordingly to
+reflect the weighting. For a user-specified subset of variables
+(<code>axis_lines</code>), the function additionally draws axis lines with tick
+marks that represent values of the selected variables. Users can estimate the
+values of the high-dimensional data by visually projecting the plotted points
+orthogonally onto these axes. The plotted points can also be colored
+according to the values of the variable <code>color_variable</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>M. Rubio-Sánchez, A. Sanchez, D. J. Lehmann: Adaptable radial axes plots for improved
-multivariate data visualization. Computer Graphics Forum 36, 3 (2017), 389–399.
-<a href="https://onlinelibrary.wiley.com/doi/10.1111/cgf.13196" class="external-link">doi:10.1111/cgf.13196</a></p>
+    <p>M. Rubio-Sánchez, A. Sanchez, D. J. Lehmann: Adaptable radial axes plots for
+improved multivariate data visualization. Computer Graphics Forum 36, 3
+(2017), 389–399. <a href="https://onlinelibrary.wiley.com/doi/10.1111/cgf.13196" class="external-link">doi:10.1111/cgf.13196</a></p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Load data</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://www.ascent.io/" class="external-link">ascentTraining</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>    <span class="co"># contains the Auto MPG dataset</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://www.ascent.io/" class="external-link">ascentTraining</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span> <span class="co"># contains the Auto MPG dataset</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"Trying to install package ascentTraining"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ascentTraining"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://www.ascent.io/" class="external-link">ascentTraining</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://www.ascent.io/" class="external-link">ascentTraining</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Could not install package ascentTraining"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"auto_mpg"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Define subset of (numerical) variables</span></span></span>
-<span class="r-in"><span><span class="va">selected_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span>   <span class="co"># 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")</span></span></span>
+<span class="r-in"><span><span class="co"># 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"</span></span></span>
+<span class="r-in"><span><span class="va">selected_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Retain only selected variables and rename dataset as X</span></span></span>
 <span class="r-in"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">auto_mpg</span><span class="op">[</span>, <span class="va">selected_variables</span><span class="op">]</span> <span class="co"># Select a subset of variables</span></span></span>
@@ -157,7 +167,7 @@ multivariate data visualization. Computer Graphics Forum 36, 3 (2017), 389–399
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://davidcsterratt.github.io/geometry/" class="external-link">geometry</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"Trying to install package geometry"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"geometry"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://davidcsterratt.github.io/geometry/" class="external-link">geometry</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://davidcsterratt.github.io/geometry/" class="external-link">geometry</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Could not install package geometry"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
@@ -172,10 +182,10 @@ multivariate data visualization. Computer Graphics Forum 36, 3 (2017), 389–399
 <span class="r-in"><span><span class="va">mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="ara_unconstrained_L2.html">ara_unconstrained_L2</a></span><span class="op">(</span><span class="va">Z</span>, <span class="va">V</span>, weights <span class="op">=</span> <span class="va">weights</span>, solver <span class="op">=</span> <span class="st">"formula"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Select variables with labeled axis lines on ARA plot</span></span></span>
-<span class="r-in"><span><span class="va">axis_lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>   <span class="co"># 1:"mpg", 4:"acceleration")</span></span></span>
+<span class="r-in"><span><span class="va">axis_lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span> <span class="co"># 1:"mpg", 4:"acceleration")</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Select variable used for coloring embedded points</span></span></span>
-<span class="r-in"><span><span class="va">color_variable</span> <span class="op">&lt;-</span> <span class="fl">1</span>    <span class="co"># "mpg"</span></span></span>
+<span class="r-in"><span><span class="va">color_variable</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co"># "mpg"</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Draw the ARA plot</span></span></span>
 <span class="r-in"><span><span class="fu">draw_ara_plot_2d_standardized</span><span class="op">(</span></span></span>
