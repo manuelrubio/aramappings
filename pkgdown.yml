@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   intro_to_aramappings: intro_to_aramappings.html
-last_built: 2025-09-01T01:49Z
+last_built: 2025-09-01T02:43Z
 urls:
   reference: https://manuelrubio.github.io/aramappings/reference
   article: https://manuelrubio.github.io/aramappings/articles
