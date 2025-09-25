@@ -8,15 +8,15 @@ reference:
   desc: >
     Functions for computing ARA mappings
   contents:
-    - ara_exact_L1
-    - ara_exact_L2
-    - ara_exact_Linf
-    - ara_ordered_L1
-    - ara_ordered_L2
-    - ara_ordered_Linf
-    - ara_unconstrained_L1
-    - ara_unconstrained_L2
-    - ara_unconstrained_Linf
+    - ara_exact_l1
+    - ara_exact_l2
+    - ara_exact_linf
+    - ara_ordered_l1
+    - ara_ordered_l2
+    - ara_ordered_linf
+    - ara_unconstrained_l1
+    - ara_unconstrained_l2
+    - ara_unconstrained_linf
 - title: Plotting functions
   desc: >
     Functions for creating an ARA plot
