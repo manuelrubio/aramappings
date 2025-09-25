@@ -88,9 +88,9 @@ The **aramappings** package contains nine functions to compute ARA mappings (i.e
 
 |                               | Unconstrained              | Exact              | Ordered              |
 |:------------------------------|:---------------------------|:-------------------|:---------------------|
-| $\ell^{2}$ **norm (squared)** | `ara_unconstrained_L2()`   | `ara_exact_L2()`   | `ara_ordered_L2()`   |
-| $\ell^{1}$ **norm**           | `ara_unconstrained_L1()`   | `ara_exact_L1()`   | `ara_ordered_L1()`   |
-| $\ell^{\infty}$ **norm**      | `ara_unconstrained_Linf()` | `ara_exact_Linf()` | `ara_ordered_Linf()` |
+| $\ell^{2}$ **norm (squared)** | `ara_unconstrained_l2()`   | `ara_exact_l2()`   | `ara_ordered_l2()`   |
+| $\ell^{1}$ **norm**           | `ara_unconstrained_l1()`   | `ara_exact_l1()`   | `ara_ordered_l1()`   |
+| $\ell^{\infty}$ **norm**      | `ara_unconstrained_linf()` | `ara_exact_linf()` | `ara_ordered_linf()` |
 
 
 The package also contains an additional basic function for drawing two-dimensional ARA plots when using standardized data:
@@ -206,7 +206,7 @@ Having defined the data (`Z`), axis vectors (`V`), and weights (`weights`), we c
 ```{r echo = T, results = 'show'}
 # Compute the mapping and print the execution time
 start <- Sys.time()
-mapping <- ara_unconstrained_L2(
+mapping <- ara_unconstrained_l2(
   Z,
   V,
   weights = weights,
@@ -245,8 +245,8 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
-```{r unc_L2, echo=FALSE, fig.align = 'center', fig.cap="Unconstrained ARA plot with the L2 norm of a subset of the Autompg dataset.", out.width = '90%'}
-knitr::include_graphics("../man/figures/vignette_autompg_unconstrained_L2_bb.svg")
+```{r unc_l2, echo=FALSE, fig.align = 'center', fig.cap="Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset.", out.width = '90%'}
+knitr::include_graphics("../man/figures/vignette_autompg_unconstrained_l2_bb.svg")
 ```
 
 \ 
@@ -266,7 +266,7 @@ The exact ARA mapping for the $\ell^{2}$ norm is computed through:
 ```{r echo = T, results = 'show'}
 # Compute the mapping and print the execution time
 start <- Sys.time()
-mapping <- ara_exact_L2(
+mapping <- ara_exact_l2(
   Z,
   V,
   variable = variable,
@@ -290,8 +290,8 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
-```{r exact_L2, echo=FALSE, fig.align = 'center', fig.cap="Exact ARA plot with the L2 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'.", out.width = '90%'}
-knitr::include_graphics("../man/figures/vignette_autompg_exact_L2_bb.svg")
+```{r exact_l2, echo=FALSE, fig.align = 'center', fig.cap="Exact ARA plot with the l2 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'.", out.width = '90%'}
+knitr::include_graphics("../man/figures/vignette_autompg_exact_l2_bb.svg")
 ```
 
 \ 
@@ -305,7 +305,7 @@ The optimization problem for the ordered ARA mapping with the $\ell^{2}$ is a qu
 ```{r echo = T, results = 'show'}
 # Compute the mapping and print the execution time
 start <- Sys.time()
-mapping <- ara_ordered_L2(
+mapping <- ara_ordered_l2(
   Z,
   V,
   variable = variable,
@@ -329,8 +329,8 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
-```{r ordered_L2, echo=FALSE, fig.align = 'center', fig.cap="Ordered ARA plot with the L2 norm of a subset of the Autompg dataset. The values of 'mpg' are ordered correctly along its corresponding axis.", out.width = '90%'}
-knitr::include_graphics("../man/figures/vignette_autompg_ordered_L2_bb.svg")
+```{r ordered_l2, echo=FALSE, fig.align = 'center', fig.cap="Ordered ARA plot with the l2 norm of a subset of the Autompg dataset. The values of 'mpg' are ordered correctly along its corresponding axis.", out.width = '90%'}
+knitr::include_graphics("../man/figures/vignette_autompg_ordered_l2_bb.svg")
 ```
 
 \ 
@@ -365,7 +365,7 @@ In this example we will compute an ARA unconstrained mapping with the $\ell^{1}$
 ```{r echo = T, results = 'show'}
 # Compute the mapping and print the execution time
 start <- Sys.time()
-mapping <- ara_unconstrained_L1(
+mapping <- ara_unconstrained_l1(
   Z,
   V,
   weights = weights,
@@ -391,8 +391,8 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
-```{r unc_L1, echo=FALSE, fig.align = 'center', fig.cap="Unconstrained ARA plot with the L1 norm of a subset of the Autompg dataset.", out.width = '90%'}
-knitr::include_graphics("../man/figures/vignette_autompg_unconstrained_L1_bb.svg")
+```{r unc_l1, echo=FALSE, fig.align = 'center', fig.cap="Unconstrained ARA plot with the l1 norm of a subset of the Autompg dataset.", out.width = '90%'}
+knitr::include_graphics("../man/figures/vignette_autompg_unconstrained_l1_bb.svg")
 ```
 
 \ 
@@ -402,7 +402,7 @@ Alternatively, the following code computes an exact ARA mapping with the $\ell^{
 ```{r echo = T, results = 'show'}
 # Compute the mapping and print the execution time
 start <- Sys.time()
-mapping <- ara_exact_L1(
+mapping <- ara_exact_l1(
   Z,
   V,
   variable = variable,
@@ -427,8 +427,8 @@ draw_ara_plot_2d_standardized(
 )
 ```
 
-```{r exact_L1, echo=FALSE, fig.align = 'center', fig.cap="Exact ARA plot with the L1 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'.", out.width = '90%'}
-knitr::include_graphics("../man/figures/vignette_autompg_exact_L1_bb.svg")
+```{r exact_l1, echo=FALSE, fig.align = 'center', fig.cap="Exact ARA plot with the l1 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'.", out.width = '90%'}
+knitr::include_graphics("../man/figures/vignette_autompg_exact_l1_bb.svg")
 ```
 
 \ 

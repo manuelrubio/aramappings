@@ -67,15 +67,15 @@ There are nine types of ARA plots (see the
 Thus, **aramappings** provides nine functions to generate each ARA
 mapping:
 
-- `ara_unconstrained_L2()`
-- `ara_unconstrained_L1()`
-- `ara_unconstrained_Linf()`
-- `ara_exact_L2()`
-- `ara_exact_L1()`
-- `ara_exact_Linf()`
-- `ara_ordered_L2()`
-- `ara_ordered_L1()`
-- `ara_ordered_Linf()`
+- `ara_unconstrained_l2()`
+- `ara_unconstrained_l1()`
+- `ara_unconstrained_linf()`
+- `ara_exact_l2()`
+- `ara_exact_l1()`
+- `ara_exact_linf()`
+- `ara_ordered_l2()`
+- `ara_ordered_l1()`
+- `ara_ordered_linf()`
 
 Each function solves a convex optimization problem to map
 high-dimensional data observations onto two- or three-dimensional points
@@ -227,7 +227,7 @@ runtime involved in computing the mapping.
 ``` r
 # Compute the mapping and print the execution time
 start <- Sys.time()
-mapping <- ara_unconstrained_L2(
+mapping <- ara_unconstrained_l2(
   Z,
   V,
   weights = weights,
@@ -235,7 +235,7 @@ mapping <- ara_unconstrained_L2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.01072788 secs
+#> Time difference of 0.01119399 secs
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -281,10 +281,10 @@ draw_ara_plot_2d_standardized(
 
 <div class="figure" style="text-align: center">
 
-<img src="man/figures/readme_autompg_unconstrained_L2.svg" alt="Unconstrained ARA plot with the L2 norm of a subset of the Autompg dataset." width="80%" />
+<img src="man/figures/readme_autompg_unconstrained_l2.svg" alt="Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset." width="80%" />
 <p class="caption">
 
-Unconstrained ARA plot with the L2 norm of a subset of the Autompg
+Unconstrained ARA plot with the l2 norm of a subset of the Autompg
 dataset.
 </p>
 
