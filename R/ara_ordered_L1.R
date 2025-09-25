@@ -1,11 +1,11 @@
 #' Ordered Adaptable Radial Axes (ARA) mappings using the L1 norm
 #'
 #' @description
-#' \code{ara_ordered_L1()} computes \strong{ordered} \strong{Adaptable Radial
+#' \code{ara_ordered_l1()} computes \strong{ordered} \strong{Adaptable Radial
 #' Axes} (ARA) mappings for the \strong{L1 norm}
 #'
 #' @details
-#' \code{ara_ordered_L1()} computes low-dimensional point representations of
+#' \code{ara_ordered_l1()} computes low-dimensional point representations of
 #' high-dimensional numerical data (\code{X}) according to the data
 #' visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017), which
 #' describes a collection of convex norm optimization problems aimed at
@@ -17,7 +17,7 @@
 #' ignoring any ties, the estimate for the data observation with the i-th
 #' smallest value will correspond to the i-th smallest estimate.
 #'
-#' @inheritParams ara_unconstrained_L1
+#' @inheritParams ara_unconstrained_l1
 #' @param variable
 #' Integer that indicates the variable (in \[1,n\]) for which the estimates of
 #' high-dimensional data will be exact. Default: variable = 1.
@@ -38,7 +38,7 @@
 #' optimization problem), \code{P} will contain \code{NA} (not available)
 #' values. In that case, \code{objval} will also be \code{NA}.
 #'
-#' @inherit ara_unconstrained_L1 references
+#' @inherit ara_unconstrained_l1 references
 #'
 #' @export
 #'
@@ -95,7 +95,7 @@
 #' variable <- sample(1:n, 1)
 #'
 #' # Compute the mapping
-#' mapping <- ara_ordered_L1(
+#' mapping <- ara_ordered_l1(
 #'   Z,
 #'   V,
 #'   variable = variable,
@@ -115,7 +115,7 @@
 #'   color_variable = variable
 #' )
 #'
-ara_ordered_L1 <- function(
+ara_ordered_l1 <- function(
     X,
     V,
     variable = 1,
@@ -190,25 +190,25 @@ ara_ordered_L1 <- function(
   ############################   Compute mapping   #############################
 
   if (pracma::strcmpi(solver, "CVXR")) {
-    outputs <- ara_ordered_L1_CVXR(
+    outputs <- ara_ordered_l1_CVXR(
       X,
       V,
       variable
     )
   } else if (pracma::strcmpi(solver, "glpkAPI")) {
-    outputs <- ara_ordered_L1_glpkAPI(
+    outputs <- ara_ordered_l1_glpkAPI(
       X,
       V,
       variable
     )
   } else if (pracma::strcmpi(solver, "clarabel")) {
-    outputs <- ara_ordered_L1_clarabel(
+    outputs <- ara_ordered_l1_clarabel(
       X,
       V,
       variable
     )
   } else { # Rglpk
-    outputs <- ara_ordered_L1_Rglpk(
+    outputs <- ara_ordered_l1_Rglpk(
       X,
       V,
       variable
@@ -232,7 +232,7 @@ ara_ordered_L1 <- function(
 
 
 #' @noRd
-ara_ordered_L1_CVXR <- function(
+ara_ordered_l1_CVXR <- function(
     X,
     V,
     variable) {
@@ -273,7 +273,7 @@ ara_ordered_L1_CVXR <- function(
 
 
 #' @noRd
-ara_ordered_L1_glpkAPI <- function(
+ara_ordered_l1_glpkAPI <- function(
     X,
     V,
     variable) {
@@ -283,7 +283,7 @@ ara_ordered_L1_glpkAPI <- function(
 
   sort_indices <- order(X[, variable])
 
-  coo_lists <- ara_L1_norm_coo_lists(N, V, 0)
+  coo_lists <- ara_l1_norm_coo_lists(N, V, 0)
 
   coo_lists_ineq <- ara_ordered_inequality_coo_lists(
     V[variable, ],
@@ -338,7 +338,7 @@ ara_ordered_L1_glpkAPI <- function(
 
 
 #' @noRd
-ara_ordered_L1_clarabel <- function(
+ara_ordered_l1_clarabel <- function(
     X,
     V,
     variable) {
@@ -348,7 +348,7 @@ ara_ordered_L1_clarabel <- function(
 
   sort_indices <- order(X[, variable])
 
-  coo_lists <- ara_L1_norm_coo_lists(N, V, 0)
+  coo_lists <- ara_l1_norm_coo_lists(N, V, 0)
 
   coo_lists_ineq <- ara_ordered_inequality_coo_lists(
     V[variable, ],
@@ -389,7 +389,7 @@ ara_ordered_L1_clarabel <- function(
 
 
 #' @noRd
-ara_ordered_L1_Rglpk <- function(
+ara_ordered_l1_Rglpk <- function(
     X,
     V,
     variable) {
@@ -399,7 +399,7 @@ ara_ordered_L1_Rglpk <- function(
 
   sort_indices <- order(X[, variable])
 
-  coo_lists <- ara_L1_norm_coo_lists(N, V, 0)
+  coo_lists <- ara_l1_norm_coo_lists(N, V, 0)
 
   coo_lists_ineq <- ara_ordered_inequality_coo_lists(
     V[variable, ],

@@ -1,11 +1,11 @@
 #' Unconstrained Adaptable Radial Axes (ARA) mappings using the L1 norm
 #'
 #' @description
-#' \code{ara_unconstrained_L1()} computes \strong{unconstrained}
+#' \code{ara_unconstrained_l1()} computes \strong{unconstrained}
 #' \strong{Adaptable Radial Axes} (ARA) mappings for the \strong{L1 norm}
 #'
 #' @details
-#' \code{ara_unconstrained_L1()} computes low-dimensional point representations
+#' \code{ara_unconstrained_l1()} computes low-dimensional point representations
 #' of high-dimensional numerical data (\code{X}) according to the data
 #' visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017), which
 #' describes a collection of convex norm optimization problems aimed at
@@ -128,7 +128,7 @@
 #' cl <- parallel::makeCluster(NCORES)
 #'
 #' # Compute the mapping
-#' mapping <- ara_unconstrained_L1(
+#' mapping <- ara_unconstrained_l1(
 #'   Z,
 #'   V,
 #'   weights = weights,
@@ -157,7 +157,7 @@
 #'   color_variable = color_variable
 #' )
 #'
-ara_unconstrained_L1 <- function(
+ara_unconstrained_l1 <- function(
     X,
     V,
     weights = rep(1, ncol(X)),
@@ -258,26 +258,26 @@ ara_unconstrained_L1 <- function(
   }
 
   if (pracma::strcmpi(solver, "CVXR")) {
-    outputs <- ara_unconstrained_L1_CVXR(
+    outputs <- ara_unconstrained_l1_CVXR(
       X,
       V
     )
   } else {
     if (pracma::strcmpi(solver, "glpkAPI")) {
-      outputs <- ara_unconstrained_L1_glpkAPI(
+      outputs <- ara_unconstrained_l1_glpkAPI(
         X,
         V,
         use_glpkAPI_simplex,
         cluster
       )
     } else if (pracma::strcmpi(solver, "clarabel")) {
-      outputs <- ara_unconstrained_L1_clarabel(
+      outputs <- ara_unconstrained_l1_clarabel(
         X,
         V,
         cluster
       )
     } else {
-      outputs <- ara_unconstrained_L1_Rglpk(
+      outputs <- ara_unconstrained_l1_Rglpk(
         X,
         V,
         cluster
@@ -310,7 +310,7 @@ ara_unconstrained_L1 <- function(
 
 
 #' @noRd
-ara_unconstrained_L1_CVXR <- function(
+ara_unconstrained_l1_CVXR <- function(
     X,
     V) {
   N <- nrow(X)
@@ -341,7 +341,7 @@ ara_unconstrained_L1_CVXR <- function(
 
 
 #' @noRd
-ara_unconstrained_L1_glpkAPI <- function(
+ara_unconstrained_l1_glpkAPI <- function(
     X,
     V,
     use_glpkAPI_simplex,
@@ -352,7 +352,7 @@ ara_unconstrained_L1_glpkAPI <- function(
 
   obj <- c(rep(1, n), rep(0, m))
 
-  coo_lists <- ara_L1_norm_coo_lists(1, V, 0)
+  coo_lists <- ara_l1_norm_coo_lists(1, V, 0)
 
   ne <- 2 * n * (m + 1)
 
@@ -431,7 +431,7 @@ ara_unconstrained_L1_glpkAPI <- function(
 
 
 #' @noRd
-ara_unconstrained_L1_clarabel <- function(
+ara_unconstrained_l1_clarabel <- function(
     X,
     V,
     cluster) {
@@ -487,7 +487,7 @@ ara_unconstrained_L1_clarabel <- function(
 
 
 #' @noRd
-ara_unconstrained_L1_Rglpk <- function(
+ara_unconstrained_l1_Rglpk <- function(
     X,
     V,
     cluster) {
@@ -497,7 +497,7 @@ ara_unconstrained_L1_Rglpk <- function(
 
   obj <- c(rep(1, n), rep(0, m))
 
-  coo_lists <- ara_L1_norm_coo_lists(1, V, 0)
+  coo_lists <- ara_l1_norm_coo_lists(1, V, 0)
 
   A <- slam::simple_triplet_matrix(
     coo_lists$rows,

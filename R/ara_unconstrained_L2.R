@@ -1,11 +1,11 @@
 #' Unconstrained Adaptable Radial Axes (ARA) mappings using the L2 norm
 #'
 #' @description
-#' \code{ara_unconstrained_L2()} computes \strong{unconstrained}
+#' \code{ara_unconstrained_l2()} computes \strong{unconstrained}
 #' \strong{Adaptable Radial Axes} (ARA) mappings for the \strong{L2 norm}
 #'
 #' @details
-#' \code{ara_unconstrained_L2()} computes low-dimensional point representations
+#' \code{ara_unconstrained_l2()} computes low-dimensional point representations
 #' of high-dimensional numerical data (\code{X}) according to the data
 #' visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017), which
 #' describes a collection of convex norm optimization problems aimed at
@@ -17,7 +17,7 @@
 #' Eq. (15).
 #'
 #'
-#' @inheritParams ara_unconstrained_L1
+#' @inheritParams ara_unconstrained_l1
 #' @param solver
 #' String indicating a package or method for solving the optimization problem.
 #' It can be "formula" (default), where the solution is obtained through a
@@ -97,7 +97,7 @@
 #' weights <- c(1, 0.75, 0.75, 1)
 #'
 #' # Compute the mapping
-#' mapping <- ara_unconstrained_L2(
+#' mapping <- ara_unconstrained_l2(
 #'   Z,
 #'   V,
 #'   weights = weights,
@@ -121,7 +121,7 @@
 #'   color_variable = color_variable
 #' )
 #'
-ara_unconstrained_L2 <- function(
+ara_unconstrained_l2 <- function(
     X,
     V,
     weights = rep(1, ncol(X)),
@@ -208,12 +208,12 @@ ara_unconstrained_L2 <- function(
   }
 
   if (pracma::strcmpi(solver, "CVXR")) {
-    outputs <- ara_unconstrained_L2_CVXR(
+    outputs <- ara_unconstrained_l2_CVXR(
       X,
       V
     )
   } else {
-    outputs <- ara_unconstrained_L2_formula(
+    outputs <- ara_unconstrained_l2_formula(
       X,
       V
     )
@@ -230,7 +230,7 @@ ara_unconstrained_L2 <- function(
 
 
 #' @noRd
-ara_unconstrained_L2_CVXR <- function(
+ara_unconstrained_l2_CVXR <- function(
     X,
     V) {
   N <- nrow(X)
@@ -270,7 +270,7 @@ ara_unconstrained_L2_CVXR <- function(
 
 
 #' @noRd
-ara_unconstrained_L2_formula <- function(
+ara_unconstrained_l2_formula <- function(
     X,
     V) {
   N <- nrow(X)

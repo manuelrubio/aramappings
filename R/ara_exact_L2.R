@@ -1,11 +1,11 @@
 #' Exact Adaptable Radial Axes (ARA) mappings using the L2 norm
 #'
 #' @description
-#' \code{ara_exact_L2()} computes \strong{exact} \strong{Adaptable Radial Axes}
+#' \code{ara_exact_l2()} computes \strong{exact} \strong{Adaptable Radial Axes}
 #' (ARA) mappings for the \strong{L2 norm}
 #'
 #' @details
-#' \code{ara_exact_L2()} computes low-dimensional point representations of
+#' \code{ara_exact_l2()} computes low-dimensional point representations of
 #' high-dimensional numerical data (\code{X}) according to the data
 #' visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017), which
 #' describes a collection of convex norm optimization problems aimed at
@@ -15,7 +15,7 @@
 #' squared-Euclidean norm. Its equality constraint forces estimates to be exact
 #' for one of the data variables. The problem admits closed-form solutions.
 #'
-#' @inheritParams ara_unconstrained_L1
+#' @inheritParams ara_unconstrained_l1
 #' @param variable
 #' Integer that indicates the variable (in \[1,n\]) for which the estimates of
 #' high-dimensional data will be exact. Default: variable = 1.
@@ -41,7 +41,7 @@
 #' optimization problem), \code{P} will contain \code{NA} (not available)
 #' values. In that case, \code{objval} will also be \code{NA}.
 #'
-#' @inherit ara_unconstrained_L1 references
+#' @inherit ara_unconstrained_l1 references
 #'
 #' @export
 #'
@@ -98,7 +98,7 @@
 #' variable <- sample(1:n, 1)
 #'
 #' # Compute the mapping
-#' mapping <- ara_exact_L2(
+#' mapping <- ara_exact_l2(
 #'   Z,
 #'   V,
 #'   variable = variable,
@@ -118,7 +118,7 @@
 #'   color_variable = variable
 #' )
 #'
-ara_exact_L2 <- function(
+ara_exact_l2 <- function(
     X,
     V,
     variable = 1,
@@ -190,13 +190,13 @@ ara_exact_L2 <- function(
   ############################   Compute mapping   #############################
 
   if (pracma::strcmpi(solver, "CVXR")) {
-    ara_exact_L2_CVXR(
+    ara_exact_l2_CVXR(
       X,
       V,
       variable
     )
   } else {
-    ara_exact_L2_formula(
+    ara_exact_l2_formula(
       X,
       V,
       variable
@@ -207,7 +207,7 @@ ara_exact_L2 <- function(
 
 
 #' @noRd
-ara_exact_L2_CVXR <- function(
+ara_exact_l2_CVXR <- function(
     X,
     V,
     variable) {
@@ -251,7 +251,7 @@ ara_exact_L2_CVXR <- function(
 
 
 #' @noRd
-ara_exact_L2_formula <- function(
+ara_exact_l2_formula <- function(
     X,
     V,
     variable) {

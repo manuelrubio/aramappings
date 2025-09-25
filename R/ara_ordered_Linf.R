@@ -1,11 +1,11 @@
 #' Ordered Adaptable Radial Axes (ARA) mappings using the L-infinity norm
 #'
 #' @description
-#' \code{ara_ordered_Linf()} computes \strong{ordered} \strong{Adaptable Radial
+#' \code{ara_ordered_linf()} computes \strong{ordered} \strong{Adaptable Radial
 #' Axes} (ARA) mappings for the \strong{Linf norm}
 #'
 #' @details
-#' \code{ara_ordered_Linf()} computes low-dimensional point representations of
+#' \code{ara_ordered_linf()} computes low-dimensional point representations of
 #' high-dimensional numerical data (\code{X}) according to the data
 #' visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017), which
 #' describes a collection of convex norm optimization problems aimed at
@@ -17,7 +17,7 @@
 #' other words, ignoring any ties, the estimate for the data observation with
 #' the i-th smallest value will correspond to the i-th smallest estimate.
 #'
-#' @inheritParams ara_unconstrained_L1
+#' @inheritParams ara_unconstrained_l1
 #' @param variable
 #' Integer that indicates the variable (in \[1,n\]) for which the estimates of
 #' high-dimensional data will be exact. Default: variable = 1.
@@ -38,7 +38,7 @@
 #' optimization problem), \code{P} will contain \code{NA} (not available)
 #' values. In that case, \code{objval} will also be \code{NA}.
 #'
-#' @inherit ara_unconstrained_L1 references
+#' @inherit ara_unconstrained_l1 references
 #'
 #' @export
 #'
@@ -95,7 +95,7 @@
 #' variable <- sample(1:n, 1)
 #'
 #' # Compute the mapping
-#' mapping <- ara_ordered_Linf(
+#' mapping <- ara_ordered_linf(
 #'   Z,
 #'   V,
 #'   variable = variable,
@@ -115,7 +115,7 @@
 #'   color_variable = variable
 #' )
 #'
-ara_ordered_Linf <- function(
+ara_ordered_linf <- function(
     X,
     V,
     variable = 1,
@@ -190,25 +190,25 @@ ara_ordered_Linf <- function(
   ############################   Compute mapping   #############################
 
   if (pracma::strcmpi(solver, "CVXR")) {
-    outputs <- ara_ordered_Linf_CVXR(
+    outputs <- ara_ordered_linf_CVXR(
       X,
       V,
       variable
     )
   } else if (pracma::strcmpi(solver, "glpkAPI")) {
-    outputs <- ara_ordered_Linf_glpkAPI(
+    outputs <- ara_ordered_linf_glpkAPI(
       X,
       V,
       variable
     )
   } else if (pracma::strcmpi(solver, "clarabel")) {
-    outputs <- ara_ordered_Linf_clarabel(
+    outputs <- ara_ordered_linf_clarabel(
       X,
       V,
       variable
     )
   } else { # Rglpk
-    outputs <- ara_ordered_Linf_Rglpk(
+    outputs <- ara_ordered_linf_Rglpk(
       X,
       V,
       variable
@@ -233,7 +233,7 @@ ara_ordered_Linf <- function(
 
 
 #' @noRd
-ara_ordered_Linf_CVXR <- function(
+ara_ordered_linf_CVXR <- function(
     X,
     V,
     variable) {
@@ -279,7 +279,7 @@ ara_ordered_Linf_CVXR <- function(
 
 
 #' @noRd
-ara_ordered_Linf_glpkAPI <- function(
+ara_ordered_linf_glpkAPI <- function(
     X,
     V,
     variable) {
@@ -355,7 +355,7 @@ ara_ordered_Linf_glpkAPI <- function(
 
 
 #' @noRd
-ara_ordered_Linf_clarabel <- function(
+ara_ordered_linf_clarabel <- function(
     X,
     V,
     variable) {
@@ -417,7 +417,7 @@ ara_ordered_Linf_clarabel <- function(
 
 
 #' @noRd
-ara_ordered_Linf_Rglpk <- function(
+ara_ordered_linf_Rglpk <- function(
     X,
     V,
     variable) {

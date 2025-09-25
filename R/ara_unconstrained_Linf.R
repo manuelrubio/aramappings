@@ -1,12 +1,12 @@
 #' Unconstrained Adaptable Radial Axes (ARA) mappings using the L-infinity norm
 #'
 #' @description
-#' \code{ara_unconstrained_Linf()} computes \strong{unconstrained}
+#' \code{ara_unconstrained_linf()} computes \strong{unconstrained}
 #' \strong{Adaptable Radial Axes} (ARA) mappings for the \strong{L-infinity
 #' norm}
 #'
 #' @details
-#' \code{ara_unconstrained_Linf()} computes low-dimensional point
+#' \code{ara_unconstrained_linf()} computes low-dimensional point
 #' representations of high-dimensional numerical data (\code{X}) according to
 #' the data visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017),
 #' which describes a collection of convex norm optimization problems aimed at
@@ -17,7 +17,7 @@
 #' described in (12). Optional non-negative weights (\code{weights}) associated
 #' with each data variable can be supplied to solve the problem in Eq. (15).
 #'
-#' @inheritParams ara_unconstrained_L1
+#' @inheritParams ara_unconstrained_l1
 #'
 #' @returns
 #' A list with the three following entries:
@@ -37,7 +37,7 @@
 #' contain \code{NA} (not available) values. In that case, \code{objval} will
 #' also be \code{NA}.
 #'
-#' @inherit ara_unconstrained_L1 references
+#' @inherit ara_unconstrained_l1 references
 #'
 #' @export
 #'
@@ -105,7 +105,7 @@
 #' cl <- parallel::makeCluster(NCORES)
 #'
 #' # Compute the mapping
-#' mapping <- ara_unconstrained_Linf(
+#' mapping <- ara_unconstrained_linf(
 #'   Z,
 #'   V,
 #'   weights = weights,
@@ -134,7 +134,7 @@
 #'   color_variable = color_variable
 #' )
 #'
-ara_unconstrained_Linf <- function(
+ara_unconstrained_linf <- function(
     X,
     V,
     weights = rep(1, ncol(X)),
@@ -235,7 +235,7 @@ ara_unconstrained_Linf <- function(
   }
 
   if (pracma::strcmpi(solver, "CVXR")) {
-    outputs <- ara_unconstrained_Linf_CVXR(
+    outputs <- ara_unconstrained_linf_CVXR(
       X,
       V
     )
@@ -244,20 +244,20 @@ ara_unconstrained_Linf <- function(
     }
   } else {
     if (pracma::strcmpi(solver, "glpkAPI")) {
-      outputs <- ara_unconstrained_Linf_glpkAPI(
+      outputs <- ara_unconstrained_linf_glpkAPI(
         X,
         V,
         use_glpkAPI_simplex,
         cluster
       )
     } else if (pracma::strcmpi(solver, "clarabel")) {
-      outputs <- ara_unconstrained_Linf_clarabel(
+      outputs <- ara_unconstrained_linf_clarabel(
         X,
         V,
         cluster
       )
     } else {
-      outputs <- ara_unconstrained_Linf_Rglpk(
+      outputs <- ara_unconstrained_linf_Rglpk(
         X,
         V,
         cluster
@@ -290,7 +290,7 @@ ara_unconstrained_Linf <- function(
 
 
 #' @noRd
-ara_unconstrained_Linf_CVXR <- function(
+ara_unconstrained_linf_CVXR <- function(
     X,
     V) {
   N <- nrow(X)
@@ -327,7 +327,7 @@ ara_unconstrained_Linf_CVXR <- function(
 
 
 #' @noRd
-ara_unconstrained_Linf_glpkAPI <- function(
+ara_unconstrained_linf_glpkAPI <- function(
     X,
     V,
     use_glpkAPI_simplex,
@@ -340,7 +340,7 @@ ara_unconstrained_Linf_glpkAPI <- function(
 
   ne <- 2 * n * (m + 1) # nonzero elements
 
-  coo_lists <- ara_Linf_norm_coo_lists(1, V, 0)
+  coo_lists <- ara_linf_norm_coo_lists(1, V, 0)
 
   nrows <- 2 * n
   ncols <- 1 + m
@@ -417,7 +417,7 @@ ara_unconstrained_Linf_glpkAPI <- function(
 
 
 #' @noRd
-ara_unconstrained_Linf_clarabel <- function(
+ara_unconstrained_linf_clarabel <- function(
     X,
     V,
     cluster) {
@@ -473,7 +473,7 @@ ara_unconstrained_Linf_clarabel <- function(
 
 
 #' @noRd
-ara_unconstrained_Linf_Rglpk <- function(
+ara_unconstrained_linf_Rglpk <- function(
     X,
     V,
     cluster) {
@@ -483,7 +483,7 @@ ara_unconstrained_Linf_Rglpk <- function(
 
   obj <- c(1, rep(0, m))
 
-  coo_lists <- ara_Linf_norm_coo_lists(1, V, 0)
+  coo_lists <- ara_linf_norm_coo_lists(1, V, 0)
 
   A <- slam::simple_triplet_matrix(
     coo_lists$rows,
