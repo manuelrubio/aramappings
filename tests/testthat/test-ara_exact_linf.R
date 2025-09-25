@@ -33,44 +33,44 @@ V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 Xcopy <- X
 Xcopy[1, 1] <- "a"
 test_that("Function halts if X is not numeric", {
-  expect_error(ara_exact_Linf(Xcopy, V))
+  expect_error(ara_exact_linf(Xcopy, V))
 })
 
 Xlist <- as.list(X)
 test_that("Function halts if X is not a matrix", {
-  expect_error(ara_exact_Linf(Xlist, V))
+  expect_error(ara_exact_linf(Xlist, V))
 })
 
 V[1, 1] <- "a"
 test_that("Function halts if V is not numeric", {
-  expect_error(ara_exact_Linf(X, V))
+  expect_error(ara_exact_linf(X, V))
 })
 
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 Vlist <- as.list(V)
 test_that("Function halts if V is not a matrix", {
-  expect_error(ara_exact_Linf(X, Vlist))
+  expect_error(ara_exact_linf(X, Vlist))
 })
 
 test_that("Function halts if variable is not numeric", {
-  expect_error(ara_exact_Linf(X, V, variable = "1"))
+  expect_error(ara_exact_linf(X, V, variable = "1"))
 })
 
 test_that("Function halts if solver is not a string", {
-  expect_error(ara_exact_Linf(X, V, solver = 1))
+  expect_error(ara_exact_linf(X, V, solver = 1))
 })
 
 test_that("Function halts if use_glpkAPI_simplex is not logical (Boolean)", {
-  expect_error(ara_exact_Linf(X, V, use_glpkAPI_simplex = 0))
+  expect_error(ara_exact_linf(X, V, use_glpkAPI_simplex = 0))
 })
 
 test_that("Function halts if use_glpkAPI_simplex is not logical (Boolean)", {
-  expect_error(ara_exact_Linf(X, V, use_glpkAPI_simplex = 1))
+  expect_error(ara_exact_linf(X, V, use_glpkAPI_simplex = 1))
 })
 
 test_that("Function halts if cluster does not inheret from classes 'SOCKcluster'
           or 'cluster'", {
-  expect_error(ara_exact_Linf(X, V, cluster = 1))
+  expect_error(ara_exact_linf(X, V, cluster = 1))
 })
 
 
@@ -78,20 +78,20 @@ test_that("Function halts if cluster does not inheret from classes 'SOCKcluster'
 m <- 4
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 test_that("Function halts if the number of columns of V is greater than 3", {
-  expect_error(ara_exact_Linf(X, V))
+  expect_error(ara_exact_linf(X, V))
 })
 
 m <- 0
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 test_that("Function halts if the number of columns of V is zero", {
-  expect_error(ara_exact_Linf(X, V))
+  expect_error(ara_exact_linf(X, V))
 })
 
 m <- 2
 V <- matrix(rnorm((n + 1) * m), nrow = n + 1, ncol = m)
 test_that("Function halts if the number axis vectors (rows of V) is different
           than the number data variables (rows of X)", {
-  expect_error(ara_exact_Linf(X, V))
+  expect_error(ara_exact_linf(X, V))
 })
 
 m <- 2
@@ -99,7 +99,7 @@ V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 aux <- X[1, 1]
 X[1, 1] <- NA
 test_that("Function halts if the data (X) has missing values", {
-  expect_error(ara_exact_Linf(X, V))
+  expect_error(ara_exact_linf(X, V))
 })
 X[1, 1] <- aux
 
@@ -107,48 +107,48 @@ m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 V[1, 1] <- NA
 test_that("Function halts if the matrix of axis vectors (V) has missing values", {
-  expect_error(ara_exact_Linf(X, V))
+  expect_error(ara_exact_linf(X, V))
 })
 
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 variable <- 0
 test_that("Function halts if selected variable is not in [1,n]", {
-  expect_error(ara_exact_Linf(X, V, variable = variable))
+  expect_error(ara_exact_linf(X, V, variable = variable))
 })
 
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 variable <- n + 1
 test_that("Function halts if selected variable is not in [1,n]", {
-  expect_error(ara_exact_Linf(X, V, variable = variable))
+  expect_error(ara_exact_linf(X, V, variable = variable))
 })
 
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 variable <- 3 / 2
 test_that("Function halts if selected variable is not an integer", {
-  expect_error(ara_exact_Linf(X, V, variable = variable))
+  expect_error(ara_exact_linf(X, V, variable = variable))
 })
 
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 test_that("Function halts if the specified solver is not 'clarabel', 'glpkAPI',
           'Rglpk'', or 'CVXR'", {
-  expect_error(ara_exact_Linf(X, V, solver = "some invalid solver"))
+  expect_error(ara_exact_linf(X, V, solver = "some invalid solver"))
 })
 
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 test_that("Function halts if the flag use_glpkAPI_simplex is not Boolean ", {
-  expect_error(ara_exact_Linf(X, V, use_glpkAPI_simplex = 3))
+  expect_error(ara_exact_linf(X, V, use_glpkAPI_simplex = 3))
 })
 
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 test_that("Function halts if the argument cluster for parallel processing is
           invalid", {
-  expect_error(ara_exact_Linf(X, V, cluster = 3))
+  expect_error(ara_exact_linf(X, V, cluster = 3))
 })
 
 
@@ -163,16 +163,16 @@ for (m in 1:3) {
   variable <- sample(1:n, 1)
 
   # Correct result
-  R <- ara_exact_Linf(X, V, variable = variable, solver = "clarabel")
+  R <- ara_exact_linf(X, V, variable = variable, solver = "clarabel")
 
-  R_test <- ara_exact_Linf(X, V, variable = variable, solver = "CVXR")
+  R_test <- ara_exact_linf(X, V, variable = variable, solver = "CVXR")
   if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
     test_that("Methods reach same objective value", {
       expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
     })
   }
 
-  R_test <- ara_exact_Linf(X, V,
+  R_test <- ara_exact_linf(X, V,
     variable = variable, solver = "glpkAPI",
     use_glpkAPI_simplex = TRUE
   )
@@ -182,7 +182,7 @@ for (m in 1:3) {
     })
   }
 
-  R_test <- ara_exact_Linf(X, V,
+  R_test <- ara_exact_linf(X, V,
     variable = variable, solver = "glpkAPI",
     use_glpkAPI_simplex = FALSE
   )
@@ -192,7 +192,7 @@ for (m in 1:3) {
     })
   }
 
-  R_test <- ara_exact_Linf(X, V, variable = variable, solver = "Rglpk")
+  R_test <- ara_exact_linf(X, V, variable = variable, solver = "Rglpk")
   if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
     test_that("Methods reach same objective value", {
       expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -219,9 +219,9 @@ for (m in 1:3) {
   variable <- sample(1:n, 1)
 
   # Correct result
-  R <- ara_exact_Linf(X, V, variable = variable, solver = "clarabel")
+  R <- ara_exact_linf(X, V, variable = variable, solver = "clarabel")
 
-  R_test <- ara_exact_Linf(X, V,
+  R_test <- ara_exact_linf(X, V,
     variable = variable, solver = "clarabel",
     cluster = cl
   )
@@ -231,7 +231,7 @@ for (m in 1:3) {
     })
   }
 
-  R_test <- ara_exact_Linf(X, V,
+  R_test <- ara_exact_linf(X, V,
     variable = variable, solver = "glpkAPI",
     use_glpkAPI_simplex = TRUE, cluster = cl
   )
@@ -241,7 +241,7 @@ for (m in 1:3) {
     })
   }
 
-  R_test <- ara_exact_Linf(X, V,
+  R_test <- ara_exact_linf(X, V,
     variable = variable, solver = "glpkAPI",
     use_glpkAPI_simplex = FALSE, cluster = cl
   )
@@ -251,7 +251,7 @@ for (m in 1:3) {
     })
   }
 
-  R_test <- ara_exact_Linf(X, V,
+  R_test <- ara_exact_linf(X, V,
     variable = variable, solver = "Rglpk",
     cluster = cl
   )
@@ -281,9 +281,9 @@ V[, 2] <- 0 * V[, 1] # linearly dependent rows
 variable <- sample(1:n, 1)
 
 # Correct result
-R <- ara_exact_Linf(X, V, variable = variable, solver = "clarabel")
+R <- ara_exact_linf(X, V, variable = variable, solver = "clarabel")
 
-R_test <- ara_exact_Linf(X, V, variable = variable, solver = "CVXR")
+R_test <- ara_exact_linf(X, V, variable = variable, solver = "CVXR")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -291,7 +291,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 }
 
 
-R_test <- ara_exact_Linf(X, V,
+R_test <- ara_exact_linf(X, V,
   variable = variable, solver = "glpkAPI",
   use_glpkAPI_simplex = TRUE
 )
@@ -301,7 +301,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_exact_Linf(X, V,
+R_test <- ara_exact_linf(X, V,
   variable = variable, solver = "glpkAPI",
   use_glpkAPI_simplex = FALSE
 )
@@ -311,7 +311,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_exact_Linf(X, V, variable = variable, solver = "Rglpk")
+R_test <- ara_exact_linf(X, V, variable = variable, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -328,9 +328,9 @@ V[, 2] <- 2 * V[, 1] # linearly dependent columns
 variable <- sample(1:n, 1)
 
 # Correct result
-R <- ara_exact_Linf(X, V, variable = variable, solver = "clarabel")
+R <- ara_exact_linf(X, V, variable = variable, solver = "clarabel")
 
-R_test <- ara_exact_Linf(X, V, variable = variable, solver = "CVXR")
+R_test <- ara_exact_linf(X, V, variable = variable, solver = "CVXR")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -338,7 +338,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 }
 
 
-R_test <- ara_exact_Linf(X, V,
+R_test <- ara_exact_linf(X, V,
   variable = variable, solver = "glpkAPI",
   use_glpkAPI_simplex = TRUE
 )
@@ -348,7 +348,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_exact_Linf(X, V,
+R_test <- ara_exact_linf(X, V,
   variable = variable, solver = "glpkAPI",
   use_glpkAPI_simplex = FALSE
 )
@@ -358,7 +358,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_exact_Linf(X, V, variable = variable, solver = "Rglpk")
+R_test <- ara_exact_linf(X, V, variable = variable, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -379,9 +379,9 @@ V[, 3] <- 2 * V[, 1] # linearly dependent columns
 variable <- sample(1:n, 1)
 
 # Correct result
-R <- ara_exact_Linf(X, V, variable = variable, solver = "clarabel")
+R <- ara_exact_linf(X, V, variable = variable, solver = "clarabel")
 
-R_test <- ara_exact_Linf(X, V, variable = variable, solver = "CVXR")
+R_test <- ara_exact_linf(X, V, variable = variable, solver = "CVXR")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -389,7 +389,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 }
 
 
-R_test <- ara_exact_Linf(X, V,
+R_test <- ara_exact_linf(X, V,
   variable = variable, solver = "glpkAPI",
   use_glpkAPI_simplex = TRUE
 )
@@ -399,7 +399,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_exact_Linf(X, V,
+R_test <- ara_exact_linf(X, V,
   variable = variable, solver = "glpkAPI",
   use_glpkAPI_simplex = FALSE
 )
@@ -409,7 +409,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_exact_Linf(X, V, variable = variable, solver = "Rglpk")
+R_test <- ara_exact_linf(X, V, variable = variable, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -427,9 +427,9 @@ V[, 3] <- 0 * V[, 3]
 variable <- sample(1:n, 1)
 
 # Correct result
-R <- ara_exact_Linf(X, V, variable = variable, solver = "clarabel")
+R <- ara_exact_linf(X, V, variable = variable, solver = "clarabel")
 
-R_test <- ara_exact_Linf(X, V, variable = variable, solver = "CVXR")
+R_test <- ara_exact_linf(X, V, variable = variable, solver = "CVXR")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -437,7 +437,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 }
 
 
-R_test <- ara_exact_Linf(X, V,
+R_test <- ara_exact_linf(X, V,
   variable = variable, solver = "glpkAPI",
   use_glpkAPI_simplex = TRUE
 )
@@ -447,7 +447,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_exact_Linf(X, V,
+R_test <- ara_exact_linf(X, V,
   variable = variable, solver = "glpkAPI",
   use_glpkAPI_simplex = FALSE
 )
@@ -457,7 +457,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_exact_Linf(X, V, variable = variable, solver = "Rglpk")
+R_test <- ara_exact_linf(X, V, variable = variable, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -478,9 +478,9 @@ V[, 3] <- 3 * V[, 1] # linearly dependent columns
 variable <- sample(1:n, 1)
 
 # Correct result
-R <- ara_exact_Linf(X, V, variable = variable, solver = "clarabel")
+R <- ara_exact_linf(X, V, variable = variable, solver = "clarabel")
 
-R_test <- ara_exact_Linf(X, V, variable = variable, solver = "CVXR")
+R_test <- ara_exact_linf(X, V, variable = variable, solver = "CVXR")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -488,7 +488,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 }
 
 
-R_test <- ara_exact_Linf(X, V,
+R_test <- ara_exact_linf(X, V,
   variable = variable, solver = "glpkAPI",
   use_glpkAPI_simplex = TRUE
 )
@@ -498,7 +498,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_exact_Linf(X, V,
+R_test <- ara_exact_linf(X, V,
   variable = variable, solver = "glpkAPI",
   use_glpkAPI_simplex = FALSE
 )
@@ -508,7 +508,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_exact_Linf(X, V, variable = variable, solver = "Rglpk")
+R_test <- ara_exact_linf(X, V, variable = variable, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -526,9 +526,9 @@ V[, 2] <- 0 * V[, 1] # linearly dependent columns
 V[, 3] <- 0 * V[, 1] # linearly dependent columns
 
 # Correct result
-R <- ara_exact_Linf(X, V, variable = variable, solver = "clarabel")
+R <- ara_exact_linf(X, V, variable = variable, solver = "clarabel")
 
-R_test <- ara_exact_Linf(X, V, variable = variable, solver = "CVXR")
+R_test <- ara_exact_linf(X, V, variable = variable, solver = "CVXR")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -536,7 +536,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
 }
 
 
-R_test <- ara_exact_Linf(X, V,
+R_test <- ara_exact_linf(X, V,
   variable = variable, solver = "glpkAPI",
   use_glpkAPI_simplex = TRUE
 )
@@ -546,7 +546,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_exact_Linf(X, V,
+R_test <- ara_exact_linf(X, V,
   variable = variable, solver = "glpkAPI",
   use_glpkAPI_simplex = FALSE
 )
@@ -556,7 +556,7 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_exact_Linf(X, V, variable = variable, solver = "Rglpk")
+R_test <- ara_exact_linf(X, V, variable = variable, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)

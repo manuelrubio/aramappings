@@ -28,7 +28,7 @@ n <- ncol(X)
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
 
-mapping <- ara_unconstrained_L2(Z, V)
+mapping <- ara_unconstrained_l2(Z, V)
 P <- mapping$P
 
 ###############################  Test arguments  ###############################
@@ -134,7 +134,7 @@ test_that("Function halts if visualization space is not bidimensional", {
   expect_error(draw_ara_plot_2d_standardized(Z, X, V, P))
 })
 
-mapping <- ara_unconstrained_L2(Z, V)
+mapping <- ara_unconstrained_l2(Z, V)
 P <- mapping$P
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
@@ -144,7 +144,7 @@ test_that("Function halts if visualization space is not bidimensional", {
 
 
 # Test values
-mapping <- ara_unconstrained_L2(Z, V)
+mapping <- ara_unconstrained_l2(Z, V)
 P <- mapping$P
 
 Zcopy <- Z
@@ -180,7 +180,7 @@ test_that("Function halts if weights contains missing values (NA)", {
 
 # Additional preconditions on input parameters -------------------------
 
-mapping <- ara_unconstrained_L2(Z, V)
+mapping <- ara_unconstrained_l2(Z, V)
 P <- mapping$P
 test_that("Function halts if weights does not contain n entries", {
   expect_error(draw_ara_plot_2d_standardized(Z, X, V, P,
@@ -256,7 +256,7 @@ test_that("Function halts if color_variable is not an integer in [1,n]", {
 
 weights <- runif(n, 0, 1)
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-mapping <- ara_unconstrained_L2(X, V, weights = weights, solver = "formula")
+mapping <- ara_unconstrained_l2(X, V, weights = weights, solver = "formula")
 P <- mapping$P
 axis_lines <- c(2, 4, 7, 9)
 color_variable <- 3

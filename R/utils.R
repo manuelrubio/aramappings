@@ -31,7 +31,7 @@ compute_orthogonal_projection_matrix <- function(
 
 
 #' @noRd
-ara_L1_norm_coo_lists <- function(
+ara_l1_norm_coo_lists <- function(
     n_points,
     V,
     row_offset) {
@@ -72,7 +72,7 @@ ara_L1_norm_coo_lists <- function(
 
 
 #' @noRd
-ara_Linf_norm_coo_lists <- function(
+ara_linf_norm_coo_lists <- function(
     n_points,
     V,
     row_offset) {

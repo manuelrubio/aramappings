@@ -102,7 +102,7 @@
 #' weights <- c(1, 0.75, 0.75, 1)
 #'
 #' # Compute the mapping
-#' mapping <- ara_unconstrained_L2(Z, V, weights = weights, solver = "formula")
+#' mapping <- ara_unconstrained_l2(Z, V, weights = weights, solver = "formula")
 #'
 #' # Select variables with labeled axis lines on ARA plot
 #' axis_lines <- c(1, 4) # 1:"mpg", 4:"acceleration")
