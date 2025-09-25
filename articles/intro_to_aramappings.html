@@ -256,7 +256,7 @@ following table:</p>
 <strong>norm (squared)</strong>
 </td>
 <td align="left"><code><a href="../reference/ara_unconstrained_L2.html">ara_unconstrained_L2()</a></code></td>
-<td align="left"><code><a href="../reference/ara_exact_L2.html">ara_exact_L2()</a></code></td>
+<td align="left"><code><a href="../reference/ara_exact_l2.html">ara_exact_L2()</a></code></td>
 <td align="left"><code><a href="../reference/ara_ordered_L2.html">ara_ordered_L2()</a></code></td>
 </tr>
 <tr class="even">
@@ -265,7 +265,7 @@ following table:</p>
 <strong>norm</strong>
 </td>
 <td align="left"><code><a href="../reference/ara_unconstrained_L1.html">ara_unconstrained_L1()</a></code></td>
-<td align="left"><code><a href="../reference/ara_exact_L1.html">ara_exact_L1()</a></code></td>
+<td align="left"><code><a href="../reference/ara_exact_l1.html">ara_exact_L1()</a></code></td>
 <td align="left"><code><a href="../reference/ara_ordered_L1.html">ara_ordered_L1()</a></code></td>
 </tr>
 <tr class="odd">
@@ -419,7 +419,7 @@ and shows the execution runtime involved in computing the mapping.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.007204771 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.006084442 secs</span></span></code></pre></div>
 <p>ARA plots can get cluttered when showing all of the axis lines and
 corresponding labels at the tick marks. Thus, the function that we will
 use to draw the ARA plot (<code><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>)
@@ -476,7 +476,7 @@ ordering the plotted points:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute the mapping and print the execution time</span></span>
 <span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ara_exact_L2.html">ara_exact_L2</a></span><span class="op">(</span></span>
+<span><span class="va">mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ara_exact_l2.html">ara_exact_L2</a></span><span class="op">(</span></span>
 <span>  <span class="va">Z</span>,</span>
 <span>  <span class="va">V</span>,</span>
 <span>  variable <span class="op">=</span> <span class="va">variable</span>,</span>
@@ -484,7 +484,7 @@ ordering the plotted points:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.6752918 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.6177461 secs</span></span></code></pre></div>
 <p>Note that it is also very efficient since the solution can also be
 expressed as a formula. Finally, we generate the ARA plot:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -525,7 +525,7 @@ package.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.02782893 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.02431607 secs</span></span></code></pre></div>
 <p>Finally, we generate the ARA plot:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Draw the ARA plot</span></span>
@@ -596,7 +596,7 @@ cluster object created above.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.2561796 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.2502141 secs</span></span></code></pre></div>
 <p>The ARA plot generated through:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
@@ -621,7 +621,7 @@ the <span class="math inline">\(\ell^{1}\)</span> norm:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute the mapping and print the execution time</span></span>
 <span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ara_exact_L1.html">ara_exact_L1</a></span><span class="op">(</span></span>
+<span><span class="va">mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ara_exact_l1.html">ara_exact_L1</a></span><span class="op">(</span></span>
 <span>  <span class="va">Z</span>,</span>
 <span>  <span class="va">V</span>,</span>
 <span>  variable <span class="op">=</span> <span class="va">variable</span>,</span>
@@ -631,7 +631,7 @@ the <span class="math inline">\(\ell^{1}\)</span> norm:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.2026176 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.2011917 secs</span></span></code></pre></div>
 <p>The ARA plot generated through:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
