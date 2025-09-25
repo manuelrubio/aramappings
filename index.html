@@ -86,15 +86,15 @@ ARA plot of four variables of a breakfast cereal dataset. High-dimensional data 
 <!-- main components of the package. For more complex packages, this will point to vignettes for more details. -->
 <p>There are nine types of ARA plots (see the <a href="https://manuelrubio.github.io/aramappings/articles/intro_to_aramappings.html"><strong>vignette</strong></a>). Thus, <strong>aramappings</strong> provides nine functions to generate each ARA mapping:</p>
 <ul>
-<li><code><a href="reference/ara_unconstrained_L2.html">ara_unconstrained_L2()</a></code></li>
-<li><code><a href="reference/ara_unconstrained_L1.html">ara_unconstrained_L1()</a></code></li>
-<li><code><a href="reference/ara_unconstrained_Linf.html">ara_unconstrained_Linf()</a></code></li>
+<li><code><a href="reference/ara_unconstrained_l2.html">ara_unconstrained_L2()</a></code></li>
+<li><code><a href="reference/ara_unconstrained_l1.html">ara_unconstrained_L1()</a></code></li>
+<li><code><a href="reference/ara_unconstrained_linf.html">ara_unconstrained_Linf()</a></code></li>
 <li><code><a href="reference/ara_exact_l2.html">ara_exact_L2()</a></code></li>
 <li><code><a href="reference/ara_exact_l1.html">ara_exact_L1()</a></code></li>
-<li><code><a href="reference/ara_exact_Linf.html">ara_exact_Linf()</a></code></li>
-<li><code><a href="reference/ara_ordered_L2.html">ara_ordered_L2()</a></code></li>
-<li><code><a href="reference/ara_ordered_L1.html">ara_ordered_L1()</a></code></li>
-<li><code><a href="reference/ara_ordered_Linf.html">ara_ordered_Linf()</a></code></li>
+<li><code><a href="reference/ara_exact_linf.html">ara_exact_Linf()</a></code></li>
+<li><code><a href="reference/ara_ordered_l2.html">ara_ordered_L2()</a></code></li>
+<li><code><a href="reference/ara_ordered_l1.html">ara_ordered_L1()</a></code></li>
+<li><code><a href="reference/ara_ordered_linf.html">ara_ordered_Linf()</a></code></li>
 </ul>
 <p>Each function solves a convex optimization problem to map high-dimensional data observations onto two- or three-dimensional points that can be visualized in a plot. Each function is included in a separate source file, and calls (optimization) solver-specific functions. These functions rely on auxiliary methods included in file <tt>utils.R</tt>.</p>
 <p>The main goal of the package is to provide functionality for generating the mappings, but not to create visualizations. Nevertheless, it includes a method for generating a two-dimensional plot for standardized data:</p>
@@ -174,7 +174,7 @@ pak::pak("manuelrubio/aramappings")
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute the mapping and print the execution time</span></span>
 <span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ara_unconstrained_L2.html">ara_unconstrained_L2</a></span><span class="op">(</span></span>
+<span><span class="va">mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ara_unconstrained_l2.html">ara_unconstrained_L2</a></span><span class="op">(</span></span>
 <span>  <span class="va">Z</span>,</span>
 <span>  <span class="va">V</span>,</span>
 <span>  weights <span class="op">=</span> <span class="va">weights</span>,</span>
