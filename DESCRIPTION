@@ -1,6 +1,6 @@
 Package: aramappings
 Title: Computes Adaptable Radial Axes Mappings
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
     c(person("Manuel", "Rubio-Sánchez", , "manuel.rubio@urjc.es", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-8692-2553")),
