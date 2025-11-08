@@ -135,3 +135,8 @@ draw_ara_plot_2d_standardized(
 )
 
 }
+\references{
+M. Rubio-Sánchez, A. Sanchez, D. J. Lehmann: Adaptable radial axes plots for
+improved multivariate data visualization. Computer Graphics Forum 36, 3
+(2017), 389–399. \href{https://onlinelibrary.wiley.com/doi/10.1111/cgf.13196}{doi:10.1111/cgf.13196}
+}
