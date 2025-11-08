@@ -67,12 +67,14 @@ Install a stable version from CRAN
 install.packages("aramappings")
 ``` -->
 
-Install the development version of aramappings from [GitHub](https://github.com/) with:
+Install the development version of aramappings from [GitHub](https://github.com/manuelrubio/aramappings/) with:
 
 <!-- ```{r install_dev}
 # install.packages("devtools")
 devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
 ``` -->
+
+or
 
 <!-- ```{r install_dev}
 # install.packages("pak")

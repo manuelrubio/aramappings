@@ -100,12 +100,14 @@ install.packages("aramappings")
 ``` -->
 
 Install the development version of aramappings from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/manuelrubio/aramappings/) with:
 
 <!-- ```{r install_dev}
 # install.packages("devtools")
 devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
 ``` -->
+
+or
 
 <!-- ```{r install_dev}
 # install.packages("pak")
@@ -235,7 +237,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.01119399 secs
+#> Time difference of 0.0103271 secs
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
