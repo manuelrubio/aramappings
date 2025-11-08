@@ -293,7 +293,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.007469893 secs
+#> Time difference of 0.007861614 secs
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -371,7 +371,7 @@ mapping <- ara_exact_l2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.675976 secs
+#> Time difference of 0.6698606 secs
 ```
 
 Note that it is also very efficient since the solution can also be
@@ -419,7 +419,7 @@ mapping <- ara_ordered_l2(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.02691007 secs
+#> Time difference of 0.02701879 secs
 ```
 
 Finally, we generate the ARA plot:
@@ -502,7 +502,7 @@ mapping <- ara_unconstrained_l1(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.2562413 secs
+#> Time difference of 0.2591286 secs
 ```
 
 The ARA plot generated through:
@@ -544,7 +544,7 @@ mapping <- ara_exact_l1(
 )
 end <- Sys.time()
 print(end - start, units = "secs")
-#> Time difference of 0.2038181 secs
+#> Time difference of 0.2093484 secs
 ```
 
 The ARA plot generated through:
