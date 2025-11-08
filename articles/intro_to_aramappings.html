@@ -95,7 +95,7 @@ variable values by visually projecting these points onto the labeled
 axes, as in Biplots.</p>
 <p><br></p>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/vignette_cereals_ara_bb.svg" alt="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots." width="80%"><p class="caption">
+<img src="../reference/figures/vignette_cereals_ara_bb.svg" class="r-plt" alt="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots." width="80%"><p class="caption">
 ARA plot of four variables of a breakfast cereal dataset.
 High-dimensional data values can be estimated via projections onto the
 labeled axes, as in Biplots.
@@ -419,7 +419,7 @@ and shows the execution runtime involved in computing the mapping.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.006946087 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.007715464 secs</span></span></code></pre></div>
 <p>ARA plots can get cluttered when showing all of the axis lines and
 corresponding labels at the tick marks. Thus, the function that we will
 use to draw the ARA plot (<code><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>)
@@ -454,7 +454,7 @@ to the value of variable “mpg”.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/vignette_autompg_unconstrained_l2_bb.svg" alt="Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset." width="90%"><p class="caption">
+<img src="../reference/figures/vignette_autompg_unconstrained_l2_bb.svg" class="r-plt" alt="Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset." width="90%"><p class="caption">
 Unconstrained ARA plot with the l2 norm of a subset of the Autompg
 dataset.
 </p>
@@ -484,7 +484,7 @@ ordering the plotted points:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.597878 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.6946533 secs</span></span></code></pre></div>
 <p>Note that it is also very efficient since the solution can also be
 expressed as a formula. Finally, we generate the ARA plot:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -499,7 +499,7 @@ expressed as a formula. Finally, we generate the ARA plot:</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/vignette_autompg_exact_l2_bb.svg" alt="Exact ARA plot with the l2 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'." width="90%"><p class="caption">
+<img src="../reference/figures/vignette_autompg_exact_l2_bb.svg" class="r-plt" alt="Exact ARA plot with the l2 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'." width="90%"><p class="caption">
 Exact ARA plot with the l2 norm of a subset of the Autompg dataset.
 Exact estimates are obtained for variable ‘mpg’.
 </p>
@@ -525,7 +525,7 @@ package.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.0241611 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.02824187 secs</span></span></code></pre></div>
 <p>Finally, we generate the ARA plot:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Draw the ARA plot</span></span>
@@ -539,7 +539,7 @@ package.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/vignette_autompg_ordered_l2_bb.svg" alt="Ordered ARA plot with the l2 norm of a subset of the Autompg dataset. The values of 'mpg' are ordered correctly along its corresponding axis." width="90%"><p class="caption">
+<img src="../reference/figures/vignette_autompg_ordered_l2_bb.svg" class="r-plt" alt="Ordered ARA plot with the l2 norm of a subset of the Autompg dataset. The values of 'mpg' are ordered correctly along its corresponding axis." width="90%"><p class="caption">
 Ordered ARA plot with the l2 norm of a subset of the Autompg dataset.
 The values of ‘mpg’ are ordered correctly along its corresponding axis.
 </p>
@@ -596,7 +596,7 @@ cluster object created above.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.2453156 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.2605016 secs</span></span></code></pre></div>
 <p>The ARA plot generated through:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
@@ -610,7 +610,7 @@ cluster object created above.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/vignette_autompg_unconstrained_l1_bb.svg" alt="Unconstrained ARA plot with the l1 norm of a subset of the Autompg dataset." width="90%"><p class="caption">
+<img src="../reference/figures/vignette_autompg_unconstrained_l1_bb.svg" class="r-plt" alt="Unconstrained ARA plot with the l1 norm of a subset of the Autompg dataset." width="90%"><p class="caption">
 Unconstrained ARA plot with the l1 norm of a subset of the Autompg
 dataset.
 </p>
@@ -631,7 +631,7 @@ the <span class="math inline">\(\ell^{1}\)</span> norm:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.1954741 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.2090414 secs</span></span></code></pre></div>
 <p>The ARA plot generated through:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
@@ -644,7 +644,7 @@ the <span class="math inline">\(\ell^{1}\)</span> norm:</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/vignette_autompg_exact_l1_bb.svg" alt="Exact ARA plot with the l1 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'." width="90%"><p class="caption">
+<img src="../reference/figures/vignette_autompg_exact_l1_bb.svg" class="r-plt" alt="Exact ARA plot with the l1 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'." width="90%"><p class="caption">
 Exact ARA plot with the l1 norm of a subset of the Autompg dataset.
 Exact estimates are obtained for variable ‘mpg’.
 </p>
@@ -723,7 +723,7 @@ Visualization.”</span> <em>Computer Graphics Forum</em> 36 (3): 389–99.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
