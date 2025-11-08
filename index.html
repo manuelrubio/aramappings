@@ -109,11 +109,12 @@ ARA plot of four variables of a breakfast cereal dataset. High-dimensional data 
 <!-- ```{r install}
 install.packages("aramappings")
 ``` -->
-<p>Install the development version of aramappings from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>Install the development version of aramappings from <a href="https://github.com/manuelrubio/aramappings/" class="external-link">GitHub</a> with:</p>
 <!-- ```{r install_dev}
 # install.packages("devtools")
 devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
 ``` -->
+<p>or</p>
 <!-- ```{r install_dev}
 # install.packages("pak")
 pak::pak("manuelrubio/aramappings")
@@ -182,7 +183,7 @@ pak::pak("manuelrubio/aramappings")
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Time difference of 0.01119399 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.0103271 secs</span></span></code></pre></div>
 <p>ARA plots can get cluttered when showing all of the axis lines and corresponding labels at the tick marks. Thus, the function that we will use to draw the ARA plot (<code><a href="reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>) contains a parameter called <code>axis_lines</code> for specifying the subset of axis lines (and labels) we wish to visualize. In this example we will show the axes associated with variables “mpg” and “acceleration”. Note that in the original data frame these were variables 1 and 6. However, since we only retained four variables (“mpg”, “horsepower”, “weight”, and “acceleration”), the column index of “acceleration” is now 4.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select variables with labeled axis lines on ARA plot</span></span>
