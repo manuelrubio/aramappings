@@ -67,14 +67,15 @@ available) values, and `objval` would be also be `NA`.
 
 `ara_unconstrained_l2()` computes low-dimensional point representations
 of high-dimensional numerical data (`X`) according to the data
-visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017),
-which describes a collection of convex norm optimization problems aimed
-at minimizing estimates of original values in `X` through dot products
-of the mapped points with the axis vectors (rows of `V`). This
-particular function solves the unconstrained optimization problem in Eq.
-(10), for the squared-Euclidean norm. Optional non-negative weights
-(`weights`) associated with each data variable can be supplied to solve
-the problem in Eq. (15).
+visualization method "Adaptable Radial Axes" (M. Rubio-Sánchez, A.
+Sanchez, and D. J. Lehmann (2017), doi: 10.1111/cgf.13196), which
+describes a collection of convex norm optimization problems aimed at
+minimizing estimates of original values in `X` through dot products of
+the mapped points with the axis vectors (rows of `V`). This particular
+function solves the unconstrained optimization problem in Eq. (10), for
+the squared-Euclidean norm. Optional non-negative weights (`weights`)
+associated with each data variable can be supplied to solve the problem
+in Eq. (15).
 
 ## References
 
@@ -87,14 +88,7 @@ for improved multivariate data visualization. Computer Graphics Forum
 
 ``` r
 # Load data
-if (!require(ascentTraining)) { # contains the Auto MPG dataset
-  print("Trying to install package ascentTraining")
-  install.packages("ascentTraining")
-  if (!require(ascentTraining)) {
-    stop("Could not install package ascentTraining")
-  }
-}
-data("auto_mpg")
+data("auto_mpg", package = "ascentTraining")
 
 # Define subset of (numerical) variables
 # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"
@@ -122,16 +116,9 @@ X <- apply(as.matrix.noquote(X), 2, as.numeric)
 Z <- scale(X)
 
 # Define axis vectors (2-dimensional in this example)
-if (!require(geometry)) {
-  print("Trying to install package geometry")
-  install.packages("geometry")
-  if (!require(geometry)) {
-    stop("Could not install package geometry")
-  }
-}
 r <- c(0.8, 1, 1.2, 1)
 theta <- c(225, 100, 315, 80) * 2 * pi / 360
-V <- pol2cart(theta, r)
+V <- geometry::pol2cart(theta, r)
 
 # Define weights
 weights <- c(1, 0.75, 0.75, 1)

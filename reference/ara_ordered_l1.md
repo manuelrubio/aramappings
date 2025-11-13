@@ -62,16 +62,17 @@ values. In that case, `objval` will also be `NA`.
 
 `ara_ordered_l1()` computes low-dimensional point representations of
 high-dimensional numerical data (`X`) according to the data
-visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017),
-which describes a collection of convex norm optimization problems aimed
-at minimizing estimates of original values in `X` through dot products
-of the mapped points with the axis vectors (rows of `V`). This
-particular function solves the constrained optimization problem in Eq.
-(14), for the L1 norm. The inequality constraint ensures that the
-estimates for a selected variable are ordered in accordance with its
-original values. In other words, ignoring any ties, the estimate for the
-data observation with the i-th smallest value will correspond to the
-i-th smallest estimate.
+visualization method "Adaptable Radial Axes" (M. Rubio-Sánchez, A.
+Sanchez, and D. J. Lehmann (2017), doi: 10.1111/cgf.13196), which
+describes a collection of convex norm optimization problems aimed at
+minimizing estimates of original values in `X` through dot products of
+the mapped points with the axis vectors (rows of `V`). This particular
+function solves the constrained optimization problem in Eq. (14), for
+the L1 norm. The inequality constraint ensures that the estimates for a
+selected variable are ordered in accordance with its original values. In
+other words, ignoring any ties, the estimate for the data observation
+with the i-th smallest value will correspond to the i-th smallest
+estimate.
 
 ## References
 
@@ -84,14 +85,7 @@ for improved multivariate data visualization. Computer Graphics Forum
 
 ``` r
 # Load data
-if (!require(ascentTraining)) { # contains the Auto MPG dataset
-  print("Trying to install package ascentTraining")
-  install.packages("ascentTraining")
-  if (!require(ascentTraining)) {
-    stop("Could not install package ascentTraining")
-  }
-}
-data("auto_mpg")
+data("auto_mpg", package = "ascentTraining")
 
 # Define subset of (numerical) variables
 # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"
@@ -119,16 +113,9 @@ X <- apply(as.matrix.noquote(X), 2, as.numeric)
 Z <- scale(X)
 
 # Define axis vectors (2-dimensional in this example)
-if (!require(geometry)) {
-  print("Trying to install package geometry")
-  install.packages("geometry")
-  if (!require(geometry)) {
-    stop("Could not install package geometry")
-  }
-}
 r <- c(0.8, 1, 1.2, 1)
 theta <- c(225, 100, 315, 80) * 2 * pi / 360
-V <- pol2cart(theta, r)
+V <- geometry::pol2cart(theta, r)
 
 # Select variable for exact estimates, and use it for coloring the embedded
 # points

@@ -14,6 +14,9 @@
 - **Alberto Sánchez Campos**. Contributor.
   [](https://orcid.org/0000-0002-5382-6805)
 
+- **Cristina Soguero-Ruiz**. Contributor.
+  [](https://orcid.org/0000-0001-5817-989X)
+
 ## Citation
 
 Source:
