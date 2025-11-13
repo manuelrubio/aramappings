@@ -5,14 +5,8 @@ set.seed(1000000)
 #################################   Set data   #################################
 
 # Load data set
-if (!require(datasetsICR)) {
-  print("Trying to install package datasetsICR ")
-  install.packages("datasetsICR ")
-  if (!require(datasetsICR)) {
-    stop("Could not install package datasetsICR ")
-  }
-}
-data("wine")
+data("wine", package = "datasetsICR")
+
 
 # wine <- read.csv(url("https://archive.ics.uci.edu/ml/
 # machine-learning-databases/wine/wine.data"), header = FALSE)

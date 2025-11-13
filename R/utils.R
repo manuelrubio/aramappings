@@ -229,7 +229,7 @@ solve_glpkAPI_wrapper <- function(
       ))
       objval <- glpkAPI::getObjValGLPK(lp)
     } else {
-      print("Error: glpkAPI failed to compute an optimal solution")
+      message("Error: glpkAPI failed to compute an optimal solution")
 
       P <- matrix(NA, n_points, m)
       objval <- NA
@@ -249,7 +249,7 @@ solve_glpkAPI_wrapper <- function(
       ))
       objval <- glpkAPI::getObjValIptGLPK(lp)
     } else {
-      print("Error: glpkAPI failed to compute an optimal solution")
+      message("Error: glpkAPI failed to compute an optimal solution")
 
       P <- matrix(NA, n_points, m)
       objval <- NA
@@ -299,7 +299,7 @@ solve_clarabel_wrapper <- function(
     ))
     objval <- clarabel_output$obj_val
   } else {
-    print("Error: clarabel failed to compute an optimal solution")
+    message("Error: clarabel failed to compute an optimal solution")
 
     P <- matrix(NA, n_points, m)
     objval <- NA
@@ -346,7 +346,7 @@ solve_Rglpk_wrapper <- function(
     ))
     objval <- rglpk_output$optimum
   } else {
-    print("Error: Rglpk failed to compute an optimal solution")
+    message("Error: Rglpk failed to compute an optimal solution")
 
     P <- matrix(NA, n_points, m)
     objval <- NA
@@ -564,7 +564,7 @@ extract_CVXR_points_status_objval <- function(
   } else {
     P <- matrix(NA, N, m)
     objval <- NA
-    print("Error: CVXR failed to compute an optimal solution")
+    message("Error: CVXR failed to compute an optimal solution")
   }
 
   status <- rep(solution$status, N)

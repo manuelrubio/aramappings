@@ -168,7 +168,7 @@ mapping <- ara_unconstrained_l2(
   solver = "formula"
 )
 end <- Sys.time()
-print(end - start, units = "secs")
+message(c('Execution time: ',end - start, ' seconds'))
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and corresponding labels at the tick marks. Thus, the function that we will use to draw the ARA plot (`draw_ara_plot_2d_standardized()`) contains a parameter called `axis_lines` for specifying the subset of axis lines (and labels) we wish to visualize. In this example we will show the axes associated with variables "mpg" and "acceleration". Note that in the original data frame these were variables 1 and 6. However, since we only retained four variables ("mpg", "horsepower", "weight", and "acceleration"), the column index of "acceleration" is now 4.

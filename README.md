@@ -236,8 +236,8 @@ mapping <- ara_unconstrained_l2(
   solver = "formula"
 )
 end <- Sys.time()
-print(end - start, units = "secs")
-#> Time difference of 0.0103271 secs
+message(c('Execution time: ',end - start, ' seconds'))
+#> Execution time: 0.0107271671295166 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and

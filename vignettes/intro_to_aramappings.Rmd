@@ -104,18 +104,20 @@ The function is included in order to show the results of the ARA mapping functio
 
 Install a stable version from CRAN
 
-<!--- ```{r install}
+<!-- ```{r install}
 install.packages("aramappings")
 ``` -->
 
-Install the development version of aramappings from [GitHub](https://github.com/) with:
+Install the development version of aramappings from [GitHub](https://github.com/manuelrubio/aramappings/) with:
 
-<!--- ```{r install_dev}
+<!-- ```{r install_dev}
 # install.packages("devtools")
 devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
 ``` -->
 
-<!--- ```{r install_dev}
+or
+
+<!-- ```{r install_dev}
 # install.packages("pak")
 pak::pak("manuelrubio/aramappings")
 ``` -->
@@ -213,7 +215,7 @@ mapping <- ara_unconstrained_l2(
   solver = "formula"
 )
 end <- Sys.time()
-print(end - start, units = "secs")
+message(c('Execution time: ',end - start, ' seconds'))
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and corresponding labels at the tick marks. Thus, the function that we will use to draw the ARA plot (`draw_ara_plot_2d_standardized()`) contains a parameter called `axis_lines` for specifying the subset of axis lines (and labels) we wish to visualize. In this example we will show the axes associated with variables "mpg" and "acceleration". Note that in the original data frame these were variables 1 and 6. However, since we only retained four variables ("mpg", "horsepower", "weight", and "acceleration"), the column index of "acceleration" is now 4.
@@ -273,7 +275,7 @@ mapping <- ara_exact_l2(
   solver = "formula"
 )
 end <- Sys.time()
-print(end - start, units = "secs")
+message(c('Execution time: ',end - start, ' seconds'))
 ```
 
 Note that it is also very efficient since the solution can also be expressed as a formula. Finally, we generate the ARA plot:
@@ -312,7 +314,7 @@ mapping <- ara_ordered_l2(
   solver = "clarabel"
 )
 end <- Sys.time()
-print(end - start, units = "secs")
+message(c('Execution time: ',end - start, ' seconds'))
 ```
 
 Finally, we generate the ARA plot:
@@ -374,7 +376,7 @@ mapping <- ara_unconstrained_l1(
   cluster = cl
 )
 end <- Sys.time()
-print(end - start, units = "secs")
+message(c('Execution time: ',end - start, ' seconds'))
 ```
 
 The ARA plot generated through:
@@ -411,7 +413,7 @@ mapping <- ara_exact_l1(
   cluster = cl
 )
 end <- Sys.time()
-print(end - start, units = "secs")
+message(c('Execution time: ',end - start, ' seconds'))
 ```
 
 The ARA plot generated through:

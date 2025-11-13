@@ -45,7 +45,8 @@ Creates a plot associated with an Adaptable Radial Axes (ARA) mapping
 \details{
 The function \code{draw_ara_plot_2d_standardized()} generates a basic
 two-dimensional plot related to an "Adaptable Radial Axes" (ARA) mapping
-(Rubio-Sánchez, 2017) for high-dimensional numerical data (\code{X}) that has
+(M. Rubio-Sánchez, A. Sanchez, and D. J. Lehmann (2017), doi:
+10.1111/cgf.13196) for high-dimensional numerical data (\code{X}) that has
 been previously standardized (\code{Z}). The plot displays a set of 2D points
 (\code{P}), each representing an observation from the high-dimensional
 dataset. It also includes a collection of axis vectors (\code{V}), each
@@ -60,14 +61,7 @@ according to the values of the variable \code{color_variable}.
 }
 \examples{
 # Load data
-if (!require(ascentTraining)) { # contains the Auto MPG dataset
-  print("Trying to install package ascentTraining")
-  install.packages("ascentTraining")
-  if (!require(ascentTraining)) {
-    stop("Could not install package ascentTraining")
-  }
-}
-data("auto_mpg")
+data("auto_mpg", package = "ascentTraining")
 
 # Define subset of (numerical) variables
 # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"
@@ -94,16 +88,9 @@ X <- apply(as.matrix.noquote(X), 2, as.numeric)
 Z <- scale(X)
 
 # Define axis vectors (2-dimensional in this example)
-if (!require(geometry)) {
-  print("Trying to install package geometry")
-  install.packages("geometry")
-  if (!require(geometry)) {
-    stop("Could not install package geometry")
-  }
-}
 r <- c(0.8, 1, 1.2, 1)
 theta <- c(225, 100, 315, 80) * 2 * pi / 360
-V <- pol2cart(theta, r)
+V <- geometry::pol2cart(theta, r)
 
 # Define weights
 weights <- c(1, 0.75, 0.75, 1)

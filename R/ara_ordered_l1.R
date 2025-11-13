@@ -7,7 +7,8 @@
 #' @details
 #' \code{ara_ordered_l1()} computes low-dimensional point representations of
 #' high-dimensional numerical data (\code{X}) according to the data
-#' visualization method "Adaptable Radial Axes" (Rubio-Sánchez, 2017), which
+#' visualization method "Adaptable Radial Axes" (M. Rubio-Sánchez, A. Sanchez,
+#' and D. J. Lehmann (2017), doi: 10.1111/cgf.13196), which
 #' describes a collection of convex norm optimization problems aimed at
 #' minimizing estimates of original values in \code{X} through dot products of
 #' the mapped points with the axis vectors (rows of \code{V}). This particular
@@ -44,14 +45,7 @@
 #'
 #' @examples
 #' # Load data
-#' if (!require(ascentTraining)) { # contains the Auto MPG dataset
-#'   print("Trying to install package ascentTraining")
-#'   install.packages("ascentTraining")
-#'   if (!require(ascentTraining)) {
-#'     stop("Could not install package ascentTraining")
-#'   }
-#' }
-#' data("auto_mpg")
+#' data("auto_mpg", package = "ascentTraining")
 #'
 #' # Define subset of (numerical) variables
 #' # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"
@@ -78,16 +72,9 @@
 #' Z <- scale(X)
 #'
 #' # Define axis vectors (2-dimensional in this example)
-#' if (!require(geometry)) {
-#'   print("Trying to install package geometry")
-#'   install.packages("geometry")
-#'   if (!require(geometry)) {
-#'     stop("Could not install package geometry")
-#'   }
-#' }
 #' r <- c(0.8, 1, 1.2, 1)
 #' theta <- c(225, 100, 315, 80) * 2 * pi / 360
-#' V <- pol2cart(theta, r)
+#' V <- geometry::pol2cart(theta, r)
 #'
 #' # Select variable for exact estimates, and use it for coloring the embedded
 #' # points
