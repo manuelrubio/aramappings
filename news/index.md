@@ -2,6 +2,8 @@
 
 ## aramappings 0.1.0
 
+CRAN release: 2025-11-18
+
 This is the first release of **aramappings**
 
 - Adaptable Radial Axes (ARA) mapping functions:
