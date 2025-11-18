@@ -29,7 +29,7 @@ points onto the labeled axes, as in Biplots.
 ![ARA plot of four variables of a breakfast cereal dataset.
 High-dimensional data values can be estimated via projections onto the
 labeled axes, as in
-Biplots.](reference/figures/vignette_cereals_ara_bb.svg)
+Biplots.](reference/figures/vignette_cereals_ara_bb.jpg)
 
 ARA plot of four variables of a breakfast cereal dataset.
 High-dimensional data values can be estimated via projections onto the
@@ -209,7 +209,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0107271671295166 seconds
+#> Execution time: 0.0106110572814941 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -255,7 +255,7 @@ draw_ara_plot_2d_standardized(
 ```
 
 ![Unconstrained ARA plot with the l2 norm of a subset of the Autompg
-dataset.](reference/figures/readme_autompg_unconstrained_l2.svg)
+dataset.](reference/figures/readme_autompg_unconstrained_l2.jpg)
 
 Unconstrained ARA plot with the l2 norm of a subset of the Autompg
 dataset.

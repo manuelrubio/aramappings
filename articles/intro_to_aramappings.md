@@ -26,7 +26,7 @@ labeled axes, as in Biplots.
 ![ARA plot of four variables of a breakfast cereal dataset.
 High-dimensional data values can be estimated via projections onto the
 labeled axes, as in
-Biplots.](../reference/figures/vignette_cereals_ara_bb.svg)
+Biplots.](../reference/figures/vignette_cereals_ara_bb.jpg)
 
 ARA plot of four variables of a breakfast cereal dataset.
 High-dimensional data values can be estimated via projections onto the
@@ -295,7 +295,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.00748038291931152 seconds
+#> Execution time: 0.00787782669067383 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -341,7 +341,7 @@ draw_ara_plot_2d_standardized(
 ```
 
 ![Unconstrained ARA plot with the l2 norm of a subset of the Autompg
-dataset.](../reference/figures/vignette_autompg_unconstrained_l2_bb.svg)
+dataset.](../reference/figures/vignette_autompg_unconstrained_l2_bb.jpg)
 
 Unconstrained ARA plot with the l2 norm of a subset of the Autompg
 dataset.
@@ -373,7 +373,7 @@ mapping <- ara_exact_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.669802904129028 seconds
+#> Execution time: 0.672279596328735 seconds
 ```
 
 Note that it is also very efficient since the solution can also be
@@ -394,7 +394,7 @@ draw_ara_plot_2d_standardized(
 
 ![Exact ARA plot with the l2 norm of a subset of the Autompg dataset.
 Exact estimates are obtained for variable
-'mpg'.](../reference/figures/vignette_autompg_exact_l2_bb.svg)
+'mpg'.](../reference/figures/vignette_autompg_exact_l2_bb.jpg)
 
 Exact ARA plot with the l2 norm of a subset of the Autompg dataset.
 Exact estimates are obtained for variable ‘mpg’.
@@ -421,7 +421,7 @@ mapping <- ara_ordered_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0269293785095215 seconds
+#> Execution time: 0.0270481109619141 seconds
 ```
 
 Finally, we generate the ARA plot:
@@ -441,7 +441,7 @@ draw_ara_plot_2d_standardized(
 
 ![Ordered ARA plot with the l2 norm of a subset of the Autompg dataset.
 The values of 'mpg' are ordered correctly along its corresponding
-axis.](../reference/figures/vignette_autompg_ordered_l2_bb.svg)
+axis.](../reference/figures/vignette_autompg_ordered_l2_bb.jpg)
 
 Ordered ARA plot with the l2 norm of a subset of the Autompg dataset.
 The values of ‘mpg’ are ordered correctly along its corresponding axis.
@@ -504,7 +504,7 @@ mapping <- ara_unconstrained_l1(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.264293432235718 seconds
+#> Execution time: 0.262260675430298 seconds
 ```
 
 The ARA plot generated through:
@@ -523,7 +523,7 @@ draw_ara_plot_2d_standardized(
 ```
 
 ![Unconstrained ARA plot with the l1 norm of a subset of the Autompg
-dataset.](../reference/figures/vignette_autompg_unconstrained_l1_bb.svg)
+dataset.](../reference/figures/vignette_autompg_unconstrained_l1_bb.jpg)
 
 Unconstrained ARA plot with the l1 norm of a subset of the Autompg
 dataset.
@@ -546,7 +546,7 @@ mapping <- ara_exact_l1(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.203077554702759 seconds
+#> Execution time: 0.202449321746826 seconds
 ```
 
 The ARA plot generated through:
@@ -565,7 +565,7 @@ draw_ara_plot_2d_standardized(
 
 ![Exact ARA plot with the l1 norm of a subset of the Autompg dataset.
 Exact estimates are obtained for variable
-'mpg'.](../reference/figures/vignette_autompg_exact_l1_bb.svg)
+'mpg'.](../reference/figures/vignette_autompg_exact_l1_bb.jpg)
 
 Exact ARA plot with the l1 norm of a subset of the Autompg dataset.
 Exact estimates are obtained for variable ‘mpg’.

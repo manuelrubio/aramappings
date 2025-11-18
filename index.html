@@ -75,7 +75,7 @@
 <p>ARA is a type of “radial axes” multivariate visualization technique. Other prominent examples include star coordinates (SC) (Kandogan 2000, 2001) and biplots (Gabriel 1971; Gower and Hand 1995; Hofmann 2004; Grange, Roux, and Gardner-Lubbe 2009; Greenacre 2010), which have been used mainly for exploratory purposes, including cluster analysis, outlier and trend detection, decision support tasks. Their main appeal is the possibility to simultaneously display information about both data observations and variables. In particular, high-dimensional numerical data observations are represented as points (or other visual markers) on a two- or three-dimensional space, while data variables are represented through axis vectors, and optionally labeled line axes, similar to those in a Cartesian coordinate system.</p>
 <p>With ARA, users create desired visualizations by selecting specific sets of axis vectors interactively (as in SC), where each vector is associated with a data variable. These axis vectors indicate the directions in which the values of their associated variables generally increase within the plot. Additionally, the high-dimensional observations are mapped onto the plot (in an optimal sense) in order to allow users to estimate variable values by visually projecting these points onto the labeled axes, as in Biplots.</p>
 <div class="figure" style="text-align: center">
-<img src="reference/figures/vignette_cereals_ara_bb.svg" alt="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots." width="80%"><p class="caption">
+<img src="reference/figures/vignette_cereals_ara_bb.jpg" alt="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots." width="80%"><p class="caption">
 ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots.
 </p>
 </div>
@@ -183,7 +183,7 @@ pak::pak("manuelrubio/aramappings")
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Execution time: '</span>,<span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, <span class="st">' seconds'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Execution time: 0.0107271671295166 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Execution time: 0.0106110572814941 seconds</span></span></code></pre></div>
 <p>ARA plots can get cluttered when showing all of the axis lines and corresponding labels at the tick marks. Thus, the function that we will use to draw the ARA plot (<code><a href="reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>) contains a parameter called <code>axis_lines</code> for specifying the subset of axis lines (and labels) we wish to visualize. In this example we will show the axes associated with variables “mpg” and “acceleration”. Note that in the original data frame these were variables 1 and 6. However, since we only retained four variables (“mpg”, “horsepower”, “weight”, and “acceleration”), the column index of “acceleration” is now 4.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select variables with labeled axis lines on ARA plot</span></span>
@@ -206,7 +206,7 @@ pak::pak("manuelrubio/aramappings")
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="reference/figures/readme_autompg_unconstrained_l2.svg" alt="Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset." width="80%"><p class="caption">
+<img src="reference/figures/readme_autompg_unconstrained_l2.jpg" alt="Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset." width="80%"><p class="caption">
 Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset.
 </p>
 </div>

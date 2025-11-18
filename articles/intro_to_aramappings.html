@@ -95,7 +95,7 @@ variable values by visually projecting these points onto the labeled
 axes, as in Biplots.</p>
 <p><br></p>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/vignette_cereals_ara_bb.svg" class="r-plt" alt="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots." width="80%"><p class="caption">
+<img src="../reference/figures/vignette_cereals_ara_bb.jpg" class="r-plt" alt="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots." width="80%"><p class="caption">
 ARA plot of four variables of a breakfast cereal dataset.
 High-dimensional data values can be estimated via projections onto the
 labeled axes, as in Biplots.
@@ -420,7 +420,7 @@ and shows the execution runtime involved in computing the mapping.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Execution time: '</span>,<span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, <span class="st">' seconds'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Execution time: 0.00748038291931152 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Execution time: 0.00787782669067383 seconds</span></span></code></pre></div>
 <p>ARA plots can get cluttered when showing all of the axis lines and
 corresponding labels at the tick marks. Thus, the function that we will
 use to draw the ARA plot (<code><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>)
@@ -455,7 +455,7 @@ to the value of variable “mpg”.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/vignette_autompg_unconstrained_l2_bb.svg" class="r-plt" alt="Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset." width="90%"><p class="caption">
+<img src="../reference/figures/vignette_autompg_unconstrained_l2_bb.jpg" class="r-plt" alt="Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset." width="90%"><p class="caption">
 Unconstrained ARA plot with the l2 norm of a subset of the Autompg
 dataset.
 </p>
@@ -485,7 +485,7 @@ ordering the plotted points:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Execution time: '</span>,<span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, <span class="st">' seconds'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Execution time: 0.669802904129028 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Execution time: 0.672279596328735 seconds</span></span></code></pre></div>
 <p>Note that it is also very efficient since the solution can also be
 expressed as a formula. Finally, we generate the ARA plot:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -500,7 +500,7 @@ expressed as a formula. Finally, we generate the ARA plot:</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/vignette_autompg_exact_l2_bb.svg" class="r-plt" alt="Exact ARA plot with the l2 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'." width="90%"><p class="caption">
+<img src="../reference/figures/vignette_autompg_exact_l2_bb.jpg" class="r-plt" alt="Exact ARA plot with the l2 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'." width="90%"><p class="caption">
 Exact ARA plot with the l2 norm of a subset of the Autompg dataset.
 Exact estimates are obtained for variable ‘mpg’.
 </p>
@@ -526,7 +526,7 @@ package.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Execution time: '</span>,<span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, <span class="st">' seconds'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Execution time: 0.0269293785095215 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Execution time: 0.0270481109619141 seconds</span></span></code></pre></div>
 <p>Finally, we generate the ARA plot:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Draw the ARA plot</span></span>
@@ -540,7 +540,7 @@ package.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/vignette_autompg_ordered_l2_bb.svg" class="r-plt" alt="Ordered ARA plot with the l2 norm of a subset of the Autompg dataset. The values of 'mpg' are ordered correctly along its corresponding axis." width="90%"><p class="caption">
+<img src="../reference/figures/vignette_autompg_ordered_l2_bb.jpg" class="r-plt" alt="Ordered ARA plot with the l2 norm of a subset of the Autompg dataset. The values of 'mpg' are ordered correctly along its corresponding axis." width="90%"><p class="caption">
 Ordered ARA plot with the l2 norm of a subset of the Autompg dataset.
 The values of ‘mpg’ are ordered correctly along its corresponding axis.
 </p>
@@ -597,7 +597,7 @@ cluster object created above.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Execution time: '</span>,<span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, <span class="st">' seconds'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Execution time: 0.264293432235718 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Execution time: 0.262260675430298 seconds</span></span></code></pre></div>
 <p>The ARA plot generated through:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
@@ -611,7 +611,7 @@ cluster object created above.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/vignette_autompg_unconstrained_l1_bb.svg" class="r-plt" alt="Unconstrained ARA plot with the l1 norm of a subset of the Autompg dataset." width="90%"><p class="caption">
+<img src="../reference/figures/vignette_autompg_unconstrained_l1_bb.jpg" class="r-plt" alt="Unconstrained ARA plot with the l1 norm of a subset of the Autompg dataset." width="90%"><p class="caption">
 Unconstrained ARA plot with the l1 norm of a subset of the Autompg
 dataset.
 </p>
@@ -632,7 +632,7 @@ the <span class="math inline">\(\ell^{1}\)</span> norm:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Execution time: '</span>,<span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, <span class="st">' seconds'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Execution time: 0.203077554702759 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Execution time: 0.202449321746826 seconds</span></span></code></pre></div>
 <p>The ARA plot generated through:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
@@ -645,7 +645,7 @@ the <span class="math inline">\(\ell^{1}\)</span> norm:</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/vignette_autompg_exact_l1_bb.svg" class="r-plt" alt="Exact ARA plot with the l1 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'." width="90%"><p class="caption">
+<img src="../reference/figures/vignette_autompg_exact_l1_bb.jpg" class="r-plt" alt="Exact ARA plot with the l1 norm of a subset of the Autompg dataset. Exact estimates are obtained for variable 'mpg'." width="90%"><p class="caption">
 Exact ARA plot with the l1 norm of a subset of the Autompg dataset.
 Exact estimates are obtained for variable ‘mpg’.
 </p>
