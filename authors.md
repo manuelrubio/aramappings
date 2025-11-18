@@ -23,13 +23,13 @@ Source:
 [`DESCRIPTION`](https://github.com/manuelrubio/aramappings/blob/master/DESCRIPTION)
 
 Rubio-Sánchez M (2025). *aramappings: Computes Adaptable Radial Axes
-Mappings*. R package version 0.1.0,
+Mappings*. R package version 0.1.1,
 <https://github.com/manuelrubio/aramappings>.
 
     @Manual{,
       title = {aramappings: Computes Adaptable Radial Axes Mappings},
       author = {Manuel Rubio-Sánchez},
       year = {2025},
-      note = {R package version 0.1.0},
+      note = {R package version 0.1.1},
       url = {https://github.com/manuelrubio/aramappings},
     }

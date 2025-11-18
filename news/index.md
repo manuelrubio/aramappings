@@ -1,5 +1,12 @@
 # Changelog
 
+## aramappings 0.1.1
+
+Fixed CRAN submission issues:
+
+- Reduced size of images  
+- Increased test tolerance in test-ara_unconstrained_l1.R
+
 ## aramappings 0.1.0
 
 CRAN release: 2025-11-18
