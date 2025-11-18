@@ -28,7 +28,7 @@ ARA is a type of "radial axes" multivariate visualization technique. Other promi
 With ARA, users create desired visualizations by selecting specific sets of axis vectors interactively (as in SC), where each vector is associated with a data variable. These axis vectors indicate the directions in which the values of their associated variables generally increase within the plot. Additionally, the high-dimensional observations are mapped onto the plot (in an optimal sense) in order to allow users to estimate variable values by visually projecting these points onto the labeled axes, as in Biplots. 
 
 ```{r araplot, echo=FALSE, fig.align = 'center', fig.cap="ARA plot of four variables of a breakfast cereal dataset. High-dimensional data values can be estimated via projections onto the labeled axes, as in Biplots.", out.width = '80%'}
-knitr::include_graphics("man/figures/vignette_cereals_ara_bb.svg")
+knitr::include_graphics("man/figures/vignette_cereals_ara_bb.jpg")
 ```
 
 The previous figure is an ARA plot of a breakfast cereal dataset. The axis vectors associated with the variables are chosen to distinguish between healthier cereals (toward the right) and less healthy ones (toward the left). For instance, points on the right will generally have larger values of Protein and Vitamins, and lower values of Sugar and Calories. Users can obtain approximations of data values by visually projecting the plotted points onto the labeled axes. For example, users would estimate a value of about 57 calories for the point that lies further to the right.
@@ -202,7 +202,7 @@ draw_ara_plot_2d_standardized(
 
 
 ```{r unc_l2, echo=FALSE, fig.align = 'center', fig.cap="Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset.", out.width = '80%'}
-knitr::include_graphics("man/figures/readme_autompg_unconstrained_l2.svg")
+knitr::include_graphics("man/figures/readme_autompg_unconstrained_l2.jpg")
 ```
 
 ## References

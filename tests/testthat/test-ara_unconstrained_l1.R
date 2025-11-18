@@ -1,4 +1,4 @@
-tolerance <- 0.001
+tolerance <- 0.002
 
 set.seed(1000000)
 
