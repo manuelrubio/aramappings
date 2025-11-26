@@ -2,6 +2,8 @@
 
 ## aramappings 0.1.1
 
+CRAN release: 2025-11-19
+
 Fixed CRAN submission issues:
 
 - Reduced size of images  

@@ -163,10 +163,24 @@ shape; and animating transitions between plots).
 
 Install a stable version from CRAN
 
+``` r
+install.packages("aramappings")
+```
+
 Install the development version of aramappings from
 [GitHub](https://github.com/manuelrubio/aramappings/) with:
 
+``` r
+# install.packages("devtools")
+devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
+```
+
 or
+
+``` r
+# install.packages("pak")
+pak::pak("manuelrubio/aramappings")
+```
 
 ## Usage examples
 
@@ -295,7 +309,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.00780034065246582 seconds
+#> Execution time: 0.00815105438232422 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -373,7 +387,7 @@ mapping <- ara_exact_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.731305122375488 seconds
+#> Execution time: 0.764922142028809 seconds
 ```
 
 Note that it is also very efficient since the solution can also be
@@ -421,7 +435,7 @@ mapping <- ara_ordered_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0272402763366699 seconds
+#> Execution time: 0.0281496047973633 seconds
 ```
 
 Finally, we generate the ARA plot:
@@ -504,7 +518,7 @@ mapping <- ara_unconstrained_l1(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.26128625869751 seconds
+#> Execution time: 0.265974998474121 seconds
 ```
 
 The ARA plot generated through:
@@ -546,7 +560,7 @@ mapping <- ara_exact_l1(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.210701704025269 seconds
+#> Execution time: 0.20493221282959 seconds
 ```
 
 The ARA plot generated through:
