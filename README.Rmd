@@ -82,6 +82,7 @@ pak::pak("manuelrubio/aramappings")
 ```
 
 
+
 ## Example
 
 We recommend starting an exploratory analysis using an unconstrained ARA plot with the $\ell^{2}$ norm, which can be generated very efficiently since the mappings can be obtained through a closed-form expression (i.e., a formula). The obvious first step is to load the **aramappings** package:
