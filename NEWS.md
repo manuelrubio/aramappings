@@ -1,3 +1,8 @@
+# aramappings 0.1.2
+
+Fixed installation instructions in README and vignette
+
+
 # aramappings 0.1.1
 
 Fixed CRAN submission issues:
