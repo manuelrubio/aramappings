@@ -104,23 +104,23 @@ The function is included in order to show the results of the ARA mapping functio
 
 Install a stable version from CRAN
 
-<!-- ```{r install}
+``` {r, eval=FALSE}
 install.packages("aramappings")
-``` -->
+```
 
 Install the development version of aramappings from [GitHub](https://github.com/manuelrubio/aramappings/) with:
 
-<!-- ```{r install_dev}
+``` {r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
-``` -->
+```
 
 or
 
-<!-- ```{r install_dev}
+``` {r, eval=FALSE}
 # install.packages("pak")
 pak::pak("manuelrubio/aramappings")
-``` -->
+```
 
 
 

@@ -95,24 +95,24 @@ data:
 
 Install a stable version from CRAN
 
-<!-- ```{r install}
+``` r
 install.packages("aramappings")
-``` -->
+```
 
 Install the development version of aramappings from
 [GitHub](https://github.com/manuelrubio/aramappings/) with:
 
-<!-- ```{r install_dev}
+``` r
 # install.packages("devtools")
 devtools::install_github("manuelrubio/aramappings", build_vignettes = TRUE)
-``` -->
+```
 
 or
 
-<!-- ```{r install_dev}
+``` r
 # install.packages("pak")
 pak::pak("manuelrubio/aramappings")
-``` -->
+```
 
 ## Example
 
@@ -237,7 +237,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0106110572814941 seconds
+#> Execution time: 0.0107440948486328 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
