@@ -2,6 +2,8 @@
 
 ## aramappings 0.1.2
 
+CRAN release: 2025-11-26
+
 Fixed installation instructions in README and vignette
 
 ## aramappings 0.1.1
