@@ -106,6 +106,7 @@
 #'   color_variable = variable
 #' )
 #'
+#'
 ara_ordered_linf <- function(
     X,
     V,

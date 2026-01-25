@@ -120,6 +120,7 @@
 #'   color_variable = variable
 #' )
 #'
+#'
 ara_exact_linf <- function(
     X,
     V,

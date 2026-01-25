@@ -146,6 +146,7 @@
 #'   color_variable = color_variable
 #' )
 #'
+#'
 ara_unconstrained_l1 <- function(
     X,
     V,

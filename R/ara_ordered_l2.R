@@ -106,6 +106,7 @@
 #'   color_variable = variable
 #' )
 #'
+#'
 ara_ordered_l2 <- function(
     X,
     V,

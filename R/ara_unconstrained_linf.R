@@ -123,6 +123,7 @@
 #'   color_variable = color_variable
 #' )
 #'
+#'
 ara_unconstrained_linf <- function(
     X,
     V,

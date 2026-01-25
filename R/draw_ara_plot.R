@@ -113,6 +113,7 @@
 #'   color_variable = color_variable
 #' )
 #'
+#'
 draw_ara_plot_2d_standardized <- function(
     Z,
     X,

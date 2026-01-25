@@ -109,6 +109,7 @@
 #'   color_variable = variable
 #' )
 #'
+#'
 ara_exact_l2 <- function(
     X,
     V,

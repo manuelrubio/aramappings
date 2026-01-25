@@ -126,6 +126,7 @@ draw_ara_plot_2d_standardized(
   color_variable = color_variable
 )
 
+
 }
 \references{
 M. Rubio-Sánchez, A. Sanchez, D. J. Lehmann: Adaptable radial axes plots for
