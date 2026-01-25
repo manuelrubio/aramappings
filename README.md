@@ -237,7 +237,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0108168125152588 seconds
+#> Execution time: 0.0103709697723389 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
