@@ -35,10 +35,8 @@ BugReports: https://github.com/manuelrubio/aramappings/issues
 Suggests: 
     testthat (>= 3.0.0),
     parallelly,
-    geometry,
-    ascentTraining,     
-    liver,
-    datasetsICR,
+    ascentTraining,
+    datasetsICR,    
     knitr,
     rmarkdown
 Config/testthat/edition: 3
