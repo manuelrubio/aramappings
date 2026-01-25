@@ -147,6 +147,7 @@ above.
 ``` r
 # Define subset of (numerical) variables
 selected_variables <- c(1, 4, 5, 6) # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+n <- length(selected_variables)
 
 # Retain only selected variables and rename dataset as X
 X <- auto_mpg[, selected_variables] # Select a subset of variables
@@ -195,15 +196,17 @@ automatic method. For instante, $\mathbf{V}$ could be the matrix
 defining the Principal Component Analysis transfomation (in that case
 the ARA plot would be a Principal Component Biplot). In this example, we
 simply define a configuration of vectors in polar coordinates and
-transform them to Cartesian coordinates with the `pol2cart()` function
-in package **geometry**.
+transform them to Cartesian coordinates.
 
 ``` r
 # Define axis vectors (2-dimensional in this example)
-library(geometry)
 r <- c(0.8, 1, 1.2, 1)
 theta <- c(225, 100, 315, 80) * 2 * pi / 360
-V <- pol2cart(theta, r)
+V <- pracma::zeros(n, 2)
+for (i in 1:n) {
+  V[i,1] <- r[i] * cos(theta[i])
+  V[i,2] <- r[i] * sin(theta[i])
+}
 ```
 
 It is also possible to define weights in order to control the relative
@@ -237,7 +240,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0103709697723389 seconds
+#> Execution time: 0.00283503532409668 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
