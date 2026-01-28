@@ -22,3 +22,8 @@ reference:
     Functions for creating an ARA plot
   contents:
     - draw_ara_plot_2d_standardized
+- title: Datasets in examples and tests
+  contents:
+  - auto_mpg
+  - cereal
+  - wine
