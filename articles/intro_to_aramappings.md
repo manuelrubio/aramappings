@@ -301,7 +301,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.00258636474609375 seconds
+#> Execution time: 0.00263094902038574 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -378,7 +378,7 @@ mapping <- ara_exact_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.680054664611816 seconds
+#> Execution time: 0.692009210586548 seconds
 ```
 
 Note that it is also very efficient since the solution can also be
@@ -425,7 +425,7 @@ mapping <- ara_ordered_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0219719409942627 seconds
+#> Execution time: 0.0216567516326904 seconds
 ```
 
 Finally, we generate the ARA plot:
@@ -465,19 +465,27 @@ matrix. In general, it grows with the number of observations. Users are
 advised to analyze runtimes on their computers to estimate an adequate
 number of cores to use on their data.
 
-In the following example, we first detect the available number of cores
-(`NCORES`) with package **parallelly**, and will use half of them (if
-several are available).
+In the following example, we use 2 workers/cores when testing the code
+in CRAN. Otherwise we detect the available number of cores (`NCORES`)
+with package **parallelly** (if installed) or **parallel**, and use half
+of them (if several are available).
 
 ``` r
-# Detect the number of available CPU cores
-if (requireNamespace("parallelly", quietly = TRUE)) {
-  NCORES <- parallelly::availableCores(omit = 1)
+chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+
+if (nzchar(chk) && chk == "TRUE") {
+  # use 2 cores in CRAN
+  NCORES <- 2L
 } else {
-  NCORES <- max(1,parallel::detectCores() - 1)
-}
-if (NCORES > 1) {
-  NCORES <- floor(NCORES / 2)
+  # use all cores in devtools::test()
+  if (requireNamespace("parallelly", quietly = TRUE)) {
+    NCORES <- parallelly::availableCores(omit = 1)
+  } else {
+    NCORES <- max(1,parallel::detectCores() - 1)
+  }
+  if (NCORES > 1) {
+    NCORES <- floor(NCORES / 2)
+  }  
 }
 ```
 
@@ -510,7 +518,7 @@ mapping <- ara_unconstrained_l1(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.273645401000977 seconds
+#> Execution time: 0.271854877471924 seconds
 ```
 
 The ARA plot generated through:
@@ -551,7 +559,7 @@ mapping <- ara_exact_l1(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.180601119995117 seconds
+#> Execution time: 0.180907726287842 seconds
 ```
 
 The ARA plot generated through:
