@@ -174,5 +174,4 @@ draw_ara_plot_2d_standardized(
   color_variable = variable
 )
 
-
 ```

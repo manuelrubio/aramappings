@@ -301,7 +301,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0028529167175293 seconds
+#> Execution time: 0.00269174575805664 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -378,7 +378,7 @@ mapping <- ara_exact_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.754346132278442 seconds
+#> Execution time: 0.728548288345337 seconds
 ```
 
 Note that it is also very efficient since the solution can also be
@@ -425,7 +425,7 @@ mapping <- ara_ordered_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.022913932800293 seconds
+#> Execution time: 0.0218970775604248 seconds
 ```
 
 Finally, we generate the ARA plot:
@@ -510,7 +510,7 @@ mapping <- ara_unconstrained_l1(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.29120945930481 seconds
+#> Execution time: 0.287074089050293 seconds
 ```
 
 The ARA plot generated through:
@@ -551,7 +551,7 @@ mapping <- ara_exact_l1(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.19450831413269 seconds
+#> Execution time: 0.193917274475098 seconds
 ```
 
 The ARA plot generated through:
