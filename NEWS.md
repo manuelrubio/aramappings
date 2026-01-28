@@ -1,3 +1,5 @@
+# aramappings 0.1.3
+
 # aramappings 0.1.2
 
 Fixed installation instructions in README and vignette
