@@ -127,18 +127,9 @@ package:
 library(aramappings)
 ```
 
-In the usage examples we will use the **Auto MPG** dataset available in
-packages **ascentTraining** and **grpnet**, Kaggle, or the UCI Machine
-Learning Repository (Frank and Asuncion 2010). In this case, we load the
-dataset in the **ascentTraining** package.
-
-``` r
-# Load data
-library(ascentTraining) # contains the Auto MPG dataset
-data("auto_mpg")
-```
-
-Next, we select a subset of numerical variables from the dataset. The
+In the usage examples we will use the **Auto MPG** dataset available
+Kaggle, or the UCI Machine Learning Repository (Frank and Asuncion
+2010). We select a subset of numerical variables from the dataset. The
 selected variables are specified through a vector containing their
 column indices in the original dataset. Furthermore, we rename the data
 set to `X`, simply for clarity with respect to the notation defined
@@ -151,8 +142,6 @@ n <- length(selected_variables)
 
 # Retain only selected variables and rename dataset as X
 X <- auto_mpg[, selected_variables] # Select a subset of variables
-rm(auto_mpg)
-#> Warning in rm(auto_mpg): objeto 'auto_mpg' no encontrado
 ```
 
 The ARA functions halt if the data or other parameters contain missing
@@ -240,7 +229,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.00283503532409668 seconds
+#> Execution time: 0.00297689437866211 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -281,7 +270,6 @@ draw_ara_plot_2d_standardized(
   axis_lines = axis_lines,
   color_variable = color_variable
 )
-#> [1] 0
 ```
 
 <div class="figure" style="text-align: center">
