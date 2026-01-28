@@ -229,7 +229,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.00294804573059082 seconds
+#> Execution time: 0.00267291069030762 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -287,14 +287,6 @@ dataset.
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
-
-<div id="ref-Frank10" class="csl-entry">
-
-Frank, A., and A. Asuncion. 2010. “UCI Machine Learning Repository.”
-University of California, Irvine, School of Information; Computer
-Sciences. [archive.ics.uci.edu/ml](https://archive.ics.uci.edu/ml).
-
-</div>
 
 <div id="ref-Gabriel71" class="csl-entry">
 
