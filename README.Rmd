@@ -92,7 +92,7 @@ We recommend starting an exploratory analysis using an unconstrained ARA plot wi
 library(aramappings)
 ```
 
-In the usage examples we will use the **Auto MPG** dataset available in packages **ascentTraining** and **grpnet**, Kaggle, or the UCI Machine Learning Repository [@Frank10]. In this case, we load the dataset in the **ascentTraining** package.
+In the usage examples we will use the **Auto MPG** dataset available Kaggle, or the UCI Machine Learning Repository [@Frank10].
 
 ```{r}
 # Load data
