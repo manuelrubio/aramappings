@@ -138,15 +138,13 @@ We recommend starting an exploratory analysis using an unconstrained ARA plot wi
 library(aramappings)
 ```
 
-In the usage examples we will use the **Auto MPG** dataset available in packages **ascentTraining** and **grpnet**, Kaggle, or the UCI Machine Learning Repository [@Frank10]. In this case, we load the dataset in the **ascentTraining** package.
-
-```{r}
-# Load data
-library(ascentTraining) # contains the Auto MPG dataset
-data("auto_mpg")
-```
-
-Next, we select a subset of numerical variables from the dataset. The selected variables are specified through a vector containing their column indices in the original dataset. Furthermore, we rename the data set to `X`, simply for clarity with respect to the notation defined above.
+In the usage examples we will use the **Auto MPG** dataset available in Kaggle, 
+the UCI Machine Learning Repository (Frank and Asuncion 2010), and can also be
+found in packages available at CRAN. In particular, we select a subset of 
+numerical variables from the dataset. The selected variables are specified 
+through a vector containing their column indices in the original dataset.
+Furthermore, we rename the data set to `X`, simply for clarity with respect to
+the notation defined above.
 
 ```{r}
 # Define subset of (numerical) variables
@@ -155,7 +153,6 @@ n <- length(selected_variables)
 
 # Retain only selected variables and rename dataset as X
 X <- auto_mpg[, selected_variables] # Select a subset of variables
-rm(auto_mpg)
 ```
 
 The ARA functions halt if the data or other parameters contain missing values. Thus, we proceed eliminating any row (data observation) that contains missing values. Naturally, another approach consists of replacing missing values by some other substituted values (imputation).

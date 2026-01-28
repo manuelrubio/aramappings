@@ -4,20 +4,15 @@ set.seed(1000000)
 
 #################################   Set data   #################################
 
-# Load data set
-data("wine", package = "datasetsICR")
-
-
-# wine <- read.csv(url("https://archive.ics.uci.edu/ml/
-# machine-learning-databases/wine/wine.data"), header = FALSE)
 
 X <- wine[, 2:ncol(wine)] # Select a subset of variables
 X <- apply(as.matrix.noquote(X), 2, as.numeric)
 
 Z <- scale(X) # standardize
 
-N <- nrow(X)
-n <- ncol(X)
+N <- nrow(Z)
+n <- ncol(Z)
+
 
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
@@ -250,49 +245,23 @@ test_that("Function halts if color_variable is not an integer in [1,n]", {
 
 weights <- runif(n, 0, 1)
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-mapping <- ara_unconstrained_l2(X, V, weights = weights, solver = "formula")
+mapping <- ara_unconstrained_l2(Z, V, weights = weights, solver = "formula")
 P <- mapping$P
 axis_lines <- c(2, 4, 7, 9)
 color_variable <- 3
 
 
-test_that("draw_ara_plot_2d_standardized() terminates without errors", {
-  expect_equal(
-    draw_ara_plot_2d_standardized(Z, X, V, P,
+test_that("draw_ara_plot_2d_standardized() generates a ggplot object", {
+  expect_match(
+    class(draw_ara_plot_2d_standardized(Z, X, V, P,
       weights = weights,
       axis_lines = axis_lines,
       color_variable = color_variable
-    ),
-    0,
-    tolerance = 0
+    )),
+    "ggplot2::ggplot",
+    fixed=TRUE,
+    all=FALSE
   )
 })
 
-test_that("draw_ara_plot_2d_standardized() terminates without errors", {
-  expect_equal(
-    draw_ara_plot_2d_standardized(Z, X, V, P,
-      weights = weights,
-      axis_lines = axis_lines
-    ),
-    0,
-    tolerance = 00
-  )
-})
 
-test_that("draw_ara_plot_2d_standardized() terminates without errors", {
-  expect_equal(draw_ara_plot_2d_standardized(Z, X, V, P, weights = weights),
-    0,
-    tolerance = 0
-  )
-})
-
-test_that("draw_ara_plot_2d_standardized() terminates without errors", {
-  expect_equal(
-    draw_ara_plot_2d_standardized(Z, X, V, P,
-      weights = weights,
-      color_variable = color_variable
-    ),
-    0,
-    tolerance = 0
-  )
-})

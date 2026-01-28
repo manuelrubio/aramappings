@@ -4,21 +4,12 @@ set.seed(1000000)
 
 #################################   Set data   #################################
 
-# Load data set
-data("wine", package = "datasetsICR")
-
-
-# wine <- read.csv(url("https://archive.ics.uci.edu/ml/
-# machine-learning-databases/wine/wine.data"), header = FALSE)
-
 X <- wine[, 2:ncol(wine)] # Select a subset of variables
 
 X <- scale(X) # standardize
 
 N <- nrow(X)
 n <- ncol(X)
-
-
 
 ###############################  Test arguments  ###############################
 

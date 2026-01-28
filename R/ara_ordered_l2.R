@@ -44,9 +44,6 @@
 #' @export
 #'
 #' @examples
-#' # Load data
-#' data("auto_mpg", package = "ascentTraining")
-#'
 #' # Define subset of (numerical) variables
 #' # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration"
 #' selected_variables <- c(1, 4, 5, 6)
@@ -54,7 +51,6 @@
 #'
 #' # Retain only selected variables and rename dataset as X
 #' X <- auto_mpg[, selected_variables] # Select a subset of variables
-#' rm(auto_mpg)
 #'
 #' # Remove rows with missing values from X
 #' N <- nrow(X)

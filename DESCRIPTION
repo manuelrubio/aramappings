@@ -35,9 +35,10 @@ BugReports: https://github.com/manuelrubio/aramappings/issues
 Suggests: 
     testthat (>= 3.0.0),
     parallelly,
-    ascentTraining,
-    datasetsICR,    
     knitr,
     rmarkdown
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+Depends: 
+    R (>= 3.5)
+LazyData: true
