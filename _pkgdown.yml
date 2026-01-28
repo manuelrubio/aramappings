@@ -24,6 +24,6 @@ reference:
     - draw_ara_plot_2d_standardized
 - title: Datasets in examples and tests
   contents:
-  - auto_mpg
-  - cereal
-  - wine
+    - auto_mpg
+    - cereal
+    - wine
