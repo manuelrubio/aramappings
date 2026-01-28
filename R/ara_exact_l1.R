@@ -86,7 +86,10 @@
 #' if (requireNamespace("parallelly", quietly = TRUE)) {
 #'   NCORES <- parallelly::availableCores(omit = 1)
 #' } else {
-#'   NCORES <- parallel::detectCores() - 1
+#' NCORES <- max(1,parallel::detectCores() - 1)
+#' }
+#' if (NCORES > 1) {
+#' NCORES <- floor(NCORES / 2)
 #' }
 #'
 #' # Create a cluster for parallel processing

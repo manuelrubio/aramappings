@@ -195,7 +195,14 @@ for (m in 1:3) {
 }
 
 
-NCORES <- parallelly::availableCores(omit = 1)
+if (requireNamespace("parallelly", quietly = TRUE)) {
+  NCORES <- parallelly::availableCores(omit = 1)
+} else {
+  NCORES <- max(1,parallel::detectCores() - 1)
+}
+if (NCORES > 1) {
+  NCORES <- floor(NCORES / 2)
+}
 
 if (exists("cl")) {
   parallel::stopCluster(cl)
