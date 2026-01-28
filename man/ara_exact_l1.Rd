@@ -107,10 +107,21 @@ for (i in 1:n) {
 variable <- sample(1:n, 1)
 
 # Detect the number of available CPU cores
-if (requireNamespace("parallelly", quietly = TRUE)) {
-  NCORES <- parallelly::availableCores(omit = 1)
+chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+
+if (nzchar(chk) && chk == "TRUE") {
+  # use 2 cores in CRAN
+  NCORES <- 2L
 } else {
-  NCORES <- parallel::detectCores() - 1
+  # use all cores in devtools::test()
+  if (requireNamespace("parallelly", quietly = TRUE)) {
+    NCORES <- parallelly::availableCores(omit = 1)
+  } else {
+    NCORES <- max(1,parallel::detectCores() - 1)
+  }
+  if (NCORES > 1) {
+    NCORES <- floor(NCORES / 2)
+  }
 }
 
 # Create a cluster for parallel processing

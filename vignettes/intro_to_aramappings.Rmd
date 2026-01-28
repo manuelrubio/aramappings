@@ -345,17 +345,24 @@ Although the estimates for "mpg" are not exact, the values of "mpg" are ordered 
 
 ARA mappings of unconstrained and exact problems with the $\ell^{1}$ or $\ell^{\infty}$ can be computed in parallel using several cores. The ideal number of cores to use depends on the size of the input data matrix. In general, it grows with the number of observations. Users are advised to analyze runtimes on their computers to estimate an adequate number of cores to use on their data. 
 
-In the following example, we first detect the available number of cores (`NCORES`) with package **parallelly**, and will use half of them (if several are available).
+In the following example, we use 2 workers/cores when testing the code in CRAN. Otherwise we detect the available number of cores (`NCORES`) with package **parallelly** (if installed) or **parallel**, and use half of them (if several are available).
 
 ```{r}
-# Detect the number of available CPU cores
-if (requireNamespace("parallelly", quietly = TRUE)) {
-  NCORES <- parallelly::availableCores(omit = 1)
+chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+
+if (nzchar(chk) && chk == "TRUE") {
+  # use 2 cores in CRAN
+  NCORES <- 2L
 } else {
-  NCORES <- max(1,parallel::detectCores() - 1)
-}
-if (NCORES > 1) {
-  NCORES <- floor(NCORES / 2)
+  # use all cores in devtools::test()
+  if (requireNamespace("parallelly", quietly = TRUE)) {
+    NCORES <- parallelly::availableCores(omit = 1)
+  } else {
+    NCORES <- max(1,parallel::detectCores() - 1)
+  }
+  if (NCORES > 1) {
+    NCORES <- floor(NCORES / 2)
+  }  
 }
 ```
 
