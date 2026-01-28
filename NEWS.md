@@ -1,6 +1,7 @@
-# aramappings 0.1.4
-
 # aramappings 0.1.3
+
+Removed package dependencies involving data sets. The data sets used in tests
+and examples are now included in the package.
 
 # aramappings 0.1.2
 
