@@ -200,29 +200,20 @@ library(aramappings)
 ```
 
 In the usage examples we will use the **Auto MPG** dataset available in
-packages **ascentTraining** and **grpnet**, Kaggle, or the UCI Machine
-Learning Repository ([Frank and Asuncion 2010](#ref-Frank10)). In this
-case, we load the dataset in the **ascentTraining** package.
-
-``` r
-# Load data
-library(ascentTraining) # contains the Auto MPG dataset
-data("auto_mpg")
-```
-
-Next, we select a subset of numerical variables from the dataset. The
-selected variables are specified through a vector containing their
-column indices in the original dataset. Furthermore, we rename the data
-set to `X`, simply for clarity with respect to the notation defined
-above.
+Kaggle, the UCI Machine Learning Repository (Frank and Asuncion 2010),
+and can also be found in packages available at CRAN. In particular, we
+select a subset of numerical variables from the dataset. The selected
+variables are specified through a vector containing their column indices
+in the original dataset. Furthermore, we rename the data set to `X`,
+simply for clarity with respect to the notation defined above.
 
 ``` r
 # Define subset of (numerical) variables
 selected_variables <- c(1, 4, 5, 6) # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+n <- length(selected_variables)
 
 # Retain only selected variables and rename dataset as X
 X <- auto_mpg[, selected_variables] # Select a subset of variables
-rm(auto_mpg)
 ```
 
 The ARA functions halt if the data or other parameters contain missing
@@ -266,16 +257,17 @@ through an automatic method. For instante, \\\mathbf{V}\\ could be the
 matrix defining the Principal Component Analysis transfomation (in that
 case the ARA plot would be a Principal Component Biplot). In this
 example, we simply define a configuration of vectors in polar
-coordinates and transform them to Cartesian coordinates with the
-[`pol2cart()`](https://rdrr.io/pkg/geometry/man/pol2cart.html) function
-in package **geometry**.
+coordinates and transform them to Cartesian coordinates.
 
 ``` r
 # Define axis vectors (2-dimensional in this example)
-library(geometry)
 r <- c(0.8, 1, 1.2, 1)
 theta <- c(225, 100, 315, 80) * 2 * pi / 360
-V <- pol2cart(theta, r)
+V <- pracma::zeros(n, 2)
+for (i in 1:n) {
+  V[i,1] <- r[i] * cos(theta[i])
+  V[i,2] <- r[i] * sin(theta[i])
+}
 ```
 
 It is also possible to define weights in order to control the relative
@@ -309,7 +301,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.00803804397583008 seconds
+#> Execution time: 0.00273680686950684 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -351,7 +343,6 @@ draw_ara_plot_2d_standardized(
   axis_lines = axis_lines,
   color_variable = color_variable
 )
-#> [1] 0
 ```
 
 ![Unconstrained ARA plot with the l2 norm of a subset of the Autompg
@@ -387,7 +378,7 @@ mapping <- ara_exact_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.751300573348999 seconds
+#> Execution time: 0.738284587860107 seconds
 ```
 
 Note that it is also very efficient since the solution can also be
@@ -403,7 +394,6 @@ draw_ara_plot_2d_standardized(
   axis_lines = axis_lines,
   color_variable = color_variable
 )
-#> [1] 0
 ```
 
 ![Exact ARA plot with the l2 norm of a subset of the Autompg dataset.
@@ -435,7 +425,7 @@ mapping <- ara_ordered_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0268456935882568 seconds
+#> Execution time: 0.0222382545471191 seconds
 ```
 
 Finally, we generate the ARA plot:
@@ -450,7 +440,6 @@ draw_ara_plot_2d_standardized(
   axis_lines = axis_lines,
   color_variable = color_variable
 )
-#> [1] 0
 ```
 
 ![Ordered ARA plot with the l2 norm of a subset of the Autompg dataset.
@@ -482,8 +471,11 @@ several are available).
 
 ``` r
 # Detect the number of available CPU cores
-library(parallelly)
-NCORES <- parallelly::availableCores()
+if (requireNamespace("parallelly", quietly = TRUE)) {
+  NCORES <- parallelly::availableCores(omit = 1)
+} else {
+  NCORES <- parallel::detectCores() - 1
+}
 if (NCORES > 1) {
   NCORES <- floor(NCORES / 2)
 }
@@ -518,7 +510,7 @@ mapping <- ara_unconstrained_l1(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.26171875 seconds
+#> Execution time: 0.289271831512451 seconds
 ```
 
 The ARA plot generated through:
@@ -533,7 +525,6 @@ draw_ara_plot_2d_standardized(
   axis_lines = axis_lines,
   color_variable = color_variable
 )
-#> [1] 0
 ```
 
 ![Unconstrained ARA plot with the l1 norm of a subset of the Autompg
@@ -560,7 +551,7 @@ mapping <- ara_exact_l1(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.203308343887329 seconds
+#> Execution time: 0.194862365722656 seconds
 ```
 
 The ARA plot generated through:
@@ -574,7 +565,6 @@ draw_ara_plot_2d_standardized(
   axis_lines = axis_lines,
   color_variable = color_variable
 )
-#> [1] 0
 ```
 
 ![Exact ARA plot with the l1 norm of a subset of the Autompg dataset.
@@ -596,10 +586,6 @@ parallel::stopCluster(cl)
 ```
 
 ## References
-
-Frank, A., and A. Asuncion. 2010. “UCI Machine Learning Repository.”
-University of California, Irvine, School of Information; Computer
-Sciences. [archive.ics.uci.edu/ml](https://archive.ics.uci.edu/ml).
 
 Gabriel, K. R. 1971. “The Biplot Graphic Display of Matrices with
 Application to Principal Component Analysis.” *Biometrika* 58 (3):

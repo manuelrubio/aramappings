@@ -124,22 +124,16 @@ ARA plot of four variables of a breakfast cereal dataset. High-dimensional data 
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/manuelrubio/aramappings" class="external-link">aramappings</a></span><span class="op">)</span></span></code></pre></div>
-<p>In the usage examples we will use the <strong>Auto MPG</strong> dataset available in packages <strong>ascentTraining</strong> and <strong>grpnet</strong>, Kaggle, or the UCI Machine Learning Repository (Frank and Asuncion 2010). In this case, we load the dataset in the <strong>ascentTraining</strong> package.</p>
+<p>In the usage examples we will use the <strong>Auto MPG</strong> dataset available Kaggle, or the UCI Machine Learning Repository (Frank and Asuncion 2010). We select a subset of numerical variables from the dataset. The selected variables are specified through a vector containing their column indices in the original dataset. Furthermore, we rename the data set to <code>X</code>, simply for clarity with respect to the notation defined above.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load data</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.ascent.io/" class="external-link">ascentTraining</a></span><span class="op">)</span> <span class="co"># contains the Auto MPG dataset</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"auto_mpg"</span><span class="op">)</span></span></code></pre></div>
-<p>Next, we select a subset of numerical variables from the dataset. The selected variables are specified through a vector containing their column indices in the original dataset. Furthermore, we rename the data set to <code>X</code>, simply for clarity with respect to the notation defined above.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define subset of (numerical) variables</span></span>
 <span><span class="va">selected_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span> <span class="co"># 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">selected_variables</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Retain only selected variables and rename dataset as X</span></span>
-<span><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">auto_mpg</span><span class="op">[</span>, <span class="va">selected_variables</span><span class="op">]</span> <span class="co"># Select a subset of variables</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">auto_mpg</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in rm(auto_mpg): objeto 'auto_mpg' no encontrado</span></span></code></pre></div>
+<span><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">auto_mpg</span><span class="op">[</span>, <span class="va">selected_variables</span><span class="op">]</span> <span class="co"># Select a subset of variables</span></span></code></pre></div>
 <p>The ARA functions halt if the data or other parameters contain missing values. Thus, we proceed eliminating any row (data observation) that contains missing values. Naturally, another approach consists of replacing missing values by some other substituted values (imputation).</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Remove rows with missing values from X</span></span>
 <span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
 <span><span class="va">rows_to_delete</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
@@ -150,26 +144,29 @@ ARA plot of four variables of a breakfast cereal dataset. High-dimensional data 
 <span><span class="op">}</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">X</span><span class="op">[</span><span class="va">rows_to_delete</span>, <span class="op">]</span></span></code></pre></div>
 <p>At this moment <code>X</code> is a <tt>data.frame</tt>. In order to use the ARA functions we first need to convert it to a matrix:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Convert X to matrix</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/noquote.html" class="external-link">as.matrix.noquote</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span>, <span class="fl">2</span>, <span class="va">as.numeric</span><span class="op">)</span></span></code></pre></div>
 <p>In addition, we strongly recommend standardizing the data when using ARA. We save the result in variable <code>Z</code> since the function that draws the plot needs the original values in <code>X</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Standardize data</span></span>
 <span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></code></pre></div>
-<p>Having preprocessed the data, the next step consists of defining the axis vectors, which are the rows of <span class="math inline">\(\mathbf{V}\)</span>. These can be obtained manually (ideally through a graphical user interface), or through an automatic method. For instante, <span class="math inline">\(\mathbf{V}\)</span> could be the matrix defining the Principal Component Analysis transfomation (in that case the ARA plot would be a Principal Component Biplot). In this example, we simply define a configuration of vectors in polar coordinates and transform them to Cartesian coordinates with the <code><a href="https://rdrr.io/pkg/geometry/man/pol2cart.html" class="external-link">pol2cart()</a></code> function in package <strong>geometry</strong>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<p>Having preprocessed the data, the next step consists of defining the axis vectors, which are the rows of <span class="math inline">\(\mathbf{V}\)</span>. These can be obtained manually (ideally through a graphical user interface), or through an automatic method. For instante, <span class="math inline">\(\mathbf{V}\)</span> could be the matrix defining the Principal Component Analysis transfomation (in that case the ARA plot would be a Principal Component Biplot). In this example, we simply define a configuration of vectors in polar coordinates and transform them to Cartesian coordinates.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define axis vectors (2-dimensional in this example)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcsterratt.github.io/geometry/" class="external-link">geometry</a></span><span class="op">)</span></span>
 <span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">1</span>, <span class="fl">1.2</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">225</span>, <span class="fl">100</span>, <span class="fl">315</span>, <span class="fl">80</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">pi</span> <span class="op">/</span> <span class="fl">360</span></span>
-<span><span class="va">V</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geometry/man/pol2cart.html" class="external-link">pol2cart</a></span><span class="op">(</span><span class="va">theta</span>, <span class="va">r</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">V</span> <span class="op">&lt;-</span> <span class="fu">pracma</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pracma/man/eye.html" class="external-link">zeros</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">V</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">r</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos</a></span><span class="op">(</span><span class="va">theta</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">V</span><span class="op">[</span><span class="va">i</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">r</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">theta</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>It is also possible to define weights in order to control the relative importance of estimating accurately on each axis. This is nevertheless complex, since the accuracy also depends on the length of the axis vectors. In this case, we have set two weigths to 1 and another two to 0.75. Visually, the weights determine the level of gray used to color the axis vectors in the ARA plot.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define weights</span></span>
 <span><span class="va">weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.75</span>, <span class="fl">0.75</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p>Having defined the data (<code>Z</code>), axis vectors (<code>V</code>), and weights (<code>weights</code>), we can proceed to compute the ARA mapping. For unconstrained ARA plots with the <span class="math inline">\(\ell^{2}\)</span> norm the <code>solver</code> parameter should be set to “formula” (the default), in order to obtain the mapping through a closed-form expression. The following code computes the embedded points and saves them in <code>mapping$P</code>, and shows the execution runtime involved in computing the mapping.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute the mapping and print the execution time</span></span>
 <span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ara_unconstrained_l2.html">ara_unconstrained_l2</a></span><span class="op">(</span></span>
@@ -180,17 +177,17 @@ ARA plot of four variables of a breakfast cereal dataset. High-dimensional data 
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Execution time: '</span>,<span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, <span class="st">' seconds'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Execution time: 0.0108168125152588 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Execution time: 0.00267291069030762 seconds</span></span></code></pre></div>
 <p>ARA plots can get cluttered when showing all of the axis lines and corresponding labels at the tick marks. Thus, the function that we will use to draw the ARA plot (<code><a href="reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>) contains a parameter called <code>axis_lines</code> for specifying the subset of axis lines (and labels) we wish to visualize. In this example we will show the axes associated with variables “mpg” and “acceleration”. Note that in the original data frame these were variables 1 and 6. However, since we only retained four variables (“mpg”, “horsepower”, “weight”, and “acceleration”), the column index of “acceleration” is now 4.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select variables with labeled axis lines on ARA plot</span></span>
 <span><span class="va">axis_lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span> <span class="co"># 1:"mpg", 4:"acceleration")</span></span></code></pre></div>
 <p>Also, the plotted points can be colored according to the values of a particular variable. In this example, we will color the points according to the value of variable “mpg”.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select variable used for coloring embedded points</span></span>
 <span><span class="va">color_variable</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co"># "mpg"</span></span></code></pre></div>
 <p>Finally, we generate the ARA plot by calling <code><a href="reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Draw the ARA plot</span></span>
 <span><span class="fu"><a href="reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
 <span>  <span class="va">Z</span>,</span>
@@ -200,8 +197,7 @@ ARA plot of four variables of a breakfast cereal dataset. High-dimensional data 
 <span>  weights <span class="op">=</span> <span class="va">weights</span>,</span>
 <span>  axis_lines <span class="op">=</span> <span class="va">axis_lines</span>,</span>
 <span>  color_variable <span class="op">=</span> <span class="va">color_variable</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="reference/figures/readme_autompg_unconstrained_l2.jpg" alt="Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset." width="80%"><p class="caption">
 Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset.
@@ -212,9 +208,6 @@ Unconstrained ARA plot with the l2 norm of a subset of the Autompg dataset.
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
-<div id="ref-Frank10" class="csl-entry">
-Frank, A., and A. Asuncion. 2010. “UCI Machine Learning Repository.” University of California, Irvine, School of Information; Computer Sciences. <a href="https://archive.ics.uci.edu/ml" class="external-link">archive.ics.uci.edu/ml</a>.
-</div>
 <div id="ref-Gabriel71" class="csl-entry">
 Gabriel, K. R. 1971. “The Biplot Graphic Display of Matrices with Application to Principal Component Analysis.” <em>Biometrika</em> 58 (3): 453–67. <a href="https://doi.org/10.1093/biomet/58.3.453" class="external-link uri">https://doi.org/10.1093/biomet/58.3.453</a>.
 </div>

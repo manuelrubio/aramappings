@@ -112,18 +112,9 @@ package:
 library(aramappings)
 ```
 
-In the usage examples we will use the **Auto MPG** dataset available in
-packages **ascentTraining** and **grpnet**, Kaggle, or the UCI Machine
-Learning Repository (Frank and Asuncion 2010). In this case, we load the
-dataset in the **ascentTraining** package.
-
-``` r
-# Load data
-library(ascentTraining) # contains the Auto MPG dataset
-data("auto_mpg")
-```
-
-Next, we select a subset of numerical variables from the dataset. The
+In the usage examples we will use the **Auto MPG** dataset available
+Kaggle, or the UCI Machine Learning Repository (Frank and Asuncion
+2010). We select a subset of numerical variables from the dataset. The
 selected variables are specified through a vector containing their
 column indices in the original dataset. Furthermore, we rename the data
 set to `X`, simply for clarity with respect to the notation defined
@@ -132,11 +123,10 @@ above.
 ``` r
 # Define subset of (numerical) variables
 selected_variables <- c(1, 4, 5, 6) # 1:"mpg", 4:"horsepower", 5:"weight", 6:"acceleration")
+n <- length(selected_variables)
 
 # Retain only selected variables and rename dataset as X
 X <- auto_mpg[, selected_variables] # Select a subset of variables
-rm(auto_mpg)
-#> Warning in rm(auto_mpg): objeto 'auto_mpg' no encontrado
 ```
 
 The ARA functions halt if the data or other parameters contain missing
@@ -180,16 +170,17 @@ through an automatic method. For instante, \\\mathbf{V}\\ could be the
 matrix defining the Principal Component Analysis transfomation (in that
 case the ARA plot would be a Principal Component Biplot). In this
 example, we simply define a configuration of vectors in polar
-coordinates and transform them to Cartesian coordinates with the
-[`pol2cart()`](https://rdrr.io/pkg/geometry/man/pol2cart.html) function
-in package **geometry**.
+coordinates and transform them to Cartesian coordinates.
 
 ``` r
 # Define axis vectors (2-dimensional in this example)
-library(geometry)
 r <- c(0.8, 1, 1.2, 1)
 theta <- c(225, 100, 315, 80) * 2 * pi / 360
-V <- pol2cart(theta, r)
+V <- pracma::zeros(n, 2)
+for (i in 1:n) {
+  V[i,1] <- r[i] * cos(theta[i])
+  V[i,2] <- r[i] * sin(theta[i])
+}
 ```
 
 It is also possible to define weights in order to control the relative
@@ -223,7 +214,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0108168125152588 seconds
+#> Execution time: 0.00267291069030762 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -265,7 +256,6 @@ draw_ara_plot_2d_standardized(
   axis_lines = axis_lines,
   color_variable = color_variable
 )
-#> [1] 0
 ```
 
 ![Unconstrained ARA plot with the l2 norm of a subset of the Autompg
@@ -275,10 +265,6 @@ Unconstrained ARA plot with the l2 norm of a subset of the Autompg
 dataset.
 
 ## References
-
-Frank, A., and A. Asuncion. 2010. “UCI Machine Learning Repository.”
-University of California, Irvine, School of Information; Computer
-Sciences. [archive.ics.uci.edu/ml](https://archive.ics.uci.edu/ml).
 
 Gabriel, K. R. 1971. “The Biplot Graphic Display of Matrices with
 Application to Principal Component Analysis.” *Biometrika* 58 (3):
@@ -348,6 +334,15 @@ Functions for creating an ARA plot
 
 - [`draw_ara_plot_2d_standardized()`](https://manuelrubio.github.io/aramappings/reference/draw_ara_plot_2d_standardized.md)
   : Draws a 2D Adaptable Radial Axes (ARA) plot for standardized data
+
+## Datasets in examples and tests
+
+- [`auto_mpg`](https://manuelrubio.github.io/aramappings/reference/auto_mpg.md)
+  : Auto MPG Data Set
+- [`cereal`](https://manuelrubio.github.io/aramappings/reference/cereal.md)
+  : Breakfast Cereal Data Set
+- [`wine`](https://manuelrubio.github.io/aramappings/reference/wine.md)
+  : Wine Data Set
 
 # Articles
 

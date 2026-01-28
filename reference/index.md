@@ -31,3 +31,12 @@ Functions for creating an ARA plot
 
 - [`draw_ara_plot_2d_standardized()`](https://manuelrubio.github.io/aramappings/reference/draw_ara_plot_2d_standardized.md)
   : Draws a 2D Adaptable Radial Axes (ARA) plot for standardized data
+
+## Datasets in examples and tests
+
+- [`auto_mpg`](https://manuelrubio.github.io/aramappings/reference/auto_mpg.md)
+  : Auto MPG Data Set
+- [`cereal`](https://manuelrubio.github.io/aramappings/reference/cereal.md)
+  : Breakfast Cereal Data Set
+- [`wine`](https://manuelrubio.github.io/aramappings/reference/wine.md)
+  : Wine Data Set
