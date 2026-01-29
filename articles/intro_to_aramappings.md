@@ -301,7 +301,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.00263094902038574 seconds
+#> Execution time: 0.00279688835144043 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -378,7 +378,7 @@ mapping <- ara_exact_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.692009210586548 seconds
+#> Execution time: 0.749321460723877 seconds
 ```
 
 Note that it is also very efficient since the solution can also be
@@ -425,7 +425,7 @@ mapping <- ara_ordered_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0216567516326904 seconds
+#> Execution time: 0.0222594738006592 seconds
 ```
 
 Finally, we generate the ARA plot:
@@ -465,28 +465,14 @@ matrix. In general, it grows with the number of observations. Users are
 advised to analyze runtimes on their computers to estimate an adequate
 number of cores to use on their data.
 
-In the following example, we use 2 workers/cores when testing the code
-in CRAN. Otherwise we detect the available number of cores (`NCORES`)
-with package **parallelly** (if installed) or **parallel**, and use half
-of them (if several are available).
+In the following example, we use 2 workers/cores for testing the code in
+CRAN. In general we can detect the available number of cores (`NCORES`)
+with packages **parallelly** or **parallel**.
 
 ``` r
-chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
-
-if (nzchar(chk) && chk == "TRUE") {
-  # use 2 cores in CRAN
-  NCORES <- 2L
-} else {
-  # use all cores in devtools::test()
-  if (requireNamespace("parallelly", quietly = TRUE)) {
-    NCORES <- parallelly::availableCores(omit = 1)
-  } else {
-    NCORES <- max(1,parallel::detectCores() - 1)
-  }
-  if (NCORES > 1) {
-    NCORES <- floor(NCORES / 2)
-  }  
-}
+# NCORES <- parallelly::availableCores(omit = 1)
+# NCORES <- max(1,parallel::detectCores() - 1)
+NCORES <- 2L
 ```
 
 We then create a cluster object with function `makeCluster()` of the
@@ -518,7 +504,7 @@ mapping <- ara_unconstrained_l1(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.271854877471924 seconds
+#> Execution time: 0.260597229003906 seconds
 ```
 
 The ARA plot generated through:
@@ -559,7 +545,7 @@ mapping <- ara_exact_l1(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.180907726287842 seconds
+#> Execution time: 0.204361200332642 seconds
 ```
 
 The ARA plot generated through:

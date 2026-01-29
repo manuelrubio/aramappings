@@ -412,7 +412,7 @@ and shows the execution runtime involved in computing the mapping.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Execution time: '</span>,<span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, <span class="st">' seconds'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Execution time: 0.00263094902038574 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Execution time: 0.00279688835144043 seconds</span></span></code></pre></div>
 <p>ARA plots can get cluttered when showing all of the axis lines and
 corresponding labels at the tick marks. Thus, the function that we will
 use to draw the ARA plot (<code><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized()</a></code>)
@@ -476,7 +476,7 @@ ordering the plotted points:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Execution time: '</span>,<span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, <span class="st">' seconds'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Execution time: 0.692009210586548 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Execution time: 0.749321460723877 seconds</span></span></code></pre></div>
 <p>Note that it is also very efficient since the solution can also be
 expressed as a formula. Finally, we generate the ARA plot:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -516,7 +516,7 @@ package.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Execution time: '</span>,<span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, <span class="st">' seconds'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Execution time: 0.0216567516326904 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Execution time: 0.0222594738006592 seconds</span></span></code></pre></div>
 <p>Finally, we generate the ARA plot:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Draw the ARA plot</span></span>
@@ -549,28 +549,14 @@ using several cores. The ideal number of cores to use depends on the
 size of the input data matrix. In general, it grows with the number of
 observations. Users are advised to analyze runtimes on their computers
 to estimate an adequate number of cores to use on their data.</p>
-<p>In the following example, we use 2 workers/cores when testing the
-code in CRAN. Otherwise we detect the available number of cores
-(<code>NCORES</code>) with package <strong>parallelly</strong> (if
-installed) or <strong>parallel</strong>, and use half of them (if
-several are available).</p>
+<p>In the following example, we use 2 workers/cores for testing the code
+in CRAN. In general we can detect the available number of cores
+(<code>NCORES</code>) with packages <strong>parallelly</strong> or
+<strong>parallel</strong>.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"_R_CHECK_LIMIT_CORES_"</span>, <span class="st">""</span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html" class="external-link">nzchar</a></span><span class="op">(</span><span class="va">chk</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="va">chk</span> <span class="op">==</span> <span class="st">"TRUE"</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="co"># use 2 cores in CRAN</span></span>
-<span>  <span class="va">NCORES</span> <span class="op">&lt;-</span> <span class="fl">2L</span></span>
-<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>  <span class="co"># use all cores in devtools::test()</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"parallelly"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">NCORES</span> <span class="op">&lt;-</span> <span class="fu">parallelly</span><span class="fu">::</span><span class="fu"><a href="https://parallelly.futureverse.org/reference/availableCores.html" class="external-link">availableCores</a></span><span class="op">(</span>omit <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>    <span class="va">NCORES</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">NCORES</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">NCORES</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">floor</a></span><span class="op">(</span><span class="va">NCORES</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span></span>
-<span>  <span class="op">}</span>  </span>
-<span><span class="op">}</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># NCORES &lt;- parallelly::availableCores(omit = 1)</span></span>
+<span><span class="co"># NCORES &lt;- max(1,parallel::detectCores() - 1)</span></span>
+<span><span class="va">NCORES</span> <span class="op">&lt;-</span> <span class="fl">2L</span></span></code></pre></div>
 <p>We then create a cluster object with function
 <code>makeCluster()</code> of the <strong>parallel</strong> package,
 specifying the number of cores to use.</p>
@@ -598,7 +584,7 @@ cluster object created above.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Execution time: '</span>,<span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, <span class="st">' seconds'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Execution time: 0.271854877471924 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Execution time: 0.260597229003906 seconds</span></span></code></pre></div>
 <p>The ARA plot generated through:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
@@ -632,7 +618,7 @@ the <span class="math inline">\(\ell^{1}\)</span> norm:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Execution time: '</span>,<span class="va">end</span> <span class="op">-</span> <span class="va">start</span>, <span class="st">' seconds'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Execution time: 0.180907726287842 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Execution time: 0.204361200332642 seconds</span></span></code></pre></div>
 <p>The ARA plot generated through:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/draw_ara_plot_2d_standardized.html">draw_ara_plot_2d_standardized</a></span><span class="op">(</span></span>
