@@ -281,8 +281,8 @@ ara_unconstrained_linf_CVXR <- function(
   n <- ncol(X)
   m <- ncol(V)
 
-  Pvar <- CVXR::Variable(N, m)
-  tvar <- CVXR::Variable(N)
+  Pvar <- CVXR::Variable(c(N, m))
+  tvar <- CVXR::Variable(c(N))
 
   obj <- CVXR::Minimize(sum(tvar))
 
@@ -297,10 +297,12 @@ ara_unconstrained_linf_CVXR <- function(
   )
 
   prob <- CVXR::Problem(obj, constraints)
-  solution <- CVXR::solve(prob, solver = "ECOS")
+  objvalue <- CVXR::psolve(prob, solver = "ECOS")
+  status <- CVXR::status(prob)
 
   extract_CVXR_points_status_objval(
-    solution,
+    status,
+    objvalue,
     Pvar,
     V,
     N,

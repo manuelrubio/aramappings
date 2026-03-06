@@ -205,17 +205,20 @@ ara_exact_l2_CVXR <- function(
   v_k <- V[variable, ]
   x_k <- X[, variable]
 
-  Pvar <- CVXR::Variable(N, m)
+  Pvar <- CVXR::Variable(c(N, m))
 
-  obj <- CVXR::Minimize(CVXR::sum_squares(Pvar %*% t(V) - X))
+  #obj <- CVXR::Minimize(CVXR::sum_squares(Pvar %*% t(V) - X))
+  obj <- CVXR::Minimize(CVXR::cvxr_norm(Pvar %*% t(V) - X, "fro"))
 
   constraints <- list(Pvar %*% v_k == x_k)
 
   prob <- CVXR::Problem(obj, constraints)
-  solution <- CVXR::solve(prob, solver = "ECOS")
+  objvalue <- CVXR::psolve(prob, solver = "ECOS")^2
+  status <- CVXR::status(prob)
 
   CVXR_output <- extract_CVXR_points_status_objval(
-    solution,
+    status,
+    objvalue,
     Pvar,
     V,
     N,

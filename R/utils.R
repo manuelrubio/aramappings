@@ -552,22 +552,23 @@ min_exact_Rglpk <- function(
 
 #' @noRd
 extract_CVXR_points_status_objval <- function(
-    solution,
+    status,
+    objvalue,
     Pvar,
     V,
     N,
     m) {
-  if (pracma::strcmpi(solution$status, "optimal") ||
-    pracma::strcmpi(solution$status, "optimal_inaccurate")) {
-    P <- solution$getValue(Pvar)
-    objval <- solution$value
+  if (pracma::strcmpi(status, "optimal") ||
+    pracma::strcmpi(status, "optimal_inaccurate")) {
+    P <- CVXR::value(Pvar)
+    objval <- objvalue
   } else {
     P <- matrix(NA, N, m)
     objval <- NA
     message("Error: CVXR failed to compute an optimal solution")
   }
 
-  status <- rep(solution$status, N)
+  status <- rep(status, N)
 
   list(
     P = P,

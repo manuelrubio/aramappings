@@ -266,8 +266,8 @@ ara_exact_linf_CVXR <- function(
   v_k <- V[variable, ]
   x_k <- X[, variable]
 
-  Pvar <- CVXR::Variable(N, m)
-  tvar <- CVXR::Variable(N)
+  Pvar <- CVXR::Variable(c(N, m))
+  tvar <- CVXR::Variable(c(N))
 
   obj <- CVXR::Minimize(sum(tvar))
 
@@ -284,10 +284,12 @@ ara_exact_linf_CVXR <- function(
   constraints <- append(constraints, Pvar %*% v_k == x_k)
 
   prob <- CVXR::Problem(obj, constraints)
-  solution <- CVXR::solve(prob, solver = "ECOS")
+  objvalue <- CVXR::psolve(prob, solver = "ECOS")
+  status <- CVXR::status(prob)
 
   extract_CVXR_points_status_objval(
-    solution,
+    status,
+    objvalue,
     Pvar,
     V,
     N,

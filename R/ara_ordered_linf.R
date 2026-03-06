@@ -232,7 +232,7 @@ ara_ordered_linf_CVXR <- function(
   sort_indices <- order(X[, variable])
   v_k <- V[variable, ]
 
-  Pvar <- CVXR::Variable(N, m)
+  Pvar <- CVXR::Variable(c(N, m))
   tvar <- CVXR::Variable()
 
   obj <- CVXR::Minimize(tvar)
@@ -254,10 +254,12 @@ ara_ordered_linf_CVXR <- function(
   )
 
   prob <- CVXR::Problem(obj, constraints)
-  solution <- CVXR::solve(prob, solver = "ECOS")
+  objvalue <- CVXR::psolve(prob, solver = "ECOS")
+  status <- CVXR::status(prob)
 
   extract_CVXR_points_status_objval(
-    solution,
+    status,
+    objvalue,
     Pvar,
     V,
     N,

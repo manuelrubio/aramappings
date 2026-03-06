@@ -220,9 +220,10 @@ ara_ordered_l2_CVXR <- function(
   sort_indices <- order(X[, variable])
   v_k <- V[variable, ]
 
-  Pvar <- CVXR::Variable(N, m)
+  Pvar <- CVXR::Variable(c(N, m))
 
-  obj <- CVXR::Minimize(CVXR::sum_squares(Pvar %*% t(V) - X))
+  #obj <- CVXR::Minimize(CVXR::sum_squares(Pvar %*% t(V) - X))
+  obj <- CVXR::Minimize(CVXR::cvxr_norm(Pvar %*% t(V) - X, "fro"))
 
   constraints <- list()
   constraints <- append(
@@ -232,10 +233,12 @@ ara_ordered_l2_CVXR <- function(
   )
 
   prob <- CVXR::Problem(obj, constraints)
-  solution <- CVXR::solve(prob, solver = "ECOS")
+  objvalue <- CVXR::psolve(prob, solver = "ECOS")^2
+  status <- CVXR::status(prob)
 
   extract_CVXR_points_status_objval(
-    solution,
+    status,
+    objvalue,
     Pvar,
     V,
     N,
