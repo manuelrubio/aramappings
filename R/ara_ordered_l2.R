@@ -233,7 +233,7 @@ ara_ordered_l2_CVXR <- function(
   )
 
   prob <- CVXR::Problem(obj, constraints)
-  objvalue <- CVXR::psolve(prob, solver = "ECOS")^2
+  objvalue <- CVXR::psolve(prob, solver = "Clarabel")^2
   status <- CVXR::status(prob)
 
   extract_CVXR_points_status_objval(
