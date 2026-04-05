@@ -104,7 +104,7 @@ test_that("Function halts if selected variable is not an integer", {
 
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-test_that("Function halts if the specified solver is not 'clarabel', 'glpkAPI',
+test_that("Function halts if the specified solver is not 'clarabel',
           'Rglpk'', or 'CVXR'", {
   expect_error(ara_ordered_linf(X, V, solver = "some invalid solver"))
 })
@@ -123,13 +123,6 @@ for (m in 1:3) {
   R <- ara_ordered_linf(X, V, variable = variable, solver = "clarabel")
 
   R_test <- ara_ordered_linf(X, V, variable = variable, solver = "CVXR")
-  if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-    test_that("Methods reach same objective value", {
-      expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-    })
-  }
-
-  R_test <- ara_ordered_linf(X, V, variable = variable, solver = "glpkAPI")
   if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
     test_that("Methods reach same objective value", {
       expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -170,13 +163,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_ordered_linf(X, V, variable = variable, solver = "glpkAPI")
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
 R_test <- ara_ordered_linf(X, V, variable = variable, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
@@ -199,13 +185,6 @@ variable <- sample(1:n, 1)
 R <- ara_ordered_linf(X, V, variable = variable, solver = "clarabel")
 
 R_test <- ara_ordered_linf(X, V, variable = variable, solver = "CVXR")
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
-R_test <- ara_ordered_linf(X, V, variable = variable, solver = "glpkAPI")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -244,13 +223,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-R_test <- ara_ordered_linf(X, V, variable = variable, solver = "glpkAPI")
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
 R_test <- ara_ordered_linf(X, V, variable = variable, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
@@ -272,13 +244,6 @@ variable <- sample(1:n, 1)
 R <- ara_ordered_linf(X, V, variable = variable, solver = "clarabel")
 
 R_test <- ara_ordered_linf(X, V, variable = variable, solver = "CVXR")
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
-R_test <- ara_ordered_linf(X, V, variable = variable, solver = "glpkAPI")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -311,13 +276,6 @@ variable <- sample(1:n, 1)
 R <- ara_ordered_linf(X, V, variable = variable, solver = "clarabel")
 
 R_test <- ara_ordered_linf(X, V, variable = variable, solver = "CVXR")
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
-R_test <- ara_ordered_linf(X, V, variable = variable, solver = "glpkAPI")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)

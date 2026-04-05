@@ -167,11 +167,9 @@ ara_ordered_linf <- function(
   }
 
   if ((!pracma::strcmpi(solver, "clarabel")) &&
-    (!pracma::strcmpi(solver, "glpkAPI")) &&
     (!pracma::strcmpi(solver, "Rglpk")) &&
     (!pracma::strcmpi(solver, "CVXR"))) {
-    stop('Input error: solver must be "clarabel", "glpkAPI", "Rglpk", or
-         "CVXR"')
+    stop('Input error: solver must be "clarabel", "Rglpk", or "CVXR"')
   }
 
 
@@ -179,12 +177,6 @@ ara_ordered_linf <- function(
 
   if (pracma::strcmpi(solver, "CVXR")) {
     outputs <- ara_ordered_linf_CVXR(
-      X,
-      V,
-      variable
-    )
-  } else if (pracma::strcmpi(solver, "glpkAPI")) {
-    outputs <- ara_ordered_linf_glpkAPI(
       X,
       V,
       variable
@@ -262,82 +254,6 @@ ara_ordered_linf_CVXR <- function(
     objvalue,
     Pvar,
     V,
-    N,
-    m
-  )
-}
-
-
-#' @noRd
-ara_ordered_linf_glpkAPI <- function(
-    X,
-    V,
-    variable) {
-  N <- nrow(X)
-  n <- ncol(X)
-  m <- ncol(V)
-
-  sort_indices <- order(X[, variable])
-
-  Q <- pracma::repmat(pracma::Reshape(1:(2 * n * N), 2 * n, N), m, 1)
-  rows <- c(1:(2 * n * N), unlist(as.list(Q)))
-
-  cols <- c(rep(1, 2 * n * N), rep(2:(N * m + 1), each = 2 * n))
-
-  vals <- c(
-    rep(-1, 2 * n * N),
-    pracma::repmat(unlist(as.list(rbind(-V, V))), 1, N)
-  )
-
-
-  # Additional inequality constraints
-  coo_lists_ineq <- ara_ordered_inequality_coo_lists(
-    V[variable, ],
-    sort_indices,
-    2 * N * n,
-    1
-  )
-
-  rows <- c(rows, coo_lists_ineq$rows)
-  cols <- c(cols, coo_lists_ineq$cols)
-  vals <- c(vals, coo_lists_ineq$vals)
-
-  b <- c(unlist(as.list(t(cbind(-X, X)))), rep(0, N - 1))
-
-  obj <- rep(0, 1 + m * N)
-  obj[1] <- 1
-
-  ne <- 2 * N * n * (m + 1) + 2 * m * (N - 1) # nonzero elements
-
-  nrows <- 2 * n * N + N - 1
-  ncols <- 1 + N * m
-
-  kind <- rep(glpkAPI::GLP_CV, ncols)
-  type_cols <- c(glpkAPI::GLP_LO, rep(glpkAPI::GLP_FR, N * m))
-  clower <- c(0, rep(-Inf, N * m))
-  cupper <- rep(Inf, 1 + N * m)
-
-  type_rows <- rep(glpkAPI::GLP_UP, nrows)
-  rlower <- rep(-Inf, nrows)
-  rupper <- b
-
-  solve_glpkAPI_wrapper(
-    nrows,
-    ncols,
-    kind,
-    clower,
-    cupper,
-    obj,
-    type_cols,
-    rlower,
-    rupper,
-    type_rows,
-    ne,
-    rows,
-    cols,
-    vals,
-    TRUE,
-    2,
     N,
     m
   )

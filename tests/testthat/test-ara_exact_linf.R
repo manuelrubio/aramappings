@@ -45,14 +45,6 @@ test_that("Function halts if solver is not a string", {
   expect_error(ara_exact_linf(X, V, solver = 1))
 })
 
-test_that("Function halts if use_glpkAPI_simplex is not logical (Boolean)", {
-  expect_error(ara_exact_linf(X, V, use_glpkAPI_simplex = 0))
-})
-
-test_that("Function halts if use_glpkAPI_simplex is not logical (Boolean)", {
-  expect_error(ara_exact_linf(X, V, use_glpkAPI_simplex = 1))
-})
-
 test_that("Function halts if cluster does not inheret from classes 'SOCKcluster'
           or 'cluster'", {
   expect_error(ara_exact_linf(X, V, cluster = 1))
@@ -118,15 +110,9 @@ test_that("Function halts if selected variable is not an integer", {
 
 m <- 2
 V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-test_that("Function halts if the specified solver is not 'clarabel', 'glpkAPI',
+test_that("Function halts if the specified solver is not 'clarabel',
           'Rglpk'', or 'CVXR'", {
   expect_error(ara_exact_linf(X, V, solver = "some invalid solver"))
-})
-
-m <- 2
-V <- matrix(rnorm(n * m), nrow = n, ncol = m)
-test_that("Function halts if the flag use_glpkAPI_simplex is not Boolean ", {
-  expect_error(ara_exact_linf(X, V, use_glpkAPI_simplex = 3))
 })
 
 m <- 2
@@ -151,26 +137,6 @@ for (m in 1:3) {
   R <- ara_exact_linf(X, V, variable = variable, solver = "clarabel")
 
   R_test <- ara_exact_linf(X, V, variable = variable, solver = "CVXR")
-  if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-    test_that("Methods reach same objective value", {
-      expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-    })
-  }
-
-  R_test <- ara_exact_linf(X, V,
-    variable = variable, solver = "glpkAPI",
-    use_glpkAPI_simplex = TRUE
-  )
-  if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-    test_that("Methods reach same objective value", {
-      expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-    })
-  }
-
-  R_test <- ara_exact_linf(X, V,
-    variable = variable, solver = "glpkAPI",
-    use_glpkAPI_simplex = FALSE
-  )
   if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
     test_that("Methods reach same objective value", {
       expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -220,26 +186,6 @@ for (m in 1:3) {
   }
 
   R_test <- ara_exact_linf(X, V,
-    variable = variable, solver = "glpkAPI",
-    use_glpkAPI_simplex = TRUE, cluster = cl
-  )
-  if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-    test_that("Methods reach same objective value", {
-      expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-    })
-  }
-
-  R_test <- ara_exact_linf(X, V,
-    variable = variable, solver = "glpkAPI",
-    use_glpkAPI_simplex = FALSE, cluster = cl
-  )
-  if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-    test_that("Methods reach same objective value", {
-      expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-    })
-  }
-
-  R_test <- ara_exact_linf(X, V,
     variable = variable, solver = "Rglpk",
     cluster = cl
   )
@@ -278,27 +224,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-
-R_test <- ara_exact_linf(X, V,
-  variable = variable, solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE
-)
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
-R_test <- ara_exact_linf(X, V,
-  variable = variable, solver = "glpkAPI",
-  use_glpkAPI_simplex = FALSE
-)
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
 R_test <- ara_exact_linf(X, V, variable = variable, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
@@ -319,27 +244,6 @@ variable <- sample(1:n, 1)
 R <- ara_exact_linf(X, V, variable = variable, solver = "clarabel")
 
 R_test <- ara_exact_linf(X, V, variable = variable, solver = "CVXR")
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
-
-R_test <- ara_exact_linf(X, V,
-  variable = variable, solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE
-)
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
-R_test <- ara_exact_linf(X, V,
-  variable = variable, solver = "glpkAPI",
-  use_glpkAPI_simplex = FALSE
-)
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -376,27 +280,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-
-R_test <- ara_exact_linf(X, V,
-  variable = variable, solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE
-)
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
-R_test <- ara_exact_linf(X, V,
-  variable = variable, solver = "glpkAPI",
-  use_glpkAPI_simplex = FALSE
-)
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
 R_test <- ara_exact_linf(X, V, variable = variable, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
@@ -418,27 +301,6 @@ variable <- sample(1:n, 1)
 R <- ara_exact_linf(X, V, variable = variable, solver = "clarabel")
 
 R_test <- ara_exact_linf(X, V, variable = variable, solver = "CVXR")
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
-
-R_test <- ara_exact_linf(X, V,
-  variable = variable, solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE
-)
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
-R_test <- ara_exact_linf(X, V,
-  variable = variable, solver = "glpkAPI",
-  use_glpkAPI_simplex = FALSE
-)
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
@@ -475,27 +337,6 @@ if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   })
 }
 
-
-R_test <- ara_exact_linf(X, V,
-  variable = variable, solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE
-)
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
-R_test <- ara_exact_linf(X, V,
-  variable = variable, solver = "glpkAPI",
-  use_glpkAPI_simplex = FALSE
-)
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
 R_test <- ara_exact_linf(X, V, variable = variable, solver = "Rglpk")
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
@@ -517,27 +358,6 @@ V[, 3] <- 0 * V[, 1] # linearly dependent columns
 R <- ara_exact_linf(X, V, variable = variable, solver = "clarabel")
 
 R_test <- ara_exact_linf(X, V, variable = variable, solver = "CVXR")
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
-
-R_test <- ara_exact_linf(X, V,
-  variable = variable, solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE
-)
-if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
-  test_that("Methods reach same objective value", {
-    expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)
-  })
-}
-
-R_test <- ara_exact_linf(X, V,
-  variable = variable, solver = "glpkAPI",
-  use_glpkAPI_simplex = FALSE
-)
 if (!any(is.na(R$objval)) && !any(is.na(R_test$objval))) {
   test_that("Methods reach same objective value", {
     expect_equal(abs(R$objval - R_test$objval), 0, tolerance = tolerance)

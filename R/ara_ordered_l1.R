@@ -167,11 +167,9 @@ ara_ordered_l1 <- function(
   }
 
   if ((!pracma::strcmpi(solver, "clarabel")) &&
-    (!pracma::strcmpi(solver, "glpkAPI")) &&
     (!pracma::strcmpi(solver, "Rglpk")) &&
     (!pracma::strcmpi(solver, "CVXR"))) {
-    stop('Input error: solver must be "clarabel", "glpkAPI", "Rglpk", or
-         "CVXR"')
+    stop('Input error: solver must be "clarabel", "Rglpk", or "CVXR"')
   }
 
 
@@ -179,12 +177,6 @@ ara_ordered_l1 <- function(
 
   if (pracma::strcmpi(solver, "CVXR")) {
     outputs <- ara_ordered_l1_CVXR(
-      X,
-      V,
-      variable
-    )
-  } else if (pracma::strcmpi(solver, "glpkAPI")) {
-    outputs <- ara_ordered_l1_glpkAPI(
       X,
       V,
       variable
@@ -260,71 +252,6 @@ ara_ordered_l1_CVXR <- function(
   )
 }
 
-
-
-#' @noRd
-ara_ordered_l1_glpkAPI <- function(
-    X,
-    V,
-    variable) {
-  N <- nrow(X)
-  n <- ncol(X)
-  m <- ncol(V)
-
-  sort_indices <- order(X[, variable])
-
-  coo_lists <- ara_l1_norm_coo_lists(N, V, 0)
-
-  coo_lists_ineq <- ara_ordered_inequality_coo_lists(
-    V[variable, ],
-    sort_indices,
-    2 * N * n,
-    N * n
-  )
-
-  rows <- c(coo_lists$rows, coo_lists_ineq$rows)
-  cols <- c(coo_lists$cols, coo_lists_ineq$cols)
-  vals <- c(coo_lists$vals, coo_lists_ineq$vals)
-
-  b <- c(unlist(as.list(t(cbind(-X, X)))), rep(0, N - 1))
-
-  obj <- c(rep(1, n * N), rep(0, m * N))
-
-  ne <- 2 * N * n * (m + 1) + 2 * m * (N - 1)
-
-  nrows <- 2 * n * N + N - 1
-  ncols <- N * (n + m)
-
-  kind <- rep(glpkAPI::GLP_CV, ncols)
-  type_cols <- c(rep(glpkAPI::GLP_LO, N * n), rep(glpkAPI::GLP_FR, N * m))
-  clower <- c(rep(0, N * n), rep(-Inf, N * m))
-  cupper <- rep(Inf, N * (n + m))
-
-  type_rows <- rep(glpkAPI::GLP_UP, nrows)
-  rlower <- rep(-Inf, nrows)
-  rupper <- b
-
-  solve_glpkAPI_wrapper(
-    nrows,
-    ncols,
-    kind,
-    clower,
-    cupper,
-    obj,
-    type_cols,
-    rlower,
-    rupper,
-    type_rows,
-    ne,
-    rows,
-    cols,
-    vals,
-    TRUE,
-    N * n + 1,
-    N,
-    m
-  )
-}
 
 
 #' @noRd

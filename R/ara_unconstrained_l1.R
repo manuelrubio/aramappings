@@ -30,11 +30,7 @@
 #' value. Default: array of n ones.
 #' @param solver
 #' String indicating a package for solving the linear problem(s). It can be
-#' "clarabel" (default), "glpkAPI", "Rglpk", or "CVXR".
-#' @param use_glpkAPI_simplex
-#' Boolean parameter that indicates whether to use the simplex algorithm (if
-#' \code{TRUE}) or an interior point method (if \code{FALSE}), when using the
-#' \pkg{glpkAPI} solver. The default is \code{TRUE}.
+#' "clarabel" (default), "Rglpk", or "CVXR".
 #' @param cluster
 #' Optional cluster object related to the parallel package. If supplied, and
 #' \code{n_LP_problems} is N, the method computes the mappings using parallel
@@ -115,8 +111,7 @@
 #'   Z,
 #'   V,
 #'   weights = weights,
-#'   solver = "glpkAPI",
-#'   use_glpkAPI_simplex = TRUE,
+#'   solver = "clarabel",
 #'   cluster = cl
 #' )
 #'
@@ -145,8 +140,7 @@ ara_unconstrained_l1 <- function(
     X,
     V,
     weights = rep(1, ncol(X)),
-    solver = "glpkAPI",
-    use_glpkAPI_simplex = TRUE,
+    solver = "clarabel",
     cluster = NULL) {
   ###################   Check validity of input parameters   ###################
 
@@ -166,10 +160,6 @@ ara_unconstrained_l1 <- function(
 
   if (!is.character(solver)) {
     stop("Input error: solver must be a string")
-  }
-
-  if (!is.logical(use_glpkAPI_simplex)) {
-    stop("Input error: use_glpkAPI_simplex must be logical (Boolean)")
   }
 
   if ((!is.null(cluster)) &&
@@ -220,11 +210,9 @@ ara_unconstrained_l1 <- function(
   }
 
   if ((!pracma::strcmpi(solver, "clarabel")) &&
-    (!pracma::strcmpi(solver, "glpkAPI")) &&
     (!pracma::strcmpi(solver, "Rglpk")) &&
     (!pracma::strcmpi(solver, "CVXR"))) {
-    stop('Input error: solver must be "clarabel", "glpkAPI", "Rglpk", or
-         "CVXR"')
+    stop('Input error: solver must be "clarabel", "Rglpk", or "CVXR"')
   }
 
 
@@ -247,14 +235,7 @@ ara_unconstrained_l1 <- function(
       V
     )
   } else {
-    if (pracma::strcmpi(solver, "glpkAPI")) {
-      outputs <- ara_unconstrained_l1_glpkAPI(
-        X,
-        V,
-        use_glpkAPI_simplex,
-        cluster
-      )
-    } else if (pracma::strcmpi(solver, "clarabel")) {
+    if (pracma::strcmpi(solver, "clarabel")) {
       outputs <- ara_unconstrained_l1_clarabel(
         X,
         V,
@@ -321,97 +302,6 @@ ara_unconstrained_l1_CVXR <- function(
     V,
     N,
     m
-  )
-}
-
-
-
-#' @noRd
-ara_unconstrained_l1_glpkAPI <- function(
-    X,
-    V,
-    use_glpkAPI_simplex,
-    cluster) {
-  N <- nrow(X)
-  n <- ncol(X)
-  m <- ncol(V)
-
-  obj <- c(rep(1, n), rep(0, m))
-
-  coo_lists <- ara_l1_norm_coo_lists(1, V, 0)
-
-  ne <- 2 * n * (m + 1)
-
-  nrows <- 2 * n
-  ncols <- n + m
-
-  kind <- rep(glpkAPI::GLP_CV, ncols)
-  type_cols <- c(rep(glpkAPI::GLP_LO, n), rep(glpkAPI::GLP_FR, m))
-  clower <- c(rep(0, n), rep(-Inf, m))
-  cupper <- rep(Inf, n + m)
-
-  type_rows <- rep(glpkAPI::GLP_UP, nrows)
-  rlower <- rep(0, 2 * n)
-
-  if (is.null(cluster)) {
-    sol <- apply(X = X, MARGIN = 1, function(x) {
-      min_unconstrained_glpkAPI(
-        x,
-        nrows,
-        ncols,
-        kind,
-        clower,
-        cupper,
-        obj,
-        type_cols,
-        rlower,
-        type_rows,
-        ne,
-        coo_lists$rows,
-        coo_lists$cols,
-        coo_lists$vals,
-        use_glpkAPI_simplex,
-        m
-      )
-    })
-  } else {
-    parallel::clusterEvalQ(cluster, library(glpkAPI))
-    parallel::clusterExport(cluster,
-      c(
-        "min_unconstrained_glpkAPI",
-        "solve_glpkAPI_wrapper"
-      ),
-      envir = environment()
-    )
-
-    sol <- parallel::parApply(cluster, X = X, MARGIN = 1, function(x) {
-      min_unconstrained_glpkAPI(
-        x,
-        nrows,
-        ncols,
-        kind,
-        clower,
-        cupper,
-        obj,
-        type_cols,
-        rlower,
-        type_rows,
-        ne,
-        coo_lists$rows,
-        coo_lists$cols,
-        coo_lists$vals,
-        use_glpkAPI_simplex,
-        m
-      )
-    })
-  }
-
-  sol_matrix <- pracma::Reshape(unlist(sol), m + 2, N)
-
-  list(
-    P = t(sol_matrix[1:m, ]),
-    status = sol_matrix[m + 1, ],
-    objval = sum(sol_matrix[m + 2, ])
   )
 }
 

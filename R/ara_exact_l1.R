@@ -95,8 +95,7 @@
 #'   Z,
 #'   V,
 #'   variable = variable,
-#'   solver = "glpkAPI",
-#'   use_glpkAPI_simplex = TRUE,
+#'   solver = "clarabel",
 #'   cluster = cl
 #' )
 #'
@@ -120,8 +119,7 @@ ara_exact_l1 <- function(
     X,
     V,
     variable = 1,
-    solver = "glpkAPI",
-    use_glpkAPI_simplex = TRUE,
+    solver = "clarabel",
     cluster = NULL) {
   ###################   Check validity of input parameters   ###################
 
@@ -141,10 +139,6 @@ ara_exact_l1 <- function(
 
   if (!is.character(solver)) {
     stop("Input error: solver must be a string")
-  }
-
-  if (!is.logical(use_glpkAPI_simplex)) {
-    stop("Input error: use_glpkAPI_simplex must be logical (Boolean)")
   }
 
   if ((!is.null(cluster)) &&
@@ -191,11 +185,9 @@ ara_exact_l1 <- function(
   }
 
   if ((!pracma::strcmpi(solver, "clarabel")) &&
-    (!pracma::strcmpi(solver, "glpkAPI")) &&
     (!pracma::strcmpi(solver, "Rglpk")) &&
     (!pracma::strcmpi(solver, "CVXR"))) {
-    stop('Input error: solver must be "clarabel", "glpkAPI", "Rglpk", or
-         "CVXR"')
+    stop('Input error: solver must be "clarabel", "Rglpk", or "CVXR"')
   }
 
 
@@ -208,15 +200,7 @@ ara_exact_l1 <- function(
       variable
     )
   } else {
-    if (pracma::strcmpi(solver, "glpkAPI")) {
-      outputs <- ara_exact_l1_glpkAPI(
-        X,
-        V,
-        variable,
-        use_glpkAPI_simplex,
-        cluster
-      )
-    } else if (pracma::strcmpi(solver, "clarabel")) {
+    if (pracma::strcmpi(solver, "clarabel")) {
       outputs <- ara_exact_l1_clarabel(
         X,
         V,
@@ -287,101 +271,6 @@ ara_exact_l1_CVXR <- function(
     V,
     N,
     m
-  )
-}
-
-
-#' @noRd
-ara_exact_l1_glpkAPI <- function(
-    X,
-    V,
-    variable,
-    use_glpkAPI_simplex,
-    cluster) {
-  N <- nrow(X)
-  n <- ncol(X)
-  m <- ncol(V)
-
-  v_k <- V[variable, ]
-
-  obj <- c(rep(1, n), rep(0, m))
-
-  ne <- 2 * n * (m + 1) + m
-
-  # Matrix of inequality constraints
-  coo_lists <- ara_l1_norm_coo_lists(1, V, 1)
-
-  # Append equality constraint to the sparse matrix
-  rows <- c(rep(1, m), coo_lists$rows)
-  cols <- c((n + 1):(n + m), coo_lists$cols)
-  vals <- c(v_k, coo_lists$vals)
-
-  nrows <- 2 * n + 1
-  ncols <- n + m
-
-  kind <- rep(glpkAPI::GLP_CV, ncols)
-  type_cols <- c(rep(glpkAPI::GLP_LO, n), rep(glpkAPI::GLP_FR, m))
-  clower <- c(rep(0, n), rep(-Inf, m))
-  cupper <- rep(Inf, n + m)
-
-  type_rows <- c(glpkAPI::GLP_FX, rep(glpkAPI::GLP_UP, nrows))
-
-  if (is.null(cluster)) {
-    sol <- apply(X = X, MARGIN = 1, function(x) {
-      min_exact_glpkAPI(
-        x,
-        nrows,
-        ncols,
-        kind,
-        clower,
-        cupper,
-        obj,
-        type_cols,
-        type_rows,
-        ne,
-        rows,
-        cols,
-        vals,
-        variable,
-        use_glpkAPI_simplex,
-        m
-      )
-    })
-  } else {
-    parallel::clusterEvalQ(cluster, library(glpkAPI))
-    parallel::clusterExport(cluster,
-      c("min_exact_glpkAPI", "solve_glpkAPI_wrapper"),
-      envir = environment()
-    )
-
-    sol <- parallel::parApply(cluster, X = X, MARGIN = 1, function(x) {
-      min_exact_glpkAPI(
-        x,
-        nrows,
-        ncols,
-        kind,
-        clower,
-        cupper,
-        obj,
-        type_cols,
-        type_rows,
-        ne,
-        rows,
-        cols,
-        vals,
-        variable,
-        use_glpkAPI_simplex,
-        m
-      )
-    })
-  }
-
-  sol_matrix <- pracma::Reshape(unlist(sol), m + 2, N)
-
-  list(
-    P = t(sol_matrix[1:m, ]),
-    status = sol_matrix[m + 1, ],
-    objval = sum(sol_matrix[m + 2, ])
   )
 }
 

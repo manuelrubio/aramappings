@@ -18,7 +18,7 @@ where 1<=m<=3 is the dimension of the visualization space. Each row of
 high-dimensional data will be exact. Default: variable = 1.}
 
 \item{solver}{String indicating a package for solving the linear problem(s). It can be
-"clarabel" (default), "glpkAPI", "Rglpk", or "CVXR".}
+"clarabel" (default), "Rglpk", or "CVXR".}
 }
 \value{
 A list with the three following entries:

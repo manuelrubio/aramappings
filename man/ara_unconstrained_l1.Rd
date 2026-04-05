@@ -8,8 +8,7 @@ ara_unconstrained_l1(
   X,
   V,
   weights = rep(1, ncol(X)),
-  solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE,
+  solver = "clarabel",
   cluster = NULL
 )
 }
@@ -26,11 +25,7 @@ variable. The function only considers them if they do not share the same
 value. Default: array of n ones.}
 
 \item{solver}{String indicating a package for solving the linear problem(s). It can be
-"clarabel" (default), "glpkAPI", "Rglpk", or "CVXR".}
-
-\item{use_glpkAPI_simplex}{Boolean parameter that indicates whether to use the simplex algorithm (if
-\code{TRUE}) or an interior point method (if \code{FALSE}), when using the
-\pkg{glpkAPI} solver. The default is \code{TRUE}.}
+"clarabel" (default), "Rglpk", or "CVXR".}
 
 \item{cluster}{Optional cluster object related to the parallel package. If supplied, and
 \code{n_LP_problems} is N, the method computes the mappings using parallel
@@ -121,8 +116,7 @@ mapping <- ara_unconstrained_l1(
   Z,
   V,
   weights = weights,
-  solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE,
+  solver = "clarabel",
   cluster = cl
 )
 

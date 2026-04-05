@@ -360,7 +360,7 @@ We then create a cluster object with function `makeCluster()` of the **parallel*
 cl <- parallel::makeCluster(NCORES)
 ```
 
-In this example we will compute an ARA unconstrained mapping with the $\ell^{1}$ norm. This function admits weights, and lets us choose between several solvers. When using the solver from package **glpkAPI** we can specify whether to use a simplex algorithm, when parameter `use_glpkAPI_simplex` is set to `TRUE`, or an interior point method if it is set to `FALSE`. Lastly, the parameter `cluster` is the cluster object created above.
+In this example we will compute an ARA unconstrained mapping with the $\ell^{1}$ norm. This function admits weights, and lets us choose between several solvers. Lastly, the parameter `cluster` is the cluster object created above.
 
 ```{r echo = T, results = 'show'}
 # Compute the mapping and print the execution time
@@ -369,8 +369,7 @@ mapping <- ara_unconstrained_l1(
   Z,
   V,
   weights = weights,
-  solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE,
+  solver = "clarabel",
   cluster = cl
 )
 end <- Sys.time()
@@ -406,8 +405,7 @@ mapping <- ara_exact_l1(
   Z,
   V,
   variable = variable,
-  solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE,
+  solver = "clarabel",
   cluster = cl
 )
 end <- Sys.time()

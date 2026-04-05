@@ -4,14 +4,7 @@
 \alias{ara_exact_linf}
 \title{Exact Adaptable Radial Axes (ARA) mappings using the L-infinity norm}
 \usage{
-ara_exact_linf(
-  X,
-  V,
-  variable = 1,
-  solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE,
-  cluster = NULL
-)
+ara_exact_linf(X, V, variable = 1, solver = "clarabel", cluster = NULL)
 }
 \arguments{
 \item{X}{Numeric data matrix of dimensions N x n, where N is the number of
@@ -25,11 +18,7 @@ where 1<=m<=3 is the dimension of the visualization space. Each row of
 high-dimensional data will be exact. Default: variable = 1.}
 
 \item{solver}{String indicating a package for solving the linear problem(s). It can be
-"clarabel" (default), "glpkAPI", "Rglpk", or "CVXR".}
-
-\item{use_glpkAPI_simplex}{Boolean parameter that indicates whether to use the simplex algorithm (if
-\code{TRUE}) or an interior point method (if \code{FALSE}), when using the
-\pkg{glpkAPI} solver. The default is \code{TRUE}.}
+"clarabel" (default), "Rglpk", or "CVXR".}
 
 \item{cluster}{Optional cluster object related to the parallel package. If supplied, and
 \code{n_LP_problems} is N, the method computes the mappings using parallel
@@ -119,8 +108,7 @@ mapping <- ara_exact_linf(
   Z,
   V,
   variable = variable,
-  solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE,
+  solver = "clarabel",
   cluster = cl
 )
 
