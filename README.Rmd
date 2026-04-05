@@ -3,6 +3,7 @@ output: github_document
 bibliography: vignettes/jss2025.bib 
 ---
 
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r readme_intro, include = FALSE}
