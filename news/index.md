@@ -1,5 +1,7 @@
 # Changelog
 
+## aramappings 0.2.0
+
 ## aramappings 0.1.3
 
 CRAN release: 2026-01-29
