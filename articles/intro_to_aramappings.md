@@ -301,7 +301,7 @@ mapping <- ara_unconstrained_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0023949146270752 seconds
+#> Execution time: 0.00230288505554199 seconds
 ```
 
 ARA plots can get cluttered when showing all of the axis lines and
@@ -378,7 +378,7 @@ mapping <- ara_exact_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.670396327972412 seconds
+#> Execution time: 0.657003402709961 seconds
 ```
 
 Note that it is also very efficient since the solution can also be
@@ -425,7 +425,7 @@ mapping <- ara_ordered_l2(
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.0223045349121094 seconds
+#> Execution time: 0.0217063426971436 seconds
 ```
 
 Finally, we generate the ARA plot:
@@ -485,10 +485,7 @@ cl <- parallel::makeCluster(NCORES)
 
 In this example we will compute an ARA unconstrained mapping with the
 \\\ell^{1}\\ norm. This function admits weights, and lets us choose
-between several solvers. When using the solver from package **glpkAPI**
-we can specify whether to use a simplex algorithm, when parameter
-`use_glpkAPI_simplex` is set to `TRUE`, or an interior point method if
-it is set to `FALSE`. Lastly, the parameter `cluster` is the cluster
+between several solvers. Lastly, the parameter `cluster` is the cluster
 object created above.
 
 ``` r
@@ -498,13 +495,12 @@ mapping <- ara_unconstrained_l1(
   Z,
   V,
   weights = weights,
-  solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE,
+  solver = "clarabel",
   cluster = cl
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.267602443695068 seconds
+#> Execution time: 0.214832544326782 seconds
 ```
 
 The ARA plot generated through:
@@ -539,13 +535,12 @@ mapping <- ara_exact_l1(
   Z,
   V,
   variable = variable,
-  solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE,
+  solver = "clarabel",
   cluster = cl
 )
 end <- Sys.time()
 message(c('Execution time: ',end - start, ' seconds'))
-#> Execution time: 0.202529668807983 seconds
+#> Execution time: 0.193049430847168 seconds
 ```
 
 The ARA plot generated through:

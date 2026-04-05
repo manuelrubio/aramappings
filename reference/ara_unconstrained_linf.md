@@ -10,8 +10,7 @@ ara_unconstrained_linf(
   X,
   V,
   weights = rep(1, ncol(X)),
-  solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE,
+  solver = "clarabel",
   cluster = NULL
 )
 ```
@@ -38,13 +37,7 @@ ara_unconstrained_linf(
 - solver:
 
   String indicating a package for solving the linear problem(s). It can
-  be "clarabel" (default), "glpkAPI", "Rglpk", or "CVXR".
-
-- use_glpkAPI_simplex:
-
-  Boolean parameter that indicates whether to use the simplex algorithm
-  (if `TRUE`) or an interior point method (if `FALSE`), when using the
-  glpkAPI solver. The default is `TRUE`.
+  be "clarabel" (default), "Rglpk", or "CVXR".
 
 - cluster:
 
@@ -152,8 +145,7 @@ mapping <- ara_unconstrained_linf(
   Z,
   V,
   weights = weights,
-  solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE,
+  solver = "clarabel",
   cluster = cl
 )
 

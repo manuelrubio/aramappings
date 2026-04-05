@@ -6,14 +6,7 @@ mappings for the **L-infinity norm**
 ## Usage
 
 ``` r
-ara_exact_linf(
-  X,
-  V,
-  variable = 1,
-  solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE,
-  cluster = NULL
-)
+ara_exact_linf(X, V, variable = 1, solver = "clarabel", cluster = NULL)
 ```
 
 ## Arguments
@@ -38,13 +31,7 @@ ara_exact_linf(
 - solver:
 
   String indicating a package for solving the linear problem(s). It can
-  be "clarabel" (default), "glpkAPI", "Rglpk", or "CVXR".
-
-- use_glpkAPI_simplex:
-
-  Boolean parameter that indicates whether to use the simplex algorithm
-  (if `TRUE`) or an interior point method (if `FALSE`), when using the
-  glpkAPI solver. The default is `TRUE`.
+  be "clarabel" (default), "Rglpk", or "CVXR".
 
 - cluster:
 
@@ -151,8 +138,7 @@ mapping <- ara_exact_linf(
   Z,
   V,
   variable = variable,
-  solver = "glpkAPI",
-  use_glpkAPI_simplex = TRUE,
+  solver = "clarabel",
   cluster = cl
 )
 

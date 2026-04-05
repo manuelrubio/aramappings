@@ -58,8 +58,7 @@ norm</strong></p>
 <span>  <span class="va">X</span>,</span>
 <span>  <span class="va">V</span>,</span>
 <span>  weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  solver <span class="op">=</span> <span class="st">"glpkAPI"</span>,</span>
-<span>  use_glpkAPI_simplex <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  solver <span class="op">=</span> <span class="st">"clarabel"</span>,</span>
 <span>  cluster <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -87,13 +86,7 @@ value. Default: array of n ones.</p></dd>
 
 <dt id="arg-solver">solver<a class="anchor" aria-label="anchor" href="#arg-solver"></a></dt>
 <dd><p>String indicating a package for solving the linear problem(s). It can be
-"clarabel" (default), "glpkAPI", "Rglpk", or "CVXR".</p></dd>
-
-
-<dt id="arg-use-glpkapi-simplex">use_glpkAPI_simplex<a class="anchor" aria-label="anchor" href="#arg-use-glpkapi-simplex"></a></dt>
-<dd><p>Boolean parameter that indicates whether to use the simplex algorithm (if
-<code>TRUE</code>) or an interior point method (if <code>FALSE</code>), when using the
-<span class="pkg">glpkAPI</span> solver. The default is <code>TRUE</code>.</p></dd>
+"clarabel" (default), "Rglpk", or "CVXR".</p></dd>
 
 
 <dt id="arg-cluster">cluster<a class="anchor" aria-label="anchor" href="#arg-cluster"></a></dt>
@@ -197,8 +190,7 @@ improved multivariate data visualization. Computer Graphics Forum 36, 3
 <span class="r-in"><span>  <span class="va">Z</span>,</span></span>
 <span class="r-in"><span>  <span class="va">V</span>,</span></span>
 <span class="r-in"><span>  weights <span class="op">=</span> <span class="va">weights</span>,</span></span>
-<span class="r-in"><span>  solver <span class="op">=</span> <span class="st">"glpkAPI"</span>,</span></span>
-<span class="r-in"><span>  use_glpkAPI_simplex <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  solver <span class="op">=</span> <span class="st">"clarabel"</span>,</span></span>
 <span class="r-in"><span>  cluster <span class="op">=</span> <span class="va">cl</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>

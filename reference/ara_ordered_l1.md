@@ -31,7 +31,7 @@ ara_ordered_l1(X, V, variable = 1, solver = "clarabel")
 - solver:
 
   String indicating a package for solving the linear problem(s). It can
-  be "clarabel" (default), "glpkAPI", "Rglpk", or "CVXR".
+  be "clarabel" (default), "Rglpk", or "CVXR".
 
 ## Value
 
