@@ -20,5 +20,5 @@ LineEndingConversion: Posix
 BuildType: Package
 PackageUseDevtools: Yes
 PackageInstallArgs: --no-multiarch --with-keep.source
-PackageCheckArgs: c("--no-manual", "--as-cran")
+PackageCheckArgs: --as-cran
 PackageRoxygenize: rd,collate,namespace

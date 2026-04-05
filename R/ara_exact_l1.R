@@ -200,7 +200,7 @@ ara_exact_l1 <- function(
       variable
     )
   } else {
-    if (pracma::strcmpi(solver, "clarabel")) {
+    if (pracma::strcmpi(solver, "Clarabel")) {
       outputs <- ara_exact_l1_clarabel(
         X,
         V,
@@ -261,7 +261,7 @@ ara_exact_l1_CVXR <- function(
   constraints <- append(constraints, Pvar %*% v_k == x_k)
 
   prob <- CVXR::Problem(obj, constraints)
-  objvalue <- CVXR::psolve(prob, solver = "ECOS")
+  objvalue <- CVXR::psolve(prob, solver = "Clarabel")
   status <- CVXR::status(prob)
 
   extract_CVXR_points_status_objval(

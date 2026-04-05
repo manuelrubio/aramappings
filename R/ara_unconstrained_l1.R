@@ -292,7 +292,7 @@ ara_unconstrained_l1_CVXR <- function(
   constraints <- append(constraints, Pvar %*% t(V) - X <= Tvar)
 
   prob <- CVXR::Problem(obj, constraints)
-  objvalue <- CVXR::psolve(prob, solver = "ECOS")
+  objvalue <- CVXR::psolve(prob, solver = "Clarabel")
   status <- CVXR::status(prob)
 
   extract_CVXR_points_status_objval(
